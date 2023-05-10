@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project_cinderella_test3/Register.dart';
 import 'package:project_cinderella_test3/user.dart';
 import 'package:http/http.dart' as http;
+// import 'package:project_cinderella_test3/Info.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -25,8 +26,9 @@ class _LoginState extends State<Login> {
       'email': user.email,
       'password': user.password,
     };
+
     var body = json.encode(data);
-    var res = await http.post(
+    http.Response res = await http.post(
       // 나중에 여기 주석처리 해제해서 사용.
       url,
       headers: {'Context-Type': 'application/json'},
@@ -34,6 +36,10 @@ class _LoginState extends State<Login> {
     );
     print(body);
   }
+
+  // Future<Post> fetchPost() async {
+  //   final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +210,28 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
+            // Container(
+            //   height: 90,
+            //   width: 90,
+            //   child: OutlinedButton(
+            //     style: OutlinedButton.styleFrom(
+            //       backgroundColor: Color.fromRGBO(233, 65, 82, 1),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(50),
+            //       ),
+            //     ),
+            //     onPressed: () {
+            //       // if (_formKey.currentState.validate()) {
+            //       fetchPost();
+            //       // }
+            //     },
+            //     child: Icon(
+            //       Icons.home,
+            //       size: 20,
+            //       color: Color.fromRGBO(255, 255, 255, 1),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

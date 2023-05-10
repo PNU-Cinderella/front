@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -8,6 +8,88 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project_cinderella_test3/Register.dart';
 import 'package:project_cinderella_test3/user.dart';
 import 'package:http/http.dart' as http;
+
+// var myBackgroundColor = const Color(0xff000D2F);
+// var buttonBackgroundColor = const Color.fromRGBO(217, 217, 217, 0.2);
+// var textLeftUp = const Text(
+//   "We just\nproviding\ntaxi...",
+//   style: TextStyle(color: Colors.white),
+// );
+// var textRightDown = const Text(
+//   "Have a comfi\n-safe time",
+//   style: TextStyle(color: Colors.white),
+// );
+// var buttonGoogleLogin = Container(
+//   width: 249,
+//   height: 53,
+//   child: OutlinedButton(
+//     onPressed: () {},
+//     child: const Text(
+//       "구글로 로그인",
+//       style: TextStyle(
+//         color: Colors.white,
+//         fontSize: 22,
+//       ),
+//     ),
+//     style: OutlinedButton.styleFrom(
+//       backgroundColor: buttonBackgroundColor,
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+//     ),
+//   ),
+// );
+// var buttonAppleLogin = Container(
+//   width: 249,
+//   height: 53,
+//   child: OutlinedButton(
+//     onPressed: () {},
+//     child: const Text(
+//       "애플로 로그인",
+//       style: TextStyle(
+//         color: Colors.white,
+//         fontSize: 22,
+//       ),
+//     ),
+//     style: OutlinedButton.styleFrom(
+//       backgroundColor: buttonBackgroundColor,
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+//     ),
+//   ),
+// );
+// class LoginPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//           body: Container(
+//         color: myBackgroundColor,
+//         height: double.infinity,
+//         width: double.infinity,
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             textLeftUp,
+//             const SizedBox(
+//               height: 100.0,
+//             ),
+//             Container(
+//               width: 100,
+//               height: 100,
+//               decoration: BoxDecoration(
+//                 color: Colors.amber,
+//               ),
+//             ),
+//             const SizedBox(
+//               height: 100.0,
+//             ),
+//             textRightDown,
+//             buttonGoogleLogin,
+//             buttonAppleLogin,
+//           ],
+//         ),
+//       )),
+//     );
+//   }
+// }
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -20,10 +102,18 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   void signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser =
+        await GoogleSignIn().signIn(); // 이게 함수의 끝
+
+    if (googleUser != null) {
+      Map data = {
+        'email': googleUser.email,
+        'id': googleUser.id,
+      };
+    }
   }
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
   User user = User("", "");
   final url = Uri.parse("http://localhost:8080/login");
 
@@ -214,9 +304,13 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 20,
             ),
-            SignInButton(Buttons.Google, text: "Google Login", onPressed: () {
-              signInWithGoogle();
-            })
+            SignInButton(
+              Buttons.Google,
+              text: "Google Login",
+              onPressed: () {
+                signInWithGoogle();
+              },
+            ),
           ],
         ),
       ),
