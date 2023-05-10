@@ -108,6 +108,10 @@ flutter:
           weight: 800
         - asset: assets/fonts/Pretendard/Pretendard-Black.ttf
           weight: 900
+    - family: Balthazar
+      fonts:
+        - asset: assets/fonts/Balthazar-Regular.ttf
+          weight: 400
       
   # fonts:
   #   - family: Italianno
