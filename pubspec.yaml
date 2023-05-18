@@ -73,6 +73,7 @@ flutter:
     - assets/images/CreateGroup/
     - assets/images/ListView/
     - assets/jsonTest.json
+    - assets/images/TaxiList/Plus.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -112,6 +113,26 @@ flutter:
       fonts:
         - asset: assets/fonts/Balthazar-Regular.ttf
           weight: 400
+    - family: AppleSDGothicNeo
+      fonts:
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoT.ttf
+          weight: 100
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoUL.ttf
+          weight: 200
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoL.ttf
+          weight: 300
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoR.ttf
+          weight: 400
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoM.ttf
+          weight: 500
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoSB.ttf
+          weight: 600
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoB.ttf
+          weight: 700
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoEB.ttf
+          weight: 800
+        - asset: assets/fonts/Apple_SandolGothic_Neo/AppleSDGothicNeoH.ttf
+          weight: 900
       
   # fonts:
   #   - family: Italianno

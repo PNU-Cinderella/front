@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 // import 'package:project_cinderella_test3/MainPage.dart';
 
 // import 'Test4.dart';
-import 'package:project_cinderella_test3/TaxiList.dart';
-import 'package:project_cinderella_test3/TaxiList/CreateGroup.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 // import 'TaxiList.dart';
 // import 'package:project_cinderella_test3/TaxiList/IntoList.dart';
 
@@ -19,9 +19,9 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "project_cinderella_test3",
-      theme: ThemeData(fontFamily: 'Pretendard'),
-      themeMode: ThemeMode.system,
-      home: CreateGroup(),
+      // theme: ThemeData(fontFamily: 'Pretendard'),
+      // themeMode: ThemeMode.system,
+      home: TaxiList(),
     ),
   );
 }
