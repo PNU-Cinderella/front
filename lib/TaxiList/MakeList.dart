@@ -19,48 +19,80 @@ Container listView_group(String Arival) => Container(
 
 class Makelist extends StatelessWidget {
   roomMember userlists;
-  Makelist(this.userlists);
+  double PX;
+  Makelist(this.userlists, this.PX);
+  // int person;
+  // String time;
+  // Makelist(this.person, this.time, this.Arrive);
+  // @override
+  // State<Makelist> createState() => _MakelistState();
+// }
 
+// class _MakelistState extends State<Makelist> {
+  // dynamic lsts;
+  // Map<String, dynamic> usermaps;
+  // _MakelistState(this.usermaps);
+  // List<roomMember> lsts = usermaps.isNotEmpty
+  // void makelsts() {
+  //   dynamic lsts = roomMembers.fromJson(widget.usermaps);
+  // }
+
+  // var user = User.fromJson(widget.usermaps);
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   lsts = roomMember.fromJson(usermaps);
+  //   print(lsts.runtimeType);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // box-shadow: 0px 3px 3px 5px rgba(245, 245, 245, 0.25);
+
     return Container(
-      width: 353,
-      height: 110,
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: Color.fromRGBO(245, 245, 245, 0.25),
+            offset: Offset(0, 3),
+            blurRadius: 3)
+      ]),
+      width: 353 * PX,
+      height: 140 * PX,
+      color: Color.fromRGBO(255, 255, 255, 1),
       // color: Colors.blueAccent,
       // child: Text(usermaps as String),
       child: Column(
         children: [
           Row(
             children: [
-              // Text(usermaps.runtimeType as String),
-              Image.asset('assets/images/ListView/user1.png'), //크기 20x20이미지
-              // Text(lsts),
-              SizedBox(
-                width: 4,
+              Padding(
+                padding: EdgeInsets.only(left: 22 * PX, top: 13 * PX),
+                child: Text(
+                  "${userlists.host} (${userlists.num_of_people}/4)",
+                  style: TextStyle(
+                      fontSize: 15 * PX,
+                      fontFamily: "Pretendard",
+                      fontWeight: FontWeight.w600),
+                ),
               ),
-              Text("${userlists.num_of_people} / 4"), //나중에 앞에 person
               SizedBox(
-                width: 20,
+                width: 124 * PX,
               ),
-              Image.asset('assets/images/ListView/clock1.png'),
-              SizedBox(
-                width: 4,
-              ),
-              Text("${userlists.time}"), // 나중에 Time
-              SizedBox(
-                width: 30,
-              ),
-              GestureDetector(onTap: () {}, child: Text("참여하기")),
-              Text("왼쪽에 누를 수 \n있는 버튼이에요"),
-            ],
-          ),
-          Row(
-            children: [
-              // for (int arrive in lsts[4]) listView_group(lsts[2]),
-              SizedBox(
-                width: 10,
+              Padding(
+                padding: EdgeInsets.only(top: 20 * PX),
+                child: Text(
+                  "${userlists.time}",
+                  style: TextStyle(
+                      fontFamily: "Pretendard",
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13 * PX,
+                      color: Color.fromRGBO(64, 113, 205, 1)),
+                ),
               )
+              // Text(usermaps.runtimeType as String),
+              // Image.asset('assets/images/ListView/user1.png'), //크기 20x20이미지
+              // Text(lsts),
             ],
           ),
         ],

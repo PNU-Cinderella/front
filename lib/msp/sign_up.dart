@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_cinderella_test3/TaxiList.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/taxi_history.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
@@ -34,7 +35,7 @@ class SignUp extends StatelessWidget {
                 height: 53,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiHistory()) );
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiList()) );
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,

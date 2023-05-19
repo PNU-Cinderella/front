@@ -1,3 +1,4 @@
+import 'package:project_cinderella_test3/TaxiList.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:project_cinderella_test3/msp/taxi_history.dart';
@@ -10,7 +11,7 @@ void main()
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Cinderella_front",
-      home: LoginPage()
+      home: TaxiList()
     ),
   );
 
