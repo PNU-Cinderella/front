@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 
+//For PlaceHolding
 Container MakeContainer(double? myWidth, double? myHeight)
 {
   return Container(
@@ -11,78 +12,80 @@ Container MakeContainer(double? myWidth, double? myHeight)
   );
 }
 
-class MyContainer extends StatelessWidget
+//Return Real Width from Figma's Widget width
+double GetRealWidth({required double pixel, required BuildContext context, })
 {
-  double? myWidth;
-  double? myHeight;
-  MyContainer(double? width, double? height)
-  {
-    this.myWidth = width;
-    this.myHeight = height;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Container(
-        width: myWidth,
-        height: myHeight,
-        color: Colors.blue,
-      ),
-    );
-  }
+  double PX = MediaQuery.of(context).size.width / 393;
+  return pixel * PX;
 }
 
-class TaxiHistoryBox extends MyContainer
+//Return Real Height from Figma's Widget height
+double GetRealHeight({required double pixel, required BuildContext context, })
 {
+  double PX = MediaQuery.of(context).size.width / 852;
+  return pixel * PX;
+}
 
-  double? myWidth;
-  double? myHeight;
-
-  TaxiHistoryBox(double? width, double? height):super(0,0){
-    this.myWidth = width;
-    this.myHeight = height;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Container(
-        width: myWidth,
-        height: myHeight,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.greenAccent,
-        ),
-        child: new Text("I'm HistoryBox!"),
-      ),
-    );
-  }
-
+//Return Status Bar Height
+double GetStatusBarHeight({required BuildContext context})
+{
+  return MediaQuery.of(context).viewPadding.top;
 }
 
 
-class Functions extends StatelessWidget {
+/// Flutter code sample for [showModalBottomSheet].
+
+void main() => runApp(const BottomSheetApp());
+
+class BottomSheetApp extends StatelessWidget {
+  const BottomSheetApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: const Color(0xff6750a4),
+        useMaterial3: true,
+      ),
       home: Scaffold(
-        body: Container(
-          color: colorBackground,
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            children: [
-              SizedBox(height: 100,),
-              MakeContainer(120, 50),
-              SizedBox(height: 50,),
-              MyContainer(120, 50),
-              SizedBox(height: 50,),
-              TaxiHistoryBox(120, 50),
-            ],
-          ),
-        ),
+        appBar: AppBar(title: const Text('Bottom Sheet Sample')),
+        body: const BottomSheetExample(),
+      ),
+    );
+  }
+}
+
+class BottomSheetExample extends StatelessWidget {
+  const BottomSheetExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        child: const Text('showModalBottomSheet'),
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return SizedBox(
+                height: 200,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('Modal BottomSheet'),
+                      ElevatedButton(
+                        child: const Text('Close BottomSheet'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

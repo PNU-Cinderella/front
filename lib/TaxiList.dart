@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'MakeList.dart';
-import 'package:project_cinderella_test3/TaxiList/MakeList.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/MakeList.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_cinderella_test3/roomparse.dart';
 // import 'roomparse.dart';
@@ -20,12 +20,6 @@ Future<List> fetchInfo(url) async {
   //   List<dynamic> jsonMaps = jsonDecode(jsonstring);
   //   List<roomMember> jsonLists =
   //       jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  //   // List<dynamic> jsonLists = [];
-  //   // for (Map<String, dynamic> map in jsonMaps) {
-  //   //   roomMember asdf = roomMember.fromJson(map);
-  //   //   jsonLists.add(
-  //   //       [asdf.host, asdf.start, asdf.dest, asdf.time, asdf.num_of_people]);
-  //   // }
   //   return jsonLists;
   //   // return Info.fromJson(json.decode(response.body));
   // } else {
@@ -34,20 +28,9 @@ Future<List> fetchInfo(url) async {
   // }
   //// 혼자 테스트한곳 //////
   String jsonString = await rootBundle.loadString('assets/jsonTest.json');
-  // final jsonLists = <Map>[];
-  // var responseBody = jsonDecode(jsonString);
-  // responseBody.forEach((element) {
-  //   jsonLists.add(element);
-  // });
   List<dynamic> jsonMaps = jsonDecode(jsonString);
   List<roomMember> jsonLists =
       jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  // // List<dynamic> jsonLists = [];
-  // // for (Map<String, dynamic> map in jsonMaps) {
-  // //   roomMember asdf = roomMember.fromJson(map);
-  // //   jsonLists
-  // //       .add([asdf.host, asdf.start, asdf.dest, asdf.time, asdf.num_of_people]);
-  // // }
   return jsonLists;
   //// 여기까지 남겨두기 //////
 }
@@ -66,10 +49,8 @@ class _TaxiListState extends State<TaxiList> {
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
   String url = "http://10.0.2.2:8080/test"; //초기 받아오는 경로 뒤에 수정해주세요..
-  // Future<List>? roominfo = fetchInfo(url);
 
   @override
-  // List<roomMember> roominfo;
   dynamic jsonList;
   dynamic _jsonList;
 
@@ -78,63 +59,35 @@ class _TaxiListState extends State<TaxiList> {
     super.initState();
     jsonList = fetchInfo(url);
     //초기 부산은행 넣어주기 // 여기 나중에 테스트하는거 잊지말기
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   _asyncMethod();
-    // });
   }
 
-  void _asyncMethod() async {
-    _jsonList = await fetchInfo(url);
-    setState(() {
-      jsonList = _jsonList;
-      // if (_jsonList != null) {
-      //   jsonList = _jsonList;
-      // }
-    });
-  }
-
-  void _bankurl() async {
-    // _jsonList = await fetchInfo(url);
+  void _bankurl() {
     setState(() {
       url = "http://10.0.2.2:8080/bank";
       button_bank = button_selected;
       button_station = button_not_selected;
       button_front = button_not_selected;
       jsonList = fetchInfo(url);
-      // jsonList = _jsonList;
-      // if (_jsonList != null) {
-      //   jsonList = _jsonList;
-      // }
     });
   }
 
-  void _stationurl() async {
-    // _jsonList = await fetchInfo(url);
+  void _stationurl() {
     setState(() {
       url = "http://10.0.2.2:8080/station";
       button_bank = button_not_selected;
       button_station = button_selected;
       button_front = button_not_selected;
       jsonList = fetchInfo(url);
-      // jsonList = _jsonList;
-      // if (_jsonList != null) {
-      //   jsonList = _jsonList;
-      // }
     });
   }
 
-  void _fronturl() async {
-    // _jsonList = await fetchInfo(url);
+  void _fronturl() {
     setState(() {
       url = "http://10.0.2.2:8080/front";
       button_bank = button_not_selected;
       button_station = button_not_selected;
       button_front = button_selected;
-      // jsonList = _jsonList;
       jsonList = fetchInfo(url);
-      // if (_jsonList != null) {
-      //   jsonList = _jsonList;
-      // }
     });
   }
 
@@ -166,58 +119,90 @@ class _TaxiListState extends State<TaxiList> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Color(0xffF5F5F5),
+        color: Color.fromRGBO(253, 253, 253, 1),
         child: Padding(
           padding: EdgeInsets.only(top: statusBarHeight),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text(
-                  "padding :  ${MediaQuery.of(context).padding.top} NOWPX : ${PX}"),
-              Text("${url}"),
-              Stack(
-                //최상위 위젯 표현
+              Row(
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 14 * PX, left: 20 * PX),
-                      child: Text(
-                        "마이 택시팟",
-                        style: TextStyle(
-                          fontFamily: "Pretendard", //우선 주희님 용으로 폰트삭제
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 22,
-                        ), // 후에 폰트 추가좀
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10 * PX, left: 20 * PX),
+                    child: Text(
+                      "택시팟 목록",
+                      style: TextStyle(
+                        fontFamily: "Pretendard", //우선 주희님 용으로 폰트삭제
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
+                      ), // 후에 폰트 추가좀 이거 왜 폰트적용안됨?
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        //여기 정렬 해주는걸 목표로 하기.
-                        top: 20 * PX,
-                        right: 20 * PX,
-                      ),
-                      child: GestureDetector(
-                        // 이게 답이였구나 이걸로 만들면 정렬하기 편할듯
-                        onTap: () {
-                          print("추가 버튼 눌림.");
-                        },
-                        child: Text(
-                          //중앙정렬좀 해주기
-                          "추가",
-                          style: TextStyle(fontSize: 17, color: Colors.black),
+                  SizedBox(
+                    width: 223 * PX,
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          //여기 정렬 해주는걸 목표로 하기.
+                          top: 24 * PX,
+                          // right: 20 * PX,
                         ),
+                        child: GestureDetector(
+                          // 이게 답이였구나 이걸로 만들면 정렬하기 편할듯
+                          onTap: () {
+                            print("추가 버튼 눌림.");
+                          },
+                          child: Image(
+                            image:
+                                AssetImage("assets/images/TaxiList/Plus.png"),
+                            //중앙정렬좀 해주기
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "create",
+                        style: TextStyle(
+                          fontFamily: "Pretendard",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13 * PX,
+                          color: Color.fromRGBO(149, 142, 142, 1),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 2 * PX,
+                color: Color.fromRGBO(247, 247, 247, 1),
+              ),
+
+              SizedBox(
+                height: 13 * PX,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 27 * PX,
+                    ),
+                    child: Text(
+                      "출발지",
+                      style: TextStyle(
+                        fontFamily: "Pretendard",
+                        fontSize: 15 * PX,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 12 * PX,
+                height: 13 * PX,
               ),
               Container(
                 height: 32 * PX,
@@ -291,13 +276,13 @@ class _TaxiListState extends State<TaxiList> {
                 ),
               ),
               SizedBox(
-                height: 20 * PX,
+                height: 21 * PX,
               ),
               Text("${snapshot.data}"),
               // Text("${runtimeType(snapshot)}"),
               // Text("${jsonList?[1].dest}"),
               for (roomMember inlsts in snapshot.data) ...[
-                Makelist(inlsts),
+                Makelist(inlsts, PX),
               ],
             ],
           ),

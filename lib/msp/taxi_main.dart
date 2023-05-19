@@ -42,15 +42,15 @@ class TaxiMain extends StatefulWidget {
             BottomNavigationBarItem(
             label: '탑승기록',
             icon: Image.asset("assets/images/icon_taxi_history.png"),
-            backgroundColor: colorLgihtGray),
+            backgroundColor: colorLightGray),
             BottomNavigationBarItem(
             label: '택시팟',
             icon: Image.asset("assets/images/icon_taxi_main.png"),
-            backgroundColor: colorLgihtGray),
+            backgroundColor: colorLightGray),
             BottomNavigationBarItem(
             label: 'my',
             icon: Image.asset("assets/images/icon_taxi_my.png"),
-            backgroundColor: colorLgihtGray),
+            backgroundColor: colorLightGray),
           ],
         ),
       ),

@@ -20,30 +20,7 @@ Container listView_group(String Arival) => Container(
 class Makelist extends StatelessWidget {
   roomMember userlists;
   Makelist(this.userlists);
-  // int person;
-  // String time;
-  // Makelist(this.person, this.time, this.Arrive);
-  // @override
-  // State<Makelist> createState() => _MakelistState();
-// }
 
-// class _MakelistState extends State<Makelist> {
-  // dynamic lsts;
-  // Map<String, dynamic> usermaps;
-  // _MakelistState(this.usermaps);
-  // List<roomMember> lsts = usermaps.isNotEmpty
-  // void makelsts() {
-  //   dynamic lsts = roomMembers.fromJson(widget.usermaps);
-  // }
-
-  // var user = User.fromJson(widget.usermaps);
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   lsts = roomMember.fromJson(usermaps);
-  //   print(lsts.runtimeType);
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -41,6 +41,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.4
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:
@@ -111,6 +112,10 @@ flutter:
     - family: Balthazar
       fonts:
         - asset: assets/fonts/Balthazar-Regular.ttf
+          weight: 400
+    - family: Italianno
+      fonts:
+        - asset: assets/fonts/Italianno_Regular.ttf
           weight: 400
       
   # fonts:

@@ -99,14 +99,16 @@ class BasicCircle extends CustomPainter
 {
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawCircle(Offset(0, 0), 45, Paint());
+    canvas.drawOval(Rect.fromLTRB(0, 0, size.width, size.height),
+        Paint()
+          ..color.blue
+          ..strokeWidth = 2
+          ..style = PaintingStyle.fill
+    );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    throw UnimplementedError();
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
   
 }
 
@@ -133,6 +135,10 @@ class TaxiStatusBox extends StatelessWidget
     return Container(
       width: myWidth,
       height: myHeight,
+      decoration: BoxDecoration(
+        color: colorWhite,
+          borderRadius: BorderRadius.circular(10)
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,8 +148,10 @@ class TaxiStatusBox extends StatelessWidget
             width: 118,
             height: 48,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   textStatus!,
+                  SizedBox(height: 4,),
                   textStatusSub!,
                 ]
             ),
@@ -168,12 +176,7 @@ class TaxiStatusBox extends StatelessWidget
                 ],
               )
           ),
-
         ],
-      ),
-      decoration: BoxDecoration(
-          color: Colors.purpleAccent,
-          borderRadius: BorderRadius.circular(10)
       ),
     );
   }
@@ -183,6 +186,7 @@ class TaxiStatusBox extends StatelessWidget
 class IconTaxiCurrent extends StatelessWidget{
   double? myWidth;
   double? myHeight;
+  int? order;
   Widget? imageIcon;
   Widget? textIcon;
 
@@ -200,23 +204,15 @@ class IconTaxiCurrent extends StatelessWidget{
     return Container(
       width: myWidth,
       height: myHeight,
-      color: Colors.lightGreenAccent,
       child: Column(
         children: [
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage("assets/images/icon_taxi_main.png") ,
-                )
-            ),
+          CustomPaint(
+            size: Size(30,30),
+            painter: BasicCircle(),
           ),
+          SizedBox(height: 4,),
           textIcon!
         ],
-
       ),
     );
   }
@@ -244,8 +240,8 @@ class TaxiHistorySearchBar extends StatelessWidget{
         ],
       ),
       decoration: BoxDecoration(
+        color: colorWhite,
         borderRadius: BorderRadius.circular(10),
-        color: Colors.redAccent
       ),
     );
   }
@@ -284,7 +280,7 @@ class TaxiHistoryBox extends StatelessWidget {
       width: myWidth,
       height: myHeight,
       decoration: BoxDecoration(
-          color: Colors.cyanAccent,
+        color: colorWhite,
       ),
       child: Column(
         children: [
@@ -336,7 +332,6 @@ class TaxiHistoryList extends StatelessWidget{
     return Container(
       width: myWidth,
       height: myHeight,
-      color: Colors.deepOrangeAccent,
       child: ListView.builder(
         padding: EdgeInsets.zero,
           itemCount: 5,

@@ -10,7 +10,7 @@ const colorBackground = Color(0xffF5F5F5);
 ///484848
 const colorDarkGray =  Color(0xff484848);
 ///F8F8F8
-const colorLgihtGray =  Color(0xffF8F8F8);
+const colorLightGray =  Color(0xfff8f8f8);
 ///000000
 const colorBlack =  Color(0xff000000);
 ///2192FB
