@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
+import 'package:project_cinderella_test3/msp/functions.dart';
 
 class BasicButton extends StatelessWidget
 {
@@ -350,5 +351,72 @@ class TaxiHistoryList extends StatelessWidget{
       ),
     );
   }
-  
 }
+
+// class MyTextField extends StatelessWidget
+// {
+//   @override
+//   Widget build(BuildContext context) {
+// return
+//   Stack(
+//     children:
+//     [
+//       Padding(
+//       padding: EdgeInsets.only(left: 28 * PX, right: 15 * PX),
+//       child: Form(
+//         key: _formKey,
+//         child: TextFormField(
+//         focusNode: textFocus,
+//         controller: TextEditingController(text: user.start),
+//         onChanged: (val) {
+//         user.start = val;
+//         },
+//         validator: (value) {
+//         // 나중에 여따가 email정규식 끼워넣기
+//         if (value!.isEmpty) {
+//         return "출발지를 정해주세요.";
+//         }
+//         return "";
+//         },
+//       style: TextStyle(fontSize: 22, color: Colors.black),
+//       decoration: InputDecoration(
+//       errorStyle: TextStyle(color: Colors.black),
+//       focusedErrorBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Colors.orange,
+//         width: 2,
+//       )
+//     ),
+//     hintText: "입력하세요",
+//     hintStyle: TextStyle(
+//     color: Color.fromRGBO(60, 60, 67, 0.6),
+//     fontFamily: "Pretendard",
+//     fontWeight: FontWeight.w400,
+//     //     color: Colors.blueAccent,
+//     fontSize: 17 * PX,
+//     ),
+//     //   border: OutlineInputBorder(
+//     //       borderSide: BorderSide.none),
+//     ),
+//     ),
+//     ),
+//     ),
+//     Padding(
+//     padding: EdgeInsets.only(left: 345 * PX, top: 17 * PX),
+//     child: GestureDetector(
+//     onTap: () {
+//     setState(() {
+//     user.start = "";
+//     });
+//     },
+//     child: Image(
+//     image: AssetImage(
+//     "assets/images/CreateGroup/CreategroupXmark.png"),
+//     ),
+//     ),
+//     ),
+//     ],
+//   });
+// }
+
+

@@ -34,6 +34,7 @@ dependencies:
   google_fonts: ^4.0.3
   http: ^0.13.5
   flutter_signin_button: ^2.0.0
+  flutter_local_notifications: 9.1.5
   
 
 
@@ -42,6 +43,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.4
   url_launcher: ^6.1.11
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,7 @@ flutter:
     - assets/images/
     - assets/images/CreateGroup/
     - assets/images/ListView/
+    - assets/images/JoinModal/
     - assets/jsonTest.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

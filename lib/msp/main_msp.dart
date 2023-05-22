@@ -13,7 +13,6 @@ void main()
       home: LoginPage()
     ),
   );
-
+  initNotification();
 
 }
-
