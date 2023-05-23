@@ -21,7 +21,7 @@ void main() {
       title: "project_cinderella_test3",
       // theme: ThemeData(fontFamily: 'Pretendard'),
       // themeMode: ThemeMode.system,
-      home: TaxiList(),
+      home: CreateGroup(),
     ),
   );
 }
