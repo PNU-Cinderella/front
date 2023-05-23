@@ -1,5 +1,7 @@
 import 'dart:convert';
-
+import 'am_pm.dart';
+import 'hours.dart';
+import 'minutes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +21,9 @@ class CreateGroup extends StatefulWidget {
 }
 
 class _CreateGroupState extends State<CreateGroup> {
+  int AM_PM = 0;
+  int CurrentHour = 0;
+  int CurrentMinute = 0;
   List<String> time_hour = [
     '00:00',
     '01:00',
@@ -180,6 +185,16 @@ class _CreateGroupState extends State<CreateGroup> {
     });
   }
 
+  // late FixedExtentScrollController _controller;
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+
+  //   _controller = FixedExtentScrollController();
+  // }
+
   // String timeString;
   @override
   Widget build(BuildContext context) {
@@ -194,6 +209,7 @@ class _CreateGroupState extends State<CreateGroup> {
         body: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(color: Colors.white),
           // color: Color(0xffF5F5F5),
           child: Padding(
             padding: EdgeInsets.only(top: statusBarHeight),
@@ -234,22 +250,22 @@ class _CreateGroupState extends State<CreateGroup> {
                 SizedBox(
                   height: 14 * PX,
                 ),
-                // Container(
-                //     width: MediaQuery.of(context).size.width,
-                //     child: Divider(color: Color(0xffF7F7F7), thickness: 2.0)),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2 * PX),
-                  child: Container(
-                    // color: const Color(0xFFF7F7F7).withOpacity(1),
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(247, 247, 247, 1),
-                    ),
-                    // color: Color(0xffF7F7F7),
-                    // color: Colors.black,
-                    height: 2 * PX,
+                Container(
                     width: MediaQuery.of(context).size.width,
-                  ),
-                ),
+                    child: Divider(color: Color(0xffF7F7F7), thickness: 2.0)),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 2 * PX),
+                //   child: Container(
+                //     // color: const Color(0xFFF7F7F7).withOpacity(1),
+                //     decoration: BoxDecoration(
+                //       color: Color.fromRGBO(247, 247, 247, 1),
+                //     ),
+                //     // color: Color(0xffF7F7F7),
+                //     // color: Colors.black,
+                //     height: 2 * PX,
+                //     width: MediaQuery.of(context).size.width,
+                //   ),
+                // ),
                 SizedBox(
                   height: 16 * PX,
                 ),
@@ -272,34 +288,114 @@ class _CreateGroupState extends State<CreateGroup> {
                     ),
                   ),
                 ),
+                Stack(
+                  children: [
+                    Container(
+                      width: 343 * PX,
+                      height: 96 * PX,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // am or pm
+                          Container(
+                            width: 70,
+                            child: ListWheelScrollView.useDelegate(
+                              onSelectedItemChanged: (value) {
+                                setState(() {
+                                  AM_PM = value;
+                                });
+                              },
+                              itemExtent: 50,
+                              perspective: 0.005,
+                              diameterRatio: 1.2,
+                              physics: FixedExtentScrollPhysics(),
+                              childDelegate: ListWheelChildBuilderDelegate(
+                                childCount: 2,
+                                builder: (context, index) {
+                                  if (index == 0) {
+                                    return AmPm(
+                                      isItAm: true,
+                                    );
+                                  } else {
+                                    return AmPm(
+                                      isItAm: false,
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          // hours wheel
+                          Container(
+                            width: 70,
+                            child: ListWheelScrollView.useDelegate(
+                              onSelectedItemChanged: (value) {
+                                setState(
+                                  () {
+                                    CurrentHour = value;
+                                  },
+                                );
+                              },
+                              // controller: _controller,
+                              itemExtent: 50,
+                              perspective: 0.005,
+                              diameterRatio: 1.2,
+                              physics: FixedExtentScrollPhysics(),
+                              childDelegate: ListWheelChildBuilderDelegate(
+                                childCount: 13,
+                                builder: (context, index) {
+                                  return MyHours(
+                                    hours: index,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          // minutes wheel
+                          Container(
+                            width: 70,
+                            child: ListWheelScrollView.useDelegate(
+                              onSelectedItemChanged: (value) {
+                                setState(() {
+                                  CurrentMinute = value;
+                                });
+                              },
+                              itemExtent: 50,
+                              perspective: 0.005,
+                              diameterRatio: 1.2,
+                              physics: FixedExtentScrollPhysics(),
+                              childDelegate: ListWheelChildBuilderDelegate(
+                                childCount: 60,
+                                builder: (context, index) {
+                                  return MyMinutes(
+                                    mins: index,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
                 // Container(
                 //   width: 343 * PX,
                 //   height: 96 * PX,
                 //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(12),
-                //       color: Colors.deepPurple),
-                //   // child: CupertinoPicker(
-                //   //     itemExtent: 75,
-                //   //     onSelectedItemChanged: (i) {
-                //   //       setState(() {
-                //   //         timeString = time[i];
-                //   //       });
-                //   //     },
-                //   //     children: [
-                //   //       ...time.map((e) => Text(
-                //   //             e,
-                //   //             style: theme.textTheme.bodyText1!
-                //   //                 .copyWith(color: Colors.amber, fontSize: 28),
-                //   //           ))
-                //   //     ]),
+                //       color: Colors.amberAccent,
+                //       borderRadius: BorderRadius.circular(8 * PX)),
                 // ),
-                Container(
-                  width: 343 * PX,
-                  height: 96 * PX,
-                  decoration: BoxDecoration(
-                      color: Colors.amberAccent,
-                      borderRadius: BorderRadius.circular(8 * PX)),
-                ),
                 SizedBox(
                   height: 29 * PX,
                 ),
@@ -591,8 +687,10 @@ class _CreateGroupState extends State<CreateGroup> {
                     ),
                   ),
                 ),
+                Text(
+                    "${CurrentMinute}${CurrentHour}${AM_PM}${user.start}${user.dest}"),
                 SizedBox(
-                  height: 180 * PX,
+                  height: 150 * PX,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20 * PX),

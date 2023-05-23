@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/TaxiList.dart';
+import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/taxi_history.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUpButton extends BasicButton
 {
@@ -15,6 +19,10 @@ class SignUpButton extends BasicButton
 }
 
 class SignUp extends StatelessWidget {
+
+  final String userName = "Default";
+  final bool isMan = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +43,10 @@ class SignUp extends StatelessWidget {
                 height: 53,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiList()) );
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiHistory()) );
+                    // launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
+                    MakeToast(msg: userName + " " + isMan.toString() + "Send!");
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,

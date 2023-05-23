@@ -1,3 +1,4 @@
+import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -19,6 +20,8 @@ const colorBlue =  Color(0xff2192FB);
 const colorWhite =  Color(0xffFFFFFF);
 
 const colorGrayhalfVis = Color(0xff9B9999);
+
+const colorDarkBlue = Color(0xff0152B1);
 
 //TextStyle///////////////////////////
 
@@ -104,6 +107,28 @@ const textstyleBoxDescrHalfVis = TextStyle(
   fontSize: 14,
   fontFamily: 'Pretendard',
   fontWeight: FontWeight.w400,
+  letterSpacing: -0.4 ,
+);
+///19, Prentendard, w600, blue
+const textstyle19DarkBlue = TextStyle(
+  color: colorDarkBlue,
+  fontSize: 19,
+  fontFamily: 'Pretendard',
+  fontWeight: FontWeight.w600,
+  letterSpacing: -0.4 ,
+);
+///19, Prentendard, w600
+const textstyle19W600 = TextStyle(
+  fontSize: 19,
+  fontFamily: 'Pretendard',
+  fontWeight: FontWeight.w600,
+  letterSpacing: -0.4 ,
+);
+///17, Prentendard, w600
+const textstyle17W600 = TextStyle(
+  fontSize: 17,
+  fontFamily: 'Pretendard',
+  fontWeight: FontWeight.w600,
   letterSpacing: -0.4 ,
 );
 
@@ -210,9 +235,9 @@ var rowLoginLogoSub =
 
 var rowBaseInfoButtons =
     Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         buttonGenderMale,
+        SizedBox(width : 13.64,),
         buttonGenderFemale,
       ],
     );
@@ -353,7 +378,11 @@ var boxSignup = Container(
         ),
       ),
       const SizedBox(height: 27,),
-      rowBaseInfoButtons
+      Container(
+        margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
+        child: rowBaseInfoButtons,
+      )
+
     ]
   )
 );
