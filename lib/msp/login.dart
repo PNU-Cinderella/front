@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
+import 'package:project_cinderella_test3/msp/Classes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginButton extends StatelessWidget
@@ -35,8 +36,8 @@ class LoginButton extends StatelessWidget
         {
           showNotification();
           MakeToast(msg: "Login Button Pressed.");
-          launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+          // launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewScreen()));
         },
         style: myButtonStyle,
         icon: myIcon,

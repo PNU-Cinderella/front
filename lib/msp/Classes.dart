@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:get/get.dart';
 
 class BasicButton extends StatelessWidget
 {
@@ -114,6 +119,28 @@ class BasicCircle extends CustomPainter
 }
 
 //Taxi_History Page Classes
+
+class SimpleSizedBox extends StatelessWidget
+{
+  double? myWidth;
+  double? myHeight;
+
+  SimpleSizedBox({required double width, required double height})
+  {
+    myWidth = width;
+    myHeight = height;
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: GetRealWidth(pixel: myWidth!, context: context),
+      height: GetRealHeight(pixel: myHeight!, context: context),
+    );
+  }
+  
+}
 
 class TaxiStatusBox extends StatelessWidget
 {
@@ -419,4 +446,64 @@ class TaxiHistoryList extends StatelessWidget{
 //   });
 // }
 
+// class Login extends StatelessWidget {
+//   const Login({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     return const WebView(
+//       initialUrl: 'http://10.0.2.2.nip.io:8080/oauth2/authorization/google',
+//       javascriptMode: JavascriptMode.unrestricted,
+//       userAgent: "random",
+//     );
+//   }
+// }
 
+class WebViewScreen extends StatefulWidget {
+  const WebViewScreen({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<WebViewScreen> createState() => _WebViewScreenState();
+}
+
+class _WebViewScreenState extends State<WebViewScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  late WebViewController webViewController = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(const Color(0x00000000))
+    ..setUserAgent("random")
+    ..setNavigationDelegate(
+      NavigationDelegate(
+        onProgress: (int progress) {},
+        onPageStarted: (String url) {},
+        onPageFinished: (String url) {},
+        onWebResourceError: (WebResourceError error) {},
+        onNavigationRequest: (NavigationRequest request) {
+          return NavigationDecision.navigate;
+        },
+      ),
+    )
+    ..loadRequest(Uri.parse('https://www.google.com/'));
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: WebViewWidget(
+              controller: webViewController,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
