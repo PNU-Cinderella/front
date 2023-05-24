@@ -35,7 +35,7 @@ class LoginButton extends StatelessWidget
         {
           showNotification();
           MakeToast(msg: "Login Button Pressed.");
-          //launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
+          launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
           Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
         },
         style: myButtonStyle,
