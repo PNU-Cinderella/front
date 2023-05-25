@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
+import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const myTestUrl = 'http://10.0.2.2:8080/chatroom/1';
@@ -10,9 +11,10 @@ void main()
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "test",
-      home: WebViewScreen()
+      home: TestUrl()
     ),
   );
+  initNotification();
 }
 
 class TestUrl extends StatelessWidget {
@@ -31,7 +33,7 @@ class TestUrl extends StatelessWidget {
               height: 53,
               child: OutlinedButton(
                 onPressed: () {
-                  launchUrl(Uri.parse(myTestUrl));
+                  showNotification();
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.blue,

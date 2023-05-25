@@ -229,6 +229,9 @@ initNotification() async {
     //알림 누를때 함수실행하고 싶으면
     //onSelectNotification: 함수명추가
   );
+
+  print("Init Notification!");
+  showNotification();
 }
 
 //2. 이 함수 원하는 곳에서 실행하면 알림 뜸
@@ -251,8 +254,9 @@ showNotification() async {
   // 알림 id, 제목, 내용 맘대로 채우기
   notifications.show(
       1,
-      '제목1',
-      '내용1',
+      'test',
+      'hihi',
       NotificationDetails(android: androidDetails, iOS: iosDetails)
   );
+  print("Show NOtification!");
 }

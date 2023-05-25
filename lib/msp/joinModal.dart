@@ -362,7 +362,81 @@ class JoinModalThird extends StatelessWidget {
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
                         SimpleSizedBox(width: 103, height: 0),
-                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalThird())
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalFourth())
+                      ]
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class JoinModalFourth extends StatelessWidget {
+  const JoinModalFourth({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: GetRealHeight(pixel: 575, context: context),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0)
+      ),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 16, context: context), GetRealHeight(pixel: 22, context: context), 0, 0),
+                  child:
+                  Row(
+                      children: [
+                        Image.asset("assets/images/JoinModal/icon_left.png"),
+                        SizedBox(width: GetRealWidth(pixel: 99, context: context),),
+                        Text("정산 및 오픈채팅", style: textstyleBoxHeader,),
+                        SizedBox(width: GetRealWidth(pixel: 92, context: context),),
+                        Image.asset("assets/images/JoinModal/icon_x.png"),
+                      ]
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 30, context: context), GetRealHeight(pixel: 45, context: context), 0, 0),
+                  child:
+                  Column(
+                    children: [
+                      Row(
+                          children: [
+                            Text("정산은 아래의 오픈채팅을 통해\n멤버들과 조정할 수 있어요", style: SimpleTextStyle(size: 24, weight: FontWeight.w600, color: colorBlack),),
+                          ]
+                      ),
+                      SizedBox(height: GetRealHeight(pixel: 28, context: context),),
+                      Row(
+                          children: [
+                            Text("오픈채팅방 링크와 참가한 택시팟은\n하단 네비게이션 바의 '확인'페이지에서 재확인 가능합니다", style: SimpleTextStyle(size: 14, weight: FontWeight.w400, color: Color(0xff5C5050)),),
+                          ]
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 21, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                  child:
+                  Column(
+                      children: [
+                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "카카오 오픈채팅방 가기", widget: JoinModalFirst(),
+                          buttonStyle: OutlinedButton.styleFrom(
+                              backgroundColor: Color(0xffF5F5F5),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              side: BorderSide(color: Color(0xffF5F5F5), width: 1.4)
+                          ),
+                          textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
+                        ),
+                        SimpleSizedBox(width: 0, height: 13),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "완료", widget: JoinModalThird())
                       ]
                   ),
                 ),

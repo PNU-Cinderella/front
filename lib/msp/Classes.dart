@@ -489,7 +489,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
         },
       ),
     )
-    ..loadRequest(Uri.parse('https://www.google.com/'));
+    ..loadRequest(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
 
   @override
   Widget build(BuildContext context) {
