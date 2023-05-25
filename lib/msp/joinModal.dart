@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_cinderella_test3/msp/Classes.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
@@ -22,6 +23,59 @@ class BottomSheetApp extends StatelessWidget {
   }
 }
 
+class JoinButton extends StatelessWidget
+{
+  BuildContext? myContext;
+  double? myWidth;
+  double? myHeight;
+  Widget? myWidget;
+  ButtonStyle? myButtonStyle = OutlinedButton.styleFrom(
+      backgroundColor: Color(0xff222222),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      side: BorderSide(color: Color(0xff222222), width: 1.4)
+  );
+  TextStyle myTextStyle = SimpleTextStyle(size: 17, color: Colors.white, weight: FontWeight.w500);
+  late String myText;
+
+  JoinButton({required BuildContext context, required double width,  required double height, required String text, required Widget widget, ButtonStyle? buttonStyle, TextStyle? textStyle}){
+    myContext = context;
+    myWidth = width;
+    myHeight = height;
+    myText = text;
+    myWidget = widget;
+
+    if(buttonStyle != null)
+      {
+        myButtonStyle = buttonStyle;
+      }
+    if(textStyle != null)
+      {
+        myTextStyle = textStyle;
+      }
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: myWidth,
+      height: myHeight,
+      child: OutlinedButton(
+        onPressed: ()
+        {
+          showNotification();
+          MakeToast(msg: "Button Pressed.");
+          Navigator.push(context, ModalBottomSheetRoute(builder: (context) => myWidget!, isScrollControlled: false));
+        },
+        style: myButtonStyle,
+        child: Text(myText, style: myTextStyle,),
+      ),
+    );
+  }
+
+}
+
+
 class JoinModalFirst extends StatelessWidget {
   const JoinModalFirst({super.key});
 
@@ -35,75 +89,91 @@ class JoinModalFirst extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return Container(
-                height: GetRealHeight(pixel: 575, context: context),
+                // height: GetRealHeight(pixel: 1575, context: context),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0)
+                    borderRadius: BorderRadius.circular(20),
+                  color: colorWhite,
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: <Widget>[
-                          Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 16, context: context), GetRealHeight(pixel: 22, context: context), 0, 0),
-                                child:
-                                Row(
-                                    children: [
-                                      Image.asset("assets/images/JoinModal/icon_left.png"),
-                                      SizedBox(width: GetRealWidth(pixel: 130, context: context),),
-                                      Text("참여하기", style: textstyleBoxHeader,),
-                                      SizedBox(width: GetRealWidth(pixel: 122, context: context),),
-                                      Image.asset("assets/images/JoinModal/icon_x.png"),
-                                    ]
+                child: Container(
+                  height: GetRealHeight(pixel: 1575, context: context),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 16, context: context), GetRealHeight(pixel: 22, context: context), 0, 0),
+                                  child:
+                                  Row(
+                                      children: [
+                                        Image.asset("assets/images/JoinModal/icon_left.png"),
+                                        SizedBox(width: GetRealWidth(pixel: 130, context: context),),
+                                        Text("참여하기", style: textstyleBoxHeader,),
+                                        SizedBox(width: GetRealWidth(pixel: 122, context: context),),
+                                        Image.asset("assets/images/JoinModal/icon_x.png"),
+                                      ]
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 39, context: context), GetRealHeight(pixel: 50, context: context), 0, 0),
-                                child:
-                                Row(
-                                    children: [
-                                      Text("부산은행 앞", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: colorDarkBlue),),
-                                      SizedBox(width: GetRealWidth(pixel: 113, context: context),),
-                                      Text("am 02시 30분", style: SimpleTextStyle(size: 19, weight: FontWeight.w600),),
-                                    ]
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 39, context: context), GetRealHeight(pixel: 50, context: context), 0, 0),
+                                  child:
+                                  Row(
+                                      children: [
+                                        Text("부산은행 앞", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: colorDarkBlue),),
+                                        SizedBox(width: GetRealWidth(pixel: 113, context: context),),
+                                        Text("am 02시 30분", style: SimpleTextStyle(size: 19, weight: FontWeight.w600),),
+                                      ]
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 38, context: context), GetRealHeight(pixel: 37, context: context), 0, 0),
-                                child:
-                                Row(
-                                    children: [
-                                      Text("동승자의 경유지를 확인해주세요", style: SimpleTextStyle(size: 17, weight: FontWeight.w600),),
-                                    ]
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 38, context: context), GetRealHeight(pixel: 37, context: context), 0, 0),
+                                  child:
+                                  Row(
+                                      children: [
+                                        Text("동승자의 경유지를 확인해주세요", style: SimpleTextStyle(size: 17, weight: FontWeight.w600),),
+                                      ]
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 37, context: context), GetRealHeight(pixel: 30, context: context), 0, 0),
-                                child:
-                                Row(
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 37, context: context), GetRealHeight(pixel: 30, context: context), 0, 0),
+                                  child:
+                                  Column(
                                     children: [
-                                      Text("1   명륜역", style: SimpleTextStyle(size: 17),),
-                                    ]
+                                      Row(
+                                          children: [
+                                            Text("1   명륜역", style: SimpleTextStyle(size: 17),),
+                                          ]
+                                      ),
+                                      SimpleSizedBox(width: 0, height: 25),
+                                      Row(
+                                          children: [
+                                            Text("2   명륜동 황금손한방병원", style: SimpleTextStyle(size: 17),),
+                                          ]
+                                      ),
+                                      SimpleSizedBox(width: 0, height: 25),
+                                      Row(
+                                          children: [
+                                            Text("3   부곡동 거제한양아파트", style: SimpleTextStyle(size: 17),),
+                                          ]
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                        alignment: Alignment.bottomCenter,
-                        margin: EdgeInsets.fromLTRB(0, 0, 0,GetRealHeight(pixel: 62, context: context)),
-                        child:
-                        ElevatedButton(
-                          child: Text("참여하기"),
-                          onPressed: () => Navigator.push(context,
-                              ModalBottomSheetRoute(builder: (context) => JoinModalSecond(), isScrollControlled: false)),
-                        )
-                    ),
-                  ],
+                      SimpleSizedBox(width: 0, height: 30),
+                      JoinButton(context: context,
+                          width: GetRealWidth(pixel: 310, context: context),
+                          height: GetRealHeight(pixel: 47, context: context),
+                          text: "참여하기",
+                          widget: JoinModalSecond())
+                    ],
+                  ),
                 ),
               );
             },
@@ -122,7 +192,8 @@ class JoinModalSecond extends StatelessWidget {
     return Container(
       height: GetRealHeight(pixel: 575, context: context),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0)
+          borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
       ),
       child: Center(
         child: Column(
@@ -152,7 +223,7 @@ class JoinModalSecond extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 30, context: context), GetRealHeight(pixel: 45, context: context), 0, 0),
+                    margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 0, context: context), GetRealHeight(pixel: 45, context: context), 0, 0),
                     width: GetRealWidth(pixel: 333, context: context),
                     height: GetRealHeight(pixel: 49, context: context),
                     child:
@@ -171,20 +242,22 @@ class JoinModalSecond extends StatelessWidget {
                       ]
                   ),
                 ),
+                SimpleSizedBox(width: 0, height: 100),
                 Container(
-                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 54, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 19, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
                   child:
                   Row(
                       children: [
-                        ElevatedButton(
-                          child: const Text('이전'),
-                          onPressed: () => Navigator.pop(context),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "이전", widget: JoinModalFirst(),
+                          buttonStyle: OutlinedButton.styleFrom(
+                              backgroundColor: Color(0xffF5F5F5),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              side: BorderSide(color: Color(0xffF5F5F5), width: 1.4)
+                          ),
+                          textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
-                        ElevatedButton(
-                          child: const Text('다음'),
-                          onPressed: () => Navigator.push(context,
-                              ModalBottomSheetRoute(builder: (context) => JoinModalThird(), isScrollControlled: false)),
-                        ),
+                        SimpleSizedBox(width: 103, height: 0),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalThird())
                       ]
                   ),
                 ),
@@ -245,7 +318,9 @@ class JoinModalThird extends StatelessWidget {
                                     color: Color(0xff2192FB),
                                     borderRadius: BorderRadius.circular(24)
                                 ),
-                                child: Text("시간을 준수해 주세요", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),)),
+                                child: Container(
+                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 40, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                                    child: Text("시간을 준수해 주세요", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),))),
                           ]
                       ),
                       SizedBox(height: GetRealHeight(pixel: 16, context: context),),
@@ -258,10 +333,12 @@ class JoinModalThird extends StatelessWidget {
                                     color: Color(0xff2192FB),
                                     borderRadius: BorderRadius.circular(24)
                                 ),
-                                child: Text("지각이나 잠수등의 비매너 행동은\n동승자로 인해 신고당할 수 있으며\n앱 사용이 제한 될 수 있음에 동의\n합니다", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),)),
+                                child: Container(
+                                    margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 40, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                                    child: Text("지각이나 잠수등의 비매너 행동은\n동승자로 인해 신고당할 수 있으며\n앱 사용이 제한 될 수 있음에 동의\n합니다", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),))),
                           ]
                       ),
-                      SizedBox(height: GetRealHeight(pixel: 73, context: context),),
+                      SizedBox(height: GetRealHeight(pixel: 36, context: context),),
                       Row(
                           children: [
                             Text("출발 30분 전 알림을 받아요", style: SimpleTextStyle(size: 17, weight: FontWeight.w400, color: colorBlack),),
@@ -272,19 +349,94 @@ class JoinModalThird extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 54, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 21, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
                   child:
                   Row(
                       children: [
-                        ElevatedButton(
-                          child: const Text('이전'),
-                          onPressed: () => Navigator.pop(context),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "이전", widget: JoinModalFirst(),
+                          buttonStyle: OutlinedButton.styleFrom(
+                              backgroundColor: Color(0xffF5F5F5),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              side: BorderSide(color: Color(0xffF5F5F5), width: 1.4)
+                          ),
+                          textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
-                        ElevatedButton(
-                          child: const Text('다음'),
-                          onPressed: () => Navigator.push(context,
-                              ModalBottomSheetRoute(builder: (context) => JoinModalThird(), isScrollControlled: false)),
+                        SimpleSizedBox(width: 103, height: 0),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalFourth())
+                      ]
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class JoinModalFourth extends StatelessWidget {
+  const JoinModalFourth({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: GetRealHeight(pixel: 575, context: context),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0)
+      ),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 16, context: context), GetRealHeight(pixel: 22, context: context), 0, 0),
+                  child:
+                  Row(
+                      children: [
+                        Image.asset("assets/images/JoinModal/icon_left.png"),
+                        SizedBox(width: GetRealWidth(pixel: 99, context: context),),
+                        Text("정산 및 오픈채팅", style: textstyleBoxHeader,),
+                        SizedBox(width: GetRealWidth(pixel: 92, context: context),),
+                        Image.asset("assets/images/JoinModal/icon_x.png"),
+                      ]
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 30, context: context), GetRealHeight(pixel: 45, context: context), 0, 0),
+                  child:
+                  Column(
+                    children: [
+                      Row(
+                          children: [
+                            Text("정산은 아래의 오픈채팅을 통해\n멤버들과 조정할 수 있어요", style: SimpleTextStyle(size: 24, weight: FontWeight.w600, color: colorBlack),),
+                          ]
+                      ),
+                      SizedBox(height: GetRealHeight(pixel: 28, context: context),),
+                      Row(
+                          children: [
+                            Text("오픈채팅방 링크와 참가한 택시팟은\n하단 네비게이션 바의 '확인'페이지에서 재확인 가능합니다", style: SimpleTextStyle(size: 14, weight: FontWeight.w400, color: Color(0xff5C5050)),),
+                          ]
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 21, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                  child:
+                  Column(
+                      children: [
+                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "카카오 오픈채팅방 가기", widget: JoinModalFirst(),
+                          buttonStyle: OutlinedButton.styleFrom(
+                              backgroundColor: Color(0xffF5F5F5),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              side: BorderSide(color: Color(0xffF5F5F5), width: 1.4)
+                          ),
+                          textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
+                        SimpleSizedBox(width: 0, height: 13),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "완료", widget: JoinModalThird())
                       ]
                   ),
                 ),

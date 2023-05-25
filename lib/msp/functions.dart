@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+const SIZE_FIGMA_WIDTH = 393;
+const SIZE_FIGMA_HEIGHT = 852;
 
 //For PlaceHolding
 Container MakeContainer(double? myWidth, double? myHeight)
@@ -24,6 +27,7 @@ double GetRealWidth({required double pixel, required BuildContext context, })
 double GetRealHeight({required double pixel, required BuildContext context, })
 {
   double PX = MediaQuery.of(context).size.height / 852;
+  print(pixel* PX);
   return pixel * PX;
 }
 
@@ -225,6 +229,9 @@ initNotification() async {
     //알림 누를때 함수실행하고 싶으면
     //onSelectNotification: 함수명추가
   );
+
+  print("Init Notification!");
+  showNotification();
 }
 
 //2. 이 함수 원하는 곳에서 실행하면 알림 뜸
@@ -247,8 +254,9 @@ showNotification() async {
   // 알림 id, 제목, 내용 맘대로 채우기
   notifications.show(
       1,
-      '제목1',
-      '내용1',
+      'test',
+      'hihi',
       NotificationDetails(android: androidDetails, iOS: iosDetails)
   );
+  print("Show NOtification!");
 }
