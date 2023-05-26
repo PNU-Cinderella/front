@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
 
-class TaxiHistory extends StatelessWidget {
+class TaxiHistory extends StatefulWidget {
+
+  @override
+  State<TaxiHistory> createState() => _TaxiHistoryState();
+}
+
+class _TaxiHistoryState extends State<TaxiHistory> {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,24 +38,7 @@ class TaxiHistory extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: colorBlack,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              label: '탑승기록',
-              icon: Image.asset("assets/images/icon_taxi_history.png"),
-              backgroundColor: colorLightGray),
-          BottomNavigationBarItem(
-              label: '택시팟',
-              icon: Image.asset("assets/images/icon_taxi_main.png"),
-              backgroundColor: colorLightGray),
-          BottomNavigationBarItem(
-              label: 'my',
-              icon: Image.asset("assets/images/icon_taxi_my.png"),
-              backgroundColor: colorLightGray),
-        ],
-      ),
+
       ),
     );
   }

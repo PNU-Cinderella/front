@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/CreateGroup.dart';
@@ -43,10 +43,7 @@ class SignUp extends StatelessWidget {
                 height: 53,
                 child: OutlinedButton(
                   onPressed: () {
-
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiHistory()) );
                     Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGroup()) );
-                    // launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
                     MakeToast(msg: userName + " " + isMan.toString() + "Send!");
                   },
                   style: OutlinedButton.styleFrom(
