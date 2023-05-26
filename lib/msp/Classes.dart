@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
+import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:get/get.dart';
 
 class BasicButton extends StatelessWidget
 {
@@ -99,18 +105,42 @@ class BasicCircle extends CustomPainter
 {
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawCircle(Offset(0, 0), 45, Paint());
+    canvas.drawOval(Rect.fromLTRB(0, 0, size.width, size.height),
+        Paint()
+          ..color.blue
+          ..strokeWidth = 2
+          ..style = PaintingStyle.fill
+    );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    throw UnimplementedError();
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
   
 }
 
 //Taxi_History Page Classes
+
+class SimpleSizedBox extends StatelessWidget
+{
+  double? myWidth;
+  double? myHeight;
+
+  SimpleSizedBox({required double width, required double height})
+  {
+    myWidth = width;
+    myHeight = height;
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: GetRealWidth(pixel: myWidth!, context: context),
+      height: GetRealHeight(pixel: myHeight!, context: context),
+    );
+  }
+  
+}
 
 class TaxiStatusBox extends StatelessWidget
 {
@@ -133,6 +163,10 @@ class TaxiStatusBox extends StatelessWidget
     return Container(
       width: myWidth,
       height: myHeight,
+      decoration: BoxDecoration(
+        color: colorWhite,
+          borderRadius: BorderRadius.circular(10)
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,8 +176,10 @@ class TaxiStatusBox extends StatelessWidget
             width: 118,
             height: 48,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   textStatus!,
+                  SizedBox(height: 4,),
                   textStatusSub!,
                 ]
             ),
@@ -168,12 +204,7 @@ class TaxiStatusBox extends StatelessWidget
                 ],
               )
           ),
-
         ],
-      ),
-      decoration: BoxDecoration(
-          color: Colors.purpleAccent,
-          borderRadius: BorderRadius.circular(10)
       ),
     );
   }
@@ -183,6 +214,7 @@ class TaxiStatusBox extends StatelessWidget
 class IconTaxiCurrent extends StatelessWidget{
   double? myWidth;
   double? myHeight;
+  int? order;
   Widget? imageIcon;
   Widget? textIcon;
 
@@ -200,23 +232,15 @@ class IconTaxiCurrent extends StatelessWidget{
     return Container(
       width: myWidth,
       height: myHeight,
-      color: Colors.lightGreenAccent,
       child: Column(
         children: [
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage("assets/images/icon_taxi_main.png") ,
-                )
-            ),
+          CustomPaint(
+            size: Size(30,30),
+            painter: BasicCircle(),
           ),
+          SizedBox(height: 4,),
           textIcon!
         ],
-
       ),
     );
   }
@@ -244,8 +268,8 @@ class TaxiHistorySearchBar extends StatelessWidget{
         ],
       ),
       decoration: BoxDecoration(
+        color: colorWhite,
         borderRadius: BorderRadius.circular(10),
-        color: Colors.redAccent
       ),
     );
   }
@@ -284,7 +308,7 @@ class TaxiHistoryBox extends StatelessWidget {
       width: myWidth,
       height: myHeight,
       decoration: BoxDecoration(
-          color: Colors.cyanAccent,
+        color: colorWhite,
       ),
       child: Column(
         children: [
@@ -336,7 +360,6 @@ class TaxiHistoryList extends StatelessWidget{
     return Container(
       width: myWidth,
       height: myHeight,
-      color: Colors.deepOrangeAccent,
       child: ListView.builder(
         padding: EdgeInsets.zero,
           itemCount: 5,
@@ -355,5 +378,84 @@ class TaxiHistoryList extends StatelessWidget{
       ),
     );
   }
-  
 }
+
+// class MyTextField extends StatelessWidget
+// {
+//   @override
+//   Widget build(BuildContext context) {
+// return
+//   Stack(
+//     children:
+//     [
+//       Padding(
+//       padding: EdgeInsets.only(left: 28 * PX, right: 15 * PX),
+//       child: Form(
+//         key: _formKey,
+//         child: TextFormField(
+//         focusNode: textFocus,
+//         controller: TextEditingController(text: user.start),
+//         onChanged: (val) {
+//         user.start = val;
+//         },
+//         validator: (value) {
+//         // 나중에 여따가 email정규식 끼워넣기
+//         if (value!.isEmpty) {
+//         return "출발지를 정해주세요.";
+//         }
+//         return "";
+//         },
+//       style: TextStyle(fontSize: 22, color: Colors.black),
+//       decoration: InputDecoration(
+//       errorStyle: TextStyle(color: Colors.black),
+//       focusedErrorBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Colors.orange,
+//         width: 2,
+//       )
+//     ),
+//     hintText: "입력하세요",
+//     hintStyle: TextStyle(
+//     color: Color.fromRGBO(60, 60, 67, 0.6),
+//     fontFamily: "Pretendard",
+//     fontWeight: FontWeight.w400,
+//     //     color: Colors.blueAccent,
+//     fontSize: 17 * PX,
+//     ),
+//     //   border: OutlineInputBorder(
+//     //       borderSide: BorderSide.none),
+//     ),
+//     ),
+//     ),
+//     ),
+//     Padding(
+//     padding: EdgeInsets.only(left: 345 * PX, top: 17 * PX),
+//     child: GestureDetector(
+//     onTap: () {
+//     setState(() {
+//     user.start = "";
+//     });
+//     },
+//     child: Image(
+//     image: AssetImage(
+//     "assets/images/CreateGroup/CreategroupXmark.png"),
+//     ),
+//     ),
+//     ),
+//     ],
+//   });
+// }
+
+// class Login extends StatelessWidget {
+//   const Login({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     return const WebView(
+//       initialUrl: 'http://10.0.2.2.nip.io:8080/oauth2/authorization/google',
+//       javascriptMode: JavascriptMode.unrestricted,
+//       userAgent: "random",
+//     );
+//   }
+// }
+

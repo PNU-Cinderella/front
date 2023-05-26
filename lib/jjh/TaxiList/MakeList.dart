@@ -28,24 +28,6 @@ class Makelist extends StatelessWidget {
   // State<Makelist> createState() => _MakelistState();
 // }
 
-// class _MakelistState extends State<Makelist> {
-  // dynamic lsts;
-  // Map<String, dynamic> usermaps;
-  // _MakelistState(this.usermaps);
-  // List<roomMember> lsts = usermaps.isNotEmpty
-  // void makelsts() {
-  //   dynamic lsts = roomMembers.fromJson(widget.usermaps);
-  // }
-
-  // var user = User.fromJson(widget.usermaps);
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   lsts = roomMember.fromJson(usermaps);
-  //   print(lsts.runtimeType);
-  // }
-
   @override
   Widget build(BuildContext context) {
     // box-shadow: 0px 3px 3px 5px rgba(245, 245, 245, 0.25);
