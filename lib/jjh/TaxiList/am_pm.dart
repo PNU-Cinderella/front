@@ -14,7 +14,7 @@ class AmPm extends StatelessWidget {
       child: Container(
         child: Center(
           child: Text(
-            isItAm == true ? 'AM' : 'PM',
+            isItAm == true ? '오전' : '오후',
             style: TextStyle(
               fontSize: 25,
               color: Colors.black,

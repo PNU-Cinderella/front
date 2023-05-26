@@ -51,45 +51,50 @@ class Makelist extends StatelessWidget {
     // box-shadow: 0px 3px 3px 5px rgba(245, 245, 245, 0.25);
 
     return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: Color.fromRGBO(245, 245, 245, 0.25),
-            offset: Offset(0, 3),
-            blurRadius: 3)
-      ]),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(255, 255, 255, 1),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+              color: Color.fromRGBO(245, 245, 245, 0.25),
+              offset: Offset(0, 3),
+              blurRadius: 3)
+        ],
+      ),
       width: 353 * PX,
       height: 140 * PX,
-      color: Color.fromRGBO(255, 255, 255, 1),
+
       // color: Colors.blueAccent,
       // child: Text(usermaps as String),
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 22 * PX, top: 13 * PX),
-                child: Text(
-                  "${userlists.host} (${userlists.num_of_people}/4)",
-                  style: TextStyle(
-                      fontSize: 15 * PX,
-                      fontFamily: "Pretendard",
-                      fontWeight: FontWeight.w600),
-                ),
+              Text(
+                "${userlists.host} (${userlists.num_of_people}/4)",
+                style: TextStyle(
+                    fontSize: 18 * PX,
+                    fontFamily: "Pretendard",
+                    fontWeight: FontWeight.w600),
               ),
-              SizedBox(
-                width: 124 * PX,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    "${userlists.time}",
+                    style: TextStyle(
+                        fontFamily: "Pretendard",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18 * PX,
+                        color: Color.fromRGBO(64, 113, 205, 1)),
+                  ),
+                  Icon(
+                    Icons.more_vert,
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 20 * PX),
-                child: Text(
-                  "${userlists.time}",
-                  style: TextStyle(
-                      fontFamily: "Pretendard",
-                      fontWeight: FontWeight.w700,
-                      fontSize: 13 * PX,
-                      color: Color.fromRGBO(64, 113, 205, 1)),
-                ),
-              )
+
               // Text(usermaps.runtimeType as String),
               // Image.asset('assets/images/ListView/user1.png'), //크기 20x20이미지
               // Text(lsts),

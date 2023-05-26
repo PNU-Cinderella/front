@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class User {
-  String time;
-  String start;
+  int time;
   String dest;
+  String start;
   User(this.time, this.start, this.dest);
 }
 
@@ -24,24 +24,9 @@ class _CreateGroupState extends State<CreateGroup> {
   int AM_PM = 0;
   int CurrentHour = 0;
   int CurrentMinute = 0;
-  List<String> time_hour = [
-    '00:00',
-    '01:00',
-    '02:00',
-    '03:00',
-    '04:00',
-    '05:00',
-    '06:00',
-    '07:00',
-    '08:00',
-    '09:00',
-    '10:00',
-    '11:00',
-    '12:00',
-  ];
 
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
-  User user = User("", "", "");
+  User user = User(0, "", "부산은행");
   final url = Uri.parse("http://localhost:8080/login");
 
   Future save() async {
@@ -64,10 +49,10 @@ class _CreateGroupState extends State<CreateGroup> {
   var button_jayou_text = Color.fromRGBO(173, 173, 173, 1);
   var button_hyowon = Color.fromRGBO(238, 238, 239, 1);
   var button_hyowon_text = Color.fromRGBO(173, 173, 173, 1);
-  var button_start_not_selected = Color.fromRGBO(238, 238, 239, 1);
-  var button_start_not_selected_text = Color.fromRGBO(173, 173, 173, 1);
-  var button_start_selected = Color.fromRGBO(33, 146, 251, 1);
-  var button_start_selected_text = Colors.white;
+  var button_dest_not_selected = Color.fromRGBO(238, 238, 239, 1);
+  var button_dest_not_selected_text = Color.fromRGBO(173, 173, 173, 1);
+  var button_dest_selected = Color.fromRGBO(33, 146, 251, 1);
+  var button_dest_selected_text = Colors.white;
 
   var button_not_selected = Color.fromRGBO(118, 118, 128, 0.12);
   var button_selected = Colors.white;
@@ -77,74 +62,74 @@ class _CreateGroupState extends State<CreateGroup> {
   FocusNode textFocus = FocusNode();
   void _notselected() {
     setState(() {
-      // user.start = "웅비관";
-      button_woongbi = button_start_not_selected;
-      button_woongbi_text = button_start_not_selected_text;
-      button_jinri = button_start_not_selected;
-      button_jinri_text = button_start_not_selected_text;
-      button_jayou = button_start_not_selected;
-      button_jayou_text = button_start_not_selected_text;
-      button_hyowon = button_start_not_selected;
-      button_hyowon_text = button_start_not_selected_text;
+      // user.dest = "웅비관";
+      button_woongbi = button_dest_not_selected;
+      button_woongbi_text = button_dest_not_selected_text;
+      button_jinri = button_dest_not_selected;
+      button_jinri_text = button_dest_not_selected_text;
+      button_jayou = button_dest_not_selected;
+      button_jayou_text = button_dest_not_selected_text;
+      button_hyowon = button_dest_not_selected;
+      button_hyowon_text = button_dest_not_selected_text;
     });
   }
 
   void _woongbi() {
     setState(() {
-      user.start = "웅비관";
-      button_woongbi = button_start_selected;
-      button_woongbi_text = button_start_selected_text;
-      button_jinri = button_start_not_selected;
-      button_jinri_text = button_start_not_selected_text;
-      button_jayou = button_start_not_selected;
-      button_jayou_text = button_start_not_selected_text;
-      button_hyowon = button_start_not_selected;
-      button_hyowon_text = button_start_not_selected_text;
+      user.dest = "웅비관";
+      button_woongbi = button_dest_selected;
+      button_woongbi_text = button_dest_selected_text;
+      button_jinri = button_dest_not_selected;
+      button_jinri_text = button_dest_not_selected_text;
+      button_jayou = button_dest_not_selected;
+      button_jayou_text = button_dest_not_selected_text;
+      button_hyowon = button_dest_not_selected;
+      button_hyowon_text = button_dest_not_selected_text;
       textFocus.unfocus();
     });
   }
 
   void _jinri() {
     setState(() {
-      user.start = "진리관";
-      button_woongbi = button_start_not_selected;
-      button_woongbi_text = button_start_not_selected_text;
-      button_jinri = button_start_selected;
-      button_jinri_text = button_start_selected_text;
-      button_jayou = button_start_not_selected;
-      button_jayou_text = button_start_not_selected_text;
-      button_hyowon = button_start_not_selected;
-      button_hyowon_text = button_start_not_selected_text;
+      user.dest = "진리관";
+      button_woongbi = button_dest_not_selected;
+      button_woongbi_text = button_dest_not_selected_text;
+      button_jinri = button_dest_selected;
+      button_jinri_text = button_dest_selected_text;
+      button_jayou = button_dest_not_selected;
+      button_jayou_text = button_dest_not_selected_text;
+      button_hyowon = button_dest_not_selected;
+      button_hyowon_text = button_dest_not_selected_text;
       textFocus.unfocus();
     });
   }
 
   void _jayou() {
     setState(() {
-      user.start = "자유관";
-      button_woongbi = button_start_not_selected;
-      button_woongbi_text = button_start_not_selected_text;
-      button_jinri = button_start_not_selected;
-      button_jinri_text = button_jinri_text = button_start_not_selected_text;
-      button_jayou = button_start_selected;
-      button_jayou_text = button_start_selected_text;
-      button_hyowon = button_start_not_selected;
-      button_hyowon_text = button_start_not_selected_text;
+      user.dest = "자유관";
+      button_woongbi = button_dest_not_selected;
+      button_woongbi_text = button_dest_not_selected_text;
+      button_jinri = button_dest_not_selected;
+      button_jinri_text = button_jinri_text = button_dest_not_selected_text;
+      button_jayou = button_dest_selected;
+      button_jayou_text = button_dest_selected_text;
+      button_hyowon = button_dest_not_selected;
+      button_hyowon_text = button_dest_not_selected_text;
       textFocus.unfocus();
     });
   }
 
   void _hyowon() {
     setState(() {
-      user.start = "효원재";
-      button_woongbi = button_start_not_selected;
-      button_woongbi_text = button_start_not_selected_text;
-      button_jinri = button_start_not_selected;
-      button_jinri_text = button_jinri_text = button_start_not_selected_text;
-      button_jayou = button_start_not_selected;
-      button_jayou_text = button_start_not_selected_text;
-      button_hyowon = button_start_selected;
-      button_hyowon_text = button_start_selected_text;
+      user.dest = "효원재";
+      button_woongbi = button_dest_not_selected;
+      button_woongbi_text = button_dest_not_selected_text;
+      button_jinri = button_dest_not_selected;
+      button_jinri_text = button_jinri_text = button_dest_not_selected_text;
+      button_jayou = button_dest_not_selected;
+      button_jayou_text = button_dest_not_selected_text;
+      button_hyowon = button_dest_selected;
+      button_hyowon_text = button_dest_selected_text;
       textFocus.unfocus();
     });
   }
@@ -155,7 +140,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_bank = button_selected;
       button_station = button_not_selected;
       button_front = button_not_selected;
-      user.dest = "부산은행";
+      user.start = "부산은행";
       textFocus.unfocus();
       // jsonList = fetchInfo(url);
     });
@@ -168,7 +153,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_station = button_selected;
       button_front = button_not_selected;
       // jsonList = fetchInfo(url);
-      user.dest = "부산대역";
+      user.start = "부산대역";
       textFocus.unfocus();
     });
   }
@@ -180,7 +165,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_station = button_not_selected;
       button_front = button_selected;
       // jsonList = fetchInfo(url);
-      user.dest = "부산대정문";
+      user.start = "부산대정문";
       textFocus.unfocus();
     });
   }
@@ -218,7 +203,7 @@ class _CreateGroupState extends State<CreateGroup> {
               children: [
                 Center(
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.dest,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       SizedBox(
@@ -306,6 +291,7 @@ class _CreateGroupState extends State<CreateGroup> {
                               onSelectedItemChanged: (value) {
                                 setState(() {
                                   AM_PM = value;
+                                  // user.time = value;
                                 });
                               },
                               itemExtent: 50,
@@ -339,6 +325,7 @@ class _CreateGroupState extends State<CreateGroup> {
                                 setState(
                                   () {
                                     CurrentHour = value;
+                                    user.time = value;
                                   },
                                 );
                               },
@@ -425,9 +412,9 @@ class _CreateGroupState extends State<CreateGroup> {
                         key: _formKey,
                         child: TextFormField(
                           focusNode: textFocus,
-                          controller: TextEditingController(text: user.start),
+                          controller: TextEditingController(text: user.dest),
                           onChanged: (val) {
-                            user.start = val;
+                            user.dest = val;
                           },
                           validator: (value) {
                             // 나중에 여따가 email정규식 끼워넣기
@@ -463,7 +450,7 @@ class _CreateGroupState extends State<CreateGroup> {
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            user.start = "";
+                            user.dest = "";
                           });
                         },
                         child: Image(
@@ -688,7 +675,7 @@ class _CreateGroupState extends State<CreateGroup> {
                   ),
                 ),
                 Text(
-                    "${CurrentMinute}${CurrentHour}${AM_PM}${user.start}${user.dest}"),
+                    "${CurrentMinute}${CurrentHour}${AM_PM}${user.dest}${user.start}"),
                 SizedBox(
                   height: 150 * PX,
                 ),
@@ -700,9 +687,12 @@ class _CreateGroupState extends State<CreateGroup> {
                       if (formKeyState.validate()) {
                         formKeyState.save();
                       }
-
-                      print(user.start);
                       print(user.dest);
+                      print(user.start);
+                      user.time = (AM_PM * 12 * 60) +
+                          (CurrentHour * 60) +
+                          CurrentMinute;
+                      print(user.time);
                     },
                     child: Container(
                       height: 60 * PX,

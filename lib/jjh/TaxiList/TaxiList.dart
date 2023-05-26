@@ -113,13 +113,14 @@ class _TaxiListState extends State<TaxiList> {
 
   Widget buildColumn(snapshot) {
     double PX = MediaQuery.of(context).size.width / 393; // 요게 픽셀값
+
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Color.fromRGBO(253, 253, 253, 1),
+        color: Color.fromRGBO(253, 253, 253, 0.3),
         child: Padding(
           padding: EdgeInsets.only(top: statusBarHeight),
           child: Column(
@@ -188,6 +189,7 @@ class _TaxiListState extends State<TaxiList> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
+                      // top: 13 * PX,
                       left: 27 * PX,
                     ),
                     child: Text(
@@ -202,7 +204,7 @@ class _TaxiListState extends State<TaxiList> {
                 ],
               ),
               SizedBox(
-                height: 13 * PX,
+                height: 8 * PX,
               ),
               Container(
                 height: 32 * PX,

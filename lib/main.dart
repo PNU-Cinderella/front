@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:project_cinderella_test3/jjh/GoogleMAP/googlemap.dart';
 // import 'package:project_cinderella_test3/MainPage.dart';
 
 // import 'Test4.dart';
@@ -21,7 +21,7 @@ void main() {
       title: "project_cinderella_test3",
       // theme: ThemeData(fontFamily: 'Pretendard'),
       // themeMode: ThemeMode.system,
-      home: CreateGroup(),
+      home: TaxiList(),
     ),
   );
 }
