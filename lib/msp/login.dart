@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
-import 'package:project_cinderella_test3/msp/Classes.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginButton extends StatelessWidget
@@ -75,10 +73,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
         onPageFinished: (String url) {},
         onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
-          print(request);
-          if(request.url.contains('connect-success'))
+          print("url is " + request.url);
+          if(request.url.contains('success'))
             {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}
-          else if(request.url.contains('connect-failed'))
+          else if(request.url.contains('failed'))
             {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
           return NavigationDecision.navigate;
         },

@@ -1,10 +1,9 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:project_cinderella_test3/CreateGroup.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
-import 'package:project_cinderella_test3/MakeList.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/MakeList.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,7 +42,7 @@ class SignUp extends StatelessWidget {
                 height: 53,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGroup()) );
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
                     MakeToast(msg: userName + " " + isMan.toString() + "Send!");
                   },
                   style: OutlinedButton.styleFrom(
