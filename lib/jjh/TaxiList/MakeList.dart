@@ -1,26 +1,89 @@
 import 'package:flutter/material.dart';
+import '../../msp/functions.dart';
 import 'package:project_cinderella_test3/roomparse.dart';
 // import 'roomparse.dart';
 
-Container listView_group(String Arival) => Container(
-    width: 50,
-    height: 50,
-    decoration: BoxDecoration(
-      color: Color.fromRGBO(239, 239, 239, 1),
-      border: Border.all(
-        color: Color.fromRGBO(0, 0, 0, 1),
-        width: 1,
-      ),
-      borderRadius: BorderRadius.all(Radius.elliptical(50, 50)),
-    ),
-    child: Center(
-      child: Text("${Arival}"),
-    ));
+Container listView_group(
+        String start, List Arival, double RealHeight, double RealWidth) =>
+    Container(
+        width: 353 * RealWidth,
+        height: 90 * RealHeight,
+        decoration: BoxDecoration(
+            // color: Color.fromRGBO(239, 239, 239, 1),
+            // border: Border.all(
+            //   color: Color.fromRGBO(0, 0, 0, 1),
+            //   width: 1,
+            // ),
+            ),
+        child: Row(
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: Center(
+                      child: Image(
+                        image: AssetImage("assets/images/ListView/Union.png"),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 25.0),
+                  child: Text(
+                    "${start}",
+                    style: SimpleTextStyle(size: 14),
+                  ),
+                ),
+              ],
+            ),
+            for (var i = 0; i < Arival.length; i++) ...{
+              Padding(
+                padding: EdgeInsets.only(left: 25),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "${i + 1}",
+                          style: SimpleTextStyle(
+                              size: 18,
+                              weight: FontWeight.w700,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        "${Arival[i]}..",
+                        style: SimpleTextStyle(size: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            }
+          ],
+        ));
 
 class Makelist extends StatelessWidget {
   roomMember userlists;
-  double PX;
-  Makelist(this.userlists, this.PX);
+  double RealHeight;
+  double RealWidth;
+  Makelist(this.userlists, this.RealHeight, this.RealWidth);
   // int person;
   // String time;
   // Makelist(this.person, this.time, this.Arrive);
@@ -61,22 +124,28 @@ class Makelist extends StatelessWidget {
               blurRadius: 3)
         ],
       ),
-      width: 353 * PX,
-      height: 140 * PX,
+      width: 353 * RealWidth,
+      height: 156 * RealHeight,
 
       // color: Colors.blueAccent,
       // child: Text(usermaps as String),
       child: Column(
         children: [
+          SizedBox(
+            height: GetRealHeight(pixel: 13, context: context),
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "${userlists.host} (${userlists.num_of_people}/4)",
-                style: TextStyle(
-                    fontSize: 18 * PX,
-                    fontFamily: "Pretendard",
-                    fontWeight: FontWeight.w600),
+              Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "${userlists.host} (${userlists.num_of_people}/4)",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Pretendard",
+                      fontWeight: FontWeight.w600),
+                ),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -86,7 +155,7 @@ class Makelist extends StatelessWidget {
                     style: TextStyle(
                         fontFamily: "Pretendard",
                         fontWeight: FontWeight.w700,
-                        fontSize: 18 * PX,
+                        fontSize: 18,
                         color: Color.fromRGBO(64, 113, 205, 1)),
                   ),
                   Icon(
@@ -100,6 +169,11 @@ class Makelist extends StatelessWidget {
               // Text(lsts),
             ],
           ),
+          SizedBox(
+            height: GetRealHeight(pixel: 26, context: context),
+          ),
+          listView_group(
+              userlists.start, userlists.dest, RealHeight, RealWidth),
         ],
       ),
     );

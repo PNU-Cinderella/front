@@ -1,4 +1,6 @@
 import 'dart:convert';
+import '../../msp/taxi_main.dart';
+
 import 'am_pm.dart';
 import 'hours.dart';
 import 'minutes.dart';
@@ -221,7 +223,20 @@ class _CreateGroupState extends State<CreateGroup> {
                         width: 223.75 * PX,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (BuildContext context,
+                                  Animation<double> animation1,
+                                  Animation<double> animation2) {
+                                return TaxiMain(); //변경 필요
+                              },
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero,
+                            ),
+                          );
+                        },
                         child: Image(
                           width: 12.5 * PX,
                           height: 12.5 * PX,

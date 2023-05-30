@@ -5,7 +5,15 @@
    <application
         android:label="project_cinderella_test3"
         android:name="${applicationName}"
+<<<<<<< Updated upstream
         android:icon="@mipmap/ic_launcher">
+=======
+        android:icon="@mipmap/ic_launcher"
+       android:usesCleartextTraffic="true">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyD-IHoh9kUx9qrnJEdY6aIh0GDHxODc9ZQ"/>
+
+>>>>>>> Stashed changes
         <activity
             android:name=".MainActivity"
             android:exported="true"
