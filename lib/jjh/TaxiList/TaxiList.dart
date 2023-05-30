@@ -9,29 +9,29 @@ import 'package:project_cinderella_test3/roomparse.dart';
 // import 'roomparse.dart';
 
 Future<List> fetchInfo(url) async {
-  ///// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
-  // final jsonString = await http.get(Uri.parse(url));
+  /// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
+  final jsonString = await http.get(Uri.parse(url));
 
-  // if (jsonString.statusCode == 200) {
-  //   //만약 서버가 ok응답을 반환하면, json을 파싱합니다
-  //   // print('백엔드쪽에서 응답 완료.');
-  //   var jsonstring = utf8.decode(jsonString.bodyBytes);
-  //   // print(json.decode(jsonString.body));
-  //   List<dynamic> jsonMaps = jsonDecode(jsonstring);
-  //   List<roomMember> jsonLists =
-  //       jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  //   return jsonLists;
-  //   // return Info.fromJson(json.decode(response.body));
-  // } else {
-  //   //만약 응답이 ok가 아니면 에러를 던집니다.
-  //   throw Exception('몬가 몬가 에러임');
-  // }
+  if (jsonString.statusCode == 200) {
+    //만약 서버가 ok응답을 반환하면, json을 파싱합니다
+    // print('백엔드쪽에서 응답 완료.');
+    var jsonstring = utf8.decode(jsonString.bodyBytes);
+    // print(json.decode(jsonString.body));
+    List<dynamic> jsonMaps = jsonDecode(jsonstring);
+    List<roomMember> jsonLists =
+        jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+    return jsonLists;
+    // return Info.fromJson(json.decode(response.body));
+  } else {
+    //만약 응답이 ok가 아니면 에러를 던집니다.
+    throw Exception('몬가 몬가 에러임');
+  }
   //// 혼자 테스트한곳 //////
-  String jsonString = await rootBundle.loadString('assets/jsonTest.json');
-  List<dynamic> jsonMaps = jsonDecode(jsonString);
-  List<roomMember> jsonLists =
-      jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  return jsonLists;
+  // String jsonString = await rootBundle.loadString('assets/jsonTest.json');
+  // List<dynamic> jsonMaps = jsonDecode(jsonString);
+  // List<roomMember> jsonLists =
+  //     jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+  // return jsonLists;
   //// 여기까지 남겨두기 //////
 }
 
