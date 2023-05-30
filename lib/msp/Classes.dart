@@ -120,12 +120,12 @@ class BasicCircle extends CustomPainter
 
 //Taxi_History Page Classes
 
-class SimpleSizedBox extends StatelessWidget
+class RealSizedBox extends StatelessWidget
 {
   double? myWidth;
   double? myHeight;
 
-  SimpleSizedBox({required double width, required double height})
+  RealSizedBox({required double width, required double height})
   {
     myWidth = width;
     myHeight = height;
@@ -163,11 +163,11 @@ class _SimpleCheckboxState extends State<SimpleCheckbox> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.white;
     }
 
     return Checkbox(
-      checkColor: Colors.white,
+      checkColor: Colors.black,
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {

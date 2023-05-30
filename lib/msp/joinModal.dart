@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
-void main() => runApp(const BottomSheetApp());
+void main() async{
+  runApp(const BottomSheetApp());
+  if (await Permission.contacts.request().isGranted) {
+// Either the permission was already granted before or the user just granted it.
+    print("Permission granted!");
+  }
+  else
+  {
+    Permission.notification.request();
+  }
+}
+
 
 class BottomSheetApp extends StatelessWidget {
   const BottomSheetApp({super.key});
@@ -11,6 +23,7 @@ class BottomSheetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff6750a4),
         useMaterial3: true,
@@ -146,13 +159,13 @@ class JoinModalFirst extends StatelessWidget {
                                             Text("1   명륜역", style: SimpleTextStyle(size: 17),),
                                           ]
                                       ),
-                                      SimpleSizedBox(width: 0, height: 25),
+                                      RealSizedBox(width: 0, height: 25),
                                       Row(
                                           children: [
                                             Text("2   명륜동 황금손한방병원", style: SimpleTextStyle(size: 17),),
                                           ]
                                       ),
-                                      SimpleSizedBox(width: 0, height: 25),
+                                      RealSizedBox(width: 0, height: 25),
                                       Row(
                                           children: [
                                             Text("3   부곡동 거제한양아파트", style: SimpleTextStyle(size: 17),),
@@ -166,7 +179,7 @@ class JoinModalFirst extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SimpleSizedBox(width: 0, height: 30),
+                      RealSizedBox(width: 0, height: 30),
                       JoinButton(context: context,
                           width: GetRealWidth(pixel: 310, context: context),
                           height: GetRealHeight(pixel: 47, context: context),
@@ -242,7 +255,7 @@ class JoinModalSecond extends StatelessWidget {
                       ]
                   ),
                 ),
-                SimpleSizedBox(width: 0, height: 100),
+                RealSizedBox(width: 0, height: 100),
                 Container(
                   margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 19, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
                   child:
@@ -256,7 +269,7 @@ class JoinModalSecond extends StatelessWidget {
                           ),
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
-                        SimpleSizedBox(width: 103, height: 0),
+                        RealSizedBox(width: 103, height: 0),
                         JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalThird())
                       ]
                   ),
@@ -277,7 +290,8 @@ class JoinModalThird extends StatelessWidget {
     return Container(
       height: GetRealHeight(pixel: 575, context: context),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0)
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
       ),
       child: Center(
         child: Column(
@@ -309,22 +323,32 @@ class JoinModalThird extends StatelessWidget {
                       ),
                       SizedBox(height: GetRealHeight(pixel: 18, context: context),),
                       Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                                width: GetRealWidth(pixel: 330, context: context),
-                                height: GetRealHeight(pixel: 54, context: context),
-                                decoration: BoxDecoration(
-                                    color: Color(0xff2192FB),
-                                    borderRadius: BorderRadius.circular(24)
-                                ),
-                                child: Container(
-                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 40, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
-                                    child: Text("시간을 준수해 주세요", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),))),
-                          ]
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                              width: GetRealWidth(pixel: 330, context: context),
+                              height: GetRealHeight(pixel: 54, context: context),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff2192FB),
+                                  borderRadius: BorderRadius.circular(24)
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                      child: SimpleCheckbox(),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 20, context: context), 0, 0, 0),
+                                      child: Text("시간을 준수해 주세요", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),)
+                                  ),
+                                ],
+                              )
+                          ),
+                        ],
                       ),
                       SizedBox(height: GetRealHeight(pixel: 16, context: context),),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
                                 width: GetRealWidth(pixel: 330, context: context),
@@ -333,16 +357,24 @@ class JoinModalThird extends StatelessWidget {
                                     color: Color(0xff2192FB),
                                     borderRadius: BorderRadius.circular(24)
                                 ),
-                                child: Container(
-                                    margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 40, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
-                                    child: Text("지각이나 잠수등의 비매너 행동은\n동승자로 인해 신고당할 수 있으며\n앱 사용이 제한 될 수 있음에 동의\n합니다", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),))),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                    child: SimpleCheckbox(),
+                                  ),
+                                    Container(
+                                        margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 20, context: context), 0, 0, 0),
+                                        child: Text("지각이나 잠수등의 비매너 행동은\n동승자로 인해 신고당할 수 있으며\n앱 사용이 제한 될 수 있음에 동의\n합니다", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: Colors.white),)),
+                                  ],
+                                )),
                           ]
                       ),
                       SizedBox(height: GetRealHeight(pixel: 36, context: context),),
                       Row(
                           children: [
                             Text("출발 30분 전 알림을 받아요", style: SimpleTextStyle(size: 17, weight: FontWeight.w400, color: colorBlack),),
-
+                            RealSizedBox(width: 96, height: 0),
+                            SimpleSwitch(),
                           ]
                       ),
                     ],
@@ -361,7 +393,7 @@ class JoinModalThird extends StatelessWidget {
                           ),
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
-                        SimpleSizedBox(width: 103, height: 0),
+                        RealSizedBox(width: 103, height: 0),
                         JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalFourth())
                       ]
                   ),
@@ -383,7 +415,8 @@ class JoinModalFourth extends StatelessWidget {
     return Container(
       height: GetRealHeight(pixel: 575, context: context),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0)
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
       ),
       child: Center(
         child: Column(
@@ -423,7 +456,7 @@ class JoinModalFourth extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 21, context: context), GetRealHeight(pixel: 14, context: context), 0, 0),
+                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 21, context: context), GetRealHeight(pixel: 100, context: context), 0, 0),
                   child:
                   Column(
                       children: [
@@ -435,8 +468,8 @@ class JoinModalFourth extends StatelessWidget {
                           ),
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
-                        SimpleSizedBox(width: 0, height: 13),
-                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "완료", widget: JoinModalThird())
+                        RealSizedBox(width: 0, height: 13),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "완료", widget: JoinModalThird())
                       ]
                   ),
                 ),

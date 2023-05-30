@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
@@ -242,8 +243,17 @@ class SignupData {
   }
 }
 
-void main() {
+void main() async {
   runApp(const MyData());
+  if (await Permission.contacts.request().isGranted) {
+  // Either the permission was already granted before or the user just granted it.
+    print("Permission granted!");
+  }
+  else
+    {
+      Permission.notification.request();
+    }
+
 }
 
 class MyData extends StatefulWidget {
@@ -264,6 +274,7 @@ class _MyDataState extends State<MyData> {
   {
     super.initState();
     initNotification();
+
   }
 
   @override
@@ -300,6 +311,7 @@ class _MyDataState extends State<MyData> {
         ),
         ElevatedButton(
           onPressed: () {
+            showNotification();
             setState(() {
               _futureAlbum = createData(_controller.text,_controller2.text);
             });
