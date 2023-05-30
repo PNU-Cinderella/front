@@ -258,5 +258,5 @@ showNotification() async {
       'hihi',
       NotificationDetails(android: androidDetails, iOS: iosDetails)
   );
-  print("Show NOtification!");
+  print("Show Notification!");
 }

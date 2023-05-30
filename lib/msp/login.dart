@@ -35,7 +35,6 @@ class LoginButton extends StatelessWidget
         {
           showNotification();
           MakeToast(msg: "Login Button Pressed.");
-          // launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
           Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewScreen()));
         },
         style: myButtonStyle,
@@ -74,9 +73,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
         onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
           print("url is " + request.url);
-          if(request.url.contains('success'))
+          if(request.url.contains('check'))
             {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}
-          else if(request.url.contains('failed'))
+          else if(request.url.contains('login'))
             {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
           return NavigationDecision.navigate;
         },

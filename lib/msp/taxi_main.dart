@@ -34,7 +34,8 @@ class _TaxiMainState extends State<TaxiMain>
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar:
+         BottomNavigationBar(
           currentIndex: _selectedIndex,
           selectedItemColor: colorBlack,
           items: <BottomNavigationBarItem>[
