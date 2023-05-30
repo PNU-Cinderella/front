@@ -34,7 +34,9 @@ dependencies:
   google_fonts: ^4.0.3
   http: ^0.13.5
   flutter_signin_button: ^2.0.0
-  
+  flutter_local_notifications: 9.1.5
+  webview_flutter: ^4.2.1
+  get:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -42,12 +44,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.4
   geolocator: ^9.0.2
-<<<<<<< Updated upstream
-=======
+  url_launcher: ^6.1.11
   fluttertoast: ^8.2.2
   google_maps_flutter: ^2.2.8
-  # url_launcher: ^6.1.11
->>>>>>> Stashed changes
+
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +79,7 @@ flutter:
     - assets/images/
     - assets/images/CreateGroup/
     - assets/images/ListView/
+    - assets/images/JoinModal/
     - assets/jsonTest.json
     - assets/images/TaxiList/Plus.png
 
@@ -119,6 +120,10 @@ flutter:
     - family: Balthazar
       fonts:
         - asset: assets/fonts/Balthazar-Regular.ttf
+          weight: 400
+    - family: Italianno
+      fonts:
+        - asset: assets/fonts/Italianno_Regular.ttf
           weight: 400
     - family: AppleSDGothicNeo
       fonts:

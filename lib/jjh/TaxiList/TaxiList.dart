@@ -4,42 +4,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 // import 'MakeList.dart';
-<<<<<<< Updated upstream
-import 'package:project_cinderella_test3/jjh/TaxiList/MakeList.dart';
-=======
 import '../../msp/taxi_history.dart';
 import 'CreateGroup.dart';
 import 'MakeList.dart';
->>>>>>> Stashed changes
 import 'package:http/http.dart' as http;
 import '../../roomparse.dart';
 // import 'roomparse.dart';
 
 Future<List> fetchInfo(url) async {
-  ///// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
-  // final jsonString = await http.get(Uri.parse(url));
+  /// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
+  final jsonString = await http.get(Uri.parse(url));
 
-  // if (jsonString.statusCode == 200) {
-  //   //만약 서버가 ok응답을 반환하면, json을 파싱합니다
-  //   // print('백엔드쪽에서 응답 완료.');
-  //   var jsonstring = utf8.decode(jsonString.bodyBytes);
-  //   // print(json.decode(jsonString.body));
-  //   List<dynamic> jsonMaps = jsonDecode(jsonstring);
-  //   List<roomMember> jsonLists =
-  //       jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  //   return jsonLists;
-  //   // return Info.fromJson(json.decode(response.body));
-  // } else {
-  //   //만약 응답이 ok가 아니면 에러를 던집니다.
-  //   throw Exception('몬가 몬가 에러임');
-  // }
+  if (jsonString.statusCode == 200) {
+    //만약 서버가 ok응답을 반환하면, json을 파싱합니다
+    // print('백엔드쪽에서 응답 완료.');
+    var jsonstring = utf8.decode(jsonString.bodyBytes);
+    // print(json.decode(jsonString.body));
+    List<dynamic> jsonMaps = jsonDecode(jsonstring);
+    List<roomMember> jsonLists =
+        jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+    return jsonLists;
+    // return Info.fromJson(json.decode(response.body));
+  } else {
+    //만약 응답이 ok가 아니면 에러를 던집니다.
+    throw Exception('몬가 몬가 에러임');
+  }
   //// 혼자 테스트한곳 //////
-
-  String jsonString = await rootBundle.loadString('assets/jsonTest.json');
-  List<dynamic> jsonMaps = jsonDecode(jsonString);
-  List<roomMember> jsonLists =
-      jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  return jsonLists;
+  // String jsonString = await rootBundle.loadString('assets/jsonTest.json');
+  // List<dynamic> jsonMaps = jsonDecode(jsonString);
+  // List<roomMember> jsonLists =
+  //     jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+  // return jsonLists;
   //// 여기까지 남겨두기 //////
 }
 
@@ -72,7 +67,7 @@ class _TaxiListState extends State<TaxiList> {
   var button_bank = Colors.white;
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
-  String url = "http://10.0.2.2:8080/test"; //초기 받아오는 경로 뒤에 수정해주세요..
+  String url = "http://10.0.2.2:8080/chatlist/school";
 
   @override
   dynamic jsonList;
@@ -82,12 +77,11 @@ class _TaxiListState extends State<TaxiList> {
   void initState() {
     super.initState();
     jsonList = fetchInfo(url);
-    //초기 부산은행 넣어주기 // 여기 나중에 테스트하는거 잊지말기
   }
 
   void _bankurl() {
     setState(() {
-      url = "http://10.0.2.2:8080/bank";
+      url = "http://10.0.2.2:8080/chatlist/bank";
       button_bank = button_selected;
       button_station = button_not_selected;
       button_front = button_not_selected;
@@ -97,7 +91,7 @@ class _TaxiListState extends State<TaxiList> {
 
   void _stationurl() {
     setState(() {
-      url = "http://10.0.2.2:8080/station";
+      url = "http://10.0.2.2:8080/chatlist/subway";
       button_bank = button_not_selected;
       button_station = button_selected;
       button_front = button_not_selected;
@@ -107,7 +101,7 @@ class _TaxiListState extends State<TaxiList> {
 
   void _fronturl() {
     setState(() {
-      url = "http://10.0.2.2:8080/front";
+      url = "http://10.0.2.2:8080/chatlist/school";
       button_bank = button_not_selected;
       button_station = button_not_selected;
       button_front = button_selected;
@@ -321,28 +315,6 @@ class _TaxiListState extends State<TaxiList> {
               // Text("${GetRealHeight(pixel: 13, context: context)}"),
               // Text("${runtimeType(snapshot)}"),
               // Text("${jsonList?[1].dest}"),
-              //         ListView.builder(
-              //   padding: EdgeInsets.zero,
-              //     itemCount: 5,
-              //     itemBuilder: (BuildContext context, int index){
-              //       return Padding(
-              //           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-              //           child: Ma
-              //       );
-              //     }
-              // ),
-    //           ListView.builder(
-    // padding: const EdgeInsets.all(8),
-    // itemCount: (snapshot.data).length,
-    // itemBuilder: (BuildContext context, int index) {
-    // return Container(
-    // height: 50,
-    // // color: Colors.amber[colorCodes[index]],
-    // child: Makelist(snapshot.data[index],GetRealHeight(pixel: 1, context: context),
-    //     GetRealWidth(pixel: 1, context: context)),
-    // );
-    // }
-    // ),
               for (roomMember inlsts in snapshot.data) ...[
                 Makelist(inlsts, GetRealHeight(pixel: 1, context: context),
                     GetRealWidth(pixel: 1, context: context)),
