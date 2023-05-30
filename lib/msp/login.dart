@@ -30,7 +30,6 @@ class LoginButton extends StatelessWidget {
       width: myWidth,
       height: myHeight,
       child: OutlinedButton.icon(
-<<<<<<< Updated upstream
         onPressed: ()
         {
           showNotification();
@@ -45,16 +44,7 @@ class LoginButton extends StatelessWidget {
   }
 }
 
-<<<<<<< Updated upstream
-=======
-class WebViewScreen extends StatefulWidget {
-  const WebViewScreen({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  State<WebViewScreen> createState() => _WebViewScreenState();
-}
 
 class WebViewScreen extends StatefulWidget {
   const WebViewScreen({

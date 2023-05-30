@@ -6,18 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 const SIZE_FIGMA_WIDTH = 393;
 const SIZE_FIGMA_HEIGHT = 852;
 
-//For PlaceHolding
-Container MakeContainer(double? myWidth, double? myHeight)
-{
-=======
-import 'package:webview_flutter/webview_flutter.dart';
-
-const SIZE_FIGMA_WIDTH = 393;
-const SIZE_FIGMA_HEIGHT = 852;
-
-//For PlaceHolding
 Container MakeContainer(double? myWidth, double? myHeight) {
->>>>>>> Stashed changes
   return Container(
     width: myWidth,
     height: myHeight,
@@ -36,7 +25,6 @@ double GetRealWidth({required double pixel, required BuildContext context, })
 double GetRealHeight({required double pixel, required BuildContext context, })
 {
   double PX = MediaQuery.of(context).size.height / 852;
-  print(pixel* PX);
   return pixel * PX;
 }
 
