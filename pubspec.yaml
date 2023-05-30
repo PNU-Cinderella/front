@@ -42,6 +42,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.4
   geolocator: ^9.0.2
+<<<<<<< Updated upstream
+=======
+  fluttertoast: ^8.2.2
+  google_maps_flutter: ^2.2.8
+  # url_launcher: ^6.1.11
+>>>>>>> Stashed changes
 
 dev_dependencies:
   flutter_test:

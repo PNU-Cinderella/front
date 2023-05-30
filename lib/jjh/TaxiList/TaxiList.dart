@@ -2,10 +2,17 @@ import 'dart:convert';
 // import 'package:project_cinderella_test3/roomparse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:project_cinderella_test3/msp/functions.dart';
 // import 'MakeList.dart';
+<<<<<<< Updated upstream
 import 'package:project_cinderella_test3/jjh/TaxiList/MakeList.dart';
+=======
+import '../../msp/taxi_history.dart';
+import 'CreateGroup.dart';
+import 'MakeList.dart';
+>>>>>>> Stashed changes
 import 'package:http/http.dart' as http;
-import 'package:project_cinderella_test3/roomparse.dart';
+import '../../roomparse.dart';
 // import 'roomparse.dart';
 
 Future<List> fetchInfo(url) async {
@@ -27,6 +34,7 @@ Future<List> fetchInfo(url) async {
   //   throw Exception('몬가 몬가 에러임');
   // }
   //// 혼자 테스트한곳 //////
+
   String jsonString = await rootBundle.loadString('assets/jsonTest.json');
   List<dynamic> jsonMaps = jsonDecode(jsonString);
   List<roomMember> jsonLists =
@@ -43,6 +51,22 @@ class TaxiList extends StatefulWidget {
 }
 
 class _TaxiListState extends State<TaxiList> {
+  // 여기가 네비게이션 바 /////
+  // int _selectedIndex = 0;
+
+  // final List<Widget> _widgetOptions = <Widget>[
+  //   TaxiHistory(),
+  //   TaxiList(),
+  //   CreateGroup()
+  // ];
+
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
+  /// 네비게이션 바 끝  //////
+
   var button_not_selected = Color.fromRGBO(118, 118, 128, 0.12);
   var button_selected = Colors.white;
   var button_bank = Colors.white;
@@ -129,7 +153,9 @@ class _TaxiListState extends State<TaxiList> {
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 10 * PX, left: 20 * PX),
+                    padding: EdgeInsets.only(
+                        top: GetRealHeight(pixel: 10, context: context),
+                        left: GetRealWidth(pixel: 20, context: context)),
                     child: Text(
                       "택시팟 목록",
                       style: TextStyle(
@@ -141,20 +167,31 @@ class _TaxiListState extends State<TaxiList> {
                     ),
                   ),
                   SizedBox(
-                    width: 223 * PX,
+                    width: GetRealWidth(pixel: 223, context: context),
                   ),
                   Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
                           //여기 정렬 해주는걸 목표로 하기.
-                          top: 24 * PX,
+                          top: GetRealHeight(pixel: 24, context: context),
                           // right: 20 * PX,
                         ),
                         child: GestureDetector(
                           // 이게 답이였구나 이걸로 만들면 정렬하기 편할듯
                           onTap: () {
-                            print("추가 버튼 눌림.");
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (BuildContext context,
+                                    Animation<double> animation1,
+                                    Animation<double> animation2) {
+                                  return CreateGroup(); //변경 필요
+                                },
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero,
+                              ),
+                            );
                           },
                           child: Image(
                             image:
@@ -168,7 +205,7 @@ class _TaxiListState extends State<TaxiList> {
                         style: TextStyle(
                           fontFamily: "Pretendard",
                           fontWeight: FontWeight.w400,
-                          fontSize: 13 * PX,
+                          fontSize: 13,
                           color: Color.fromRGBO(149, 142, 142, 1),
                         ),
                       )
@@ -178,7 +215,7 @@ class _TaxiListState extends State<TaxiList> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 2 * PX,
+                height: GetRealHeight(pixel: 2, context: context),
                 color: Color.fromRGBO(247, 247, 247, 1),
               ),
 
@@ -190,13 +227,13 @@ class _TaxiListState extends State<TaxiList> {
                   Padding(
                     padding: EdgeInsets.only(
                       // top: 13 * PX,
-                      left: 27 * PX,
+                      left: GetRealWidth(pixel: 27, context: context),
                     ),
                     child: Text(
                       "출발지",
                       style: TextStyle(
                         fontFamily: "Pretendard",
-                        fontSize: 15 * PX,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -204,16 +241,16 @@ class _TaxiListState extends State<TaxiList> {
                 ],
               ),
               SizedBox(
-                height: 8 * PX,
+                height: GetRealHeight(pixel: 8, context: context),
               ),
               Container(
-                height: 32 * PX,
-                width: 343 * PX,
+                height: GetRealHeight(pixel: 32, context: context),
+                width: GetRealWidth(pixel: 343, context: context),
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(118, 118, 128, 0.12),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 child: Padding(
-                  padding: EdgeInsets.all(2 * PX),
+                  padding: EdgeInsets.all(2),
                   child: Row(
                     children: [
                       Expanded(
@@ -278,13 +315,37 @@ class _TaxiListState extends State<TaxiList> {
                 ),
               ),
               SizedBox(
-                height: 21 * PX,
+                height: GetRealHeight(pixel: 21, context: context),
               ),
-              Text("${snapshot.data}"),
+              // Text("${snapshot.data}"),
+              // Text("${GetRealHeight(pixel: 13, context: context)}"),
               // Text("${runtimeType(snapshot)}"),
               // Text("${jsonList?[1].dest}"),
+              //         ListView.builder(
+              //   padding: EdgeInsets.zero,
+              //     itemCount: 5,
+              //     itemBuilder: (BuildContext context, int index){
+              //       return Padding(
+              //           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+              //           child: Ma
+              //       );
+              //     }
+              // ),
+    //           ListView.builder(
+    // padding: const EdgeInsets.all(8),
+    // itemCount: (snapshot.data).length,
+    // itemBuilder: (BuildContext context, int index) {
+    // return Container(
+    // height: 50,
+    // // color: Colors.amber[colorCodes[index]],
+    // child: Makelist(snapshot.data[index],GetRealHeight(pixel: 1, context: context),
+    //     GetRealWidth(pixel: 1, context: context)),
+    // );
+    // }
+    // ),
               for (roomMember inlsts in snapshot.data) ...[
-                Makelist(inlsts, PX),
+                Makelist(inlsts, GetRealHeight(pixel: 1, context: context),
+                    GetRealWidth(pixel: 1, context: context)),
               ],
             ],
           ),
