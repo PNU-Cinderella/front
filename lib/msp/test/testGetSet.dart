@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Classes.dart';
+
 Future<Album> fetchAlbum() async {
   final response = await http
       .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
@@ -211,7 +214,7 @@ Future<SignupData> createData(String nickName, String gender) async {
       'gender' : gender
     }),
   );
-
+  showNotification();
   if (response.statusCode == 201) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
@@ -221,6 +224,8 @@ Future<SignupData> createData(String nickName, String gender) async {
     // then throw an exception.
     throw Exception('Failed to create album.');
   }
+
+
 }
 
 class SignupData {
@@ -253,6 +258,13 @@ class _MyDataState extends State<MyData> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   Future<SignupData>? _futureAlbum;
+
+  @override
+  void initState()
+  {
+    super.initState();
+    initNotification();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -48,7 +48,7 @@ class _TaxiListState extends State<TaxiList> {
   var button_bank = Colors.white;
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
-  String url = "http://10.0.2.2:8080/test"; //초기 받아오는 경로 뒤에 수정해주세요..
+  String url = "http://10.0.2.2:8080/chatlist/school";
 
   @override
   dynamic jsonList;
@@ -58,12 +58,11 @@ class _TaxiListState extends State<TaxiList> {
   void initState() {
     super.initState();
     jsonList = fetchInfo(url);
-    //초기 부산은행 넣어주기 // 여기 나중에 테스트하는거 잊지말기
   }
 
   void _bankurl() {
     setState(() {
-      url = "http://10.0.2.2:8080/bank";
+      url = "http://10.0.2.2:8080/chatlist/bank";
       button_bank = button_selected;
       button_station = button_not_selected;
       button_front = button_not_selected;
@@ -73,7 +72,7 @@ class _TaxiListState extends State<TaxiList> {
 
   void _stationurl() {
     setState(() {
-      url = "http://10.0.2.2:8080/station";
+      url = "http://10.0.2.2:8080/chatlist/subway";
       button_bank = button_not_selected;
       button_station = button_selected;
       button_front = button_not_selected;
@@ -83,7 +82,7 @@ class _TaxiListState extends State<TaxiList> {
 
   void _fronturl() {
     setState(() {
-      url = "http://10.0.2.2:8080/front";
+      url = "http://10.0.2.2:8080/chatlist/school";
       button_bank = button_not_selected;
       button_station = button_not_selected;
       button_front = button_selected;

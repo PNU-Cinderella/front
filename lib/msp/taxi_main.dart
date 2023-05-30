@@ -14,7 +14,7 @@ class TaxiMain extends StatefulWidget {
 
 class _TaxiMainState extends State<TaxiMain>
 {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   final List<Widget> _widgetOptions = <Widget>[
     TaxiHistory(),

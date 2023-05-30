@@ -10,7 +10,7 @@ void main() {
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Cinderella_front",
-        home: SignUp()),
+        home: TaxiMain()),
   );
   initNotification();
 }

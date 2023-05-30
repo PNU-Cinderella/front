@@ -211,7 +211,7 @@ final notifications = FlutterLocalNotificationsPlugin();
 initNotification() async {
 
   //안드로이드용 아이콘파일 이름
-  var androidSetting = AndroidInitializationSettings('@mipmap/ic_launcher');
+  var androidSetting = AndroidInitializationSettings('@drawable/app_icon');
 
   //ios에서 앱 로드시 유저에게 권한요청하려면
   var iosSetting = IOSInitializationSettings(
@@ -231,10 +231,9 @@ initNotification() async {
   );
 
   print("Init Notification!");
-  showNotification();
 }
 
-//2. 이 함수 원하는 곳에서 실행하면 알림 뜸
+//Show Notification
 showNotification() async {
 
   var androidDetails = AndroidNotificationDetails(

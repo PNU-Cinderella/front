@@ -17,7 +17,13 @@ class SignUpButton extends BasicButton
 
 }
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
 
   final String userName = "Default";
   final bool isMan = true;
