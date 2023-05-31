@@ -10,16 +10,9 @@ const SignUpURL = "http://10.0.2.2:8080/signup";
 const ChatRoomURL = "http://10.0.2.2:8080/chatroom";
 
 Future createData(String nickName, String gender, BuildContext context) async {
-  Map data = {'name': nickName, 'gender': gender};
-  final response = await http.put(
-    Uri.parse(SignUpURL),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: json.encode(data),
-  );
-  print(response.statusCode);
-  if (response.statusCode == 201) {
+  final response1 = await http.get(Uri.parse(SignUpURL+"?name="+nickName+"&gender="+gender));;
+  print(response1.statusCode);
+  if (response1.statusCode == 201) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     showNotification();
