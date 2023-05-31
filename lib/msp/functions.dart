@@ -29,7 +29,6 @@ double GetRealWidth({required double pixel, required BuildContext context, })
 double GetRealHeight({required double pixel, required BuildContext context, })
 {
   double PX = MediaQuery.of(context).size.height / 852;
-  print(pixel* PX);
   return pixel * PX;
 }
 
@@ -37,6 +36,11 @@ double GetRealHeight({required double pixel, required BuildContext context, })
 double GetStatusBarHeight({required BuildContext context})
 {
   return MediaQuery.of(context).viewPadding.top;
+}
+
+EdgeInsetsGeometry RealLTRB({required double left, required double top, required double right, required double bottom, required BuildContext context})
+{
+  return EdgeInsets.fromLTRB(GetRealWidth(pixel: left, context: context),GetRealHeight(pixel: top, context: context),GetRealWidth(pixel: right, context: context),GetRealHeight(pixel: bottom, context: context));
 }
 
 TextStyle SimpleTextStyle({required double size, Color color = colorBlack, String family = 'Pretendard', FontWeight weight = FontWeight.w400})

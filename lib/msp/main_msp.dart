@@ -11,10 +11,10 @@ void main() async {
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Cinderella_front",
-        home: TaxiMain()),
+        home: SignUp()),
   );
   initNotification();
-  if (await Permission.contacts.request().isGranted) {
+  if (await Permission.notification.request().isGranted) {
   // Either the permission was already granted before or the user just granted it.
   print("Permission granted!");
   }

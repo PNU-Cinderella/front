@@ -245,7 +245,7 @@ class SignupData {
 
 void main() async {
   runApp(const MyData());
-  if (await Permission.contacts.request().isGranted) {
+  if (await Permission.notification.request().isGranted) {
   // Either the permission was already granted before or the user just granted it.
     print("Permission granted!");
   }
@@ -267,7 +267,7 @@ class MyData extends StatefulWidget {
 class _MyDataState extends State<MyData> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
-  Future<SignupData>? _futureAlbum;
+  Future<SignupData>? _futureData;
 
   @override
   void initState()
@@ -291,7 +291,7 @@ class _MyDataState extends State<MyData> {
         body: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8.0),
-          child: (_futureAlbum == null) ? buildColumn() : buildFutureBuilder(),
+          child: (_futureData == null) ? buildColumn() : buildFutureBuilder(),
         ),
       ),
     );
@@ -313,7 +313,7 @@ class _MyDataState extends State<MyData> {
           onPressed: () {
             showNotification();
             setState(() {
-              _futureAlbum = createData(_controller.text,_controller2.text);
+              _futureData = createData(_controller.text,_controller2.text);
             });
           },
           child: const Text('Create Data'),
@@ -324,7 +324,7 @@ class _MyDataState extends State<MyData> {
 
   FutureBuilder<SignupData> buildFutureBuilder() {
     return FutureBuilder<SignupData>(
-      future: _futureAlbum,
+      future: _futureData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Text(snapshot.data!.nickName + snapshot.data!.gender );
