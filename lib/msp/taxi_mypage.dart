@@ -5,6 +5,8 @@ import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
 class MypageMyInfo extends StatelessWidget
 {
+  double myWidth = 393;
+  double myHeight = 119;
   Widget myImage = Image.asset("assets/images/Mypage/image_default_myimage.png");
   String myName = "기본";
   String myGender = "남성";
@@ -15,6 +17,7 @@ class MypageMyInfo extends StatelessWidget
     return Container(
       width: GetRealWidth(pixel: 393, context: context),
       height: GetRealHeight(pixel: 119, context: context),
+      color: colorWhite,
       child: Row(
         children: [
           Container(
@@ -51,6 +54,22 @@ class MypageMyInfo extends StatelessWidget
           )
         ],
       ),
+    );
+  }
+}
+
+class MypageOptionBox extends StatelessWidget
+{
+  double myWidth = 393;
+  double myHeight = 60;
+  String? optionText = "기본";
+  void Function() function = (){};
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: GetRealWidth(pixel: myWidth, context: context),
+      height: GetRealHeight(pixel: myHeight, context: context),
     );
   }
 

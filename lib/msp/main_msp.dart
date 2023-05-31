@@ -20,6 +20,6 @@ void main() async {
   }
   else
   {
-  Permission.notification.request();
+    Permission.notification.request();
   }
 }
