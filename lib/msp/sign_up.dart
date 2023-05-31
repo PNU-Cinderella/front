@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
-import 'package:project_cinderella_test3/msp/viewstyle.dart';
-import 'package:project_cinderella_test3/msp/taxi_history.dart';
-import 'package:project_cinderella_test3/msp/Classes.dart';
-=======
-import '../jjh/TaxiList/CreateGroup.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
-import '../jjh/TaxiList/MakeList.dart';
+import 'package:project_cinderella_test3/jjh/TaxiList/MakeList.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
-// import 'package:url_launcher/url_launcher.dart';
->>>>>>> Stashed changes
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUpButton extends BasicButton {
   @override
@@ -19,13 +14,15 @@ class SignUpButton extends BasicButton {
   }
 }
 
-class SignUp extends StatelessWidget {
-<<<<<<< Updated upstream
-=======
+class SignUp extends StatefulWidget {
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final String userName = "Default";
   final bool isMan = true;
 
->>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,13 +45,9 @@ class SignUp extends StatelessWidget {
                 height: 53,
                 child: OutlinedButton(
                   onPressed: () {
-<<<<<<< Updated upstream
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiHistory()) );
-=======
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CreateGroup()));
+                        MaterialPageRoute(builder: (context) => TaxiMain()));
                     MakeToast(msg: userName + " " + isMan.toString() + "Send!");
->>>>>>> Stashed changes
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,

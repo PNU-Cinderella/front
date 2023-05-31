@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
-<<<<<<< Updated upstream
-import 'package:project_cinderella_test3/msp/sign_up.dart';
-
-Container MakeContainer(double? myWidth, double? myHeight)
-{
-=======
 import 'package:webview_flutter/webview_flutter.dart';
-
 const SIZE_FIGMA_WIDTH = 393;
 const SIZE_FIGMA_HEIGHT = 852;
 
-//For PlaceHolding
 Container MakeContainer(double? myWidth, double? myHeight) {
->>>>>>> Stashed changes
   return Container(
     width: myWidth,
     height: myHeight,
@@ -21,46 +14,28 @@ Container MakeContainer(double? myWidth, double? myHeight) {
   );
 }
 
-<<<<<<< Updated upstream
-class MyContainer extends StatelessWidget
-{
-  double? myWidth;
-  double? myHeight;
-  MyContainer(double? width, double? height)
-  {
-    this.myWidth = width;
-    this.myHeight = height;
-  }
-=======
 //Return Real Width from Figma's Widget width
-double GetRealWidth({
-  required double pixel,
-  required BuildContext context,
-}) {
+double GetRealWidth({required double pixel, required BuildContext context, })
+{
   double PX = MediaQuery.of(context).size.width / 393;
   return pixel * PX;
 }
 
 //Return Real Height from Figma's Widget height
-double GetRealHeight({
-  required double pixel,
-  required BuildContext context,
-}) {
+double GetRealHeight({required double pixel, required BuildContext context, })
+{
   double PX = MediaQuery.of(context).size.height / 852;
-  // print(pixel* PX);
   return pixel * PX;
 }
 
 //Return Status Bar Height
-double GetStatusBarHeight({required BuildContext context}) {
+double GetStatusBarHeight({required BuildContext context})
+{
   return MediaQuery.of(context).viewPadding.top;
 }
 
-TextStyle SimpleTextStyle(
-    {required double size,
-    Color color = colorBlack,
-    String family = 'Pretendard',
-    FontWeight weight = FontWeight.w400}) {
+TextStyle SimpleTextStyle({required double size, Color color = colorBlack, String family = 'Pretendard', FontWeight weight = FontWeight.w400})
+{
   return TextStyle(
     color: color,
     fontSize: size,
@@ -70,9 +45,13 @@ TextStyle SimpleTextStyle(
   );
 }
 
-void MakeToast({required String msg}) {
+
+void MakeToast({required String msg})
+{
   Fluttertoast.showToast(msg: msg);
 }
+
+
 
 /// Flutter code sample for [ToggleButtons].
 
@@ -98,83 +77,137 @@ void main() => runApp(const ToggleButtonsExampleApp());
 
 class ToggleButtonsExampleApp extends StatelessWidget {
   const ToggleButtonsExampleApp({super.key});
->>>>>>> Stashed changes
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Container(
-        width: myWidth,
-        height: myHeight,
-        color: Colors.blue,
-      ),
+    return const MaterialApp(
+      home: ToggleButtonsSample(title: 'ToggleButtons Sample'),
     );
   }
 }
 
-class TaxiHistoryBox extends MyContainer
-{
+class ToggleButtonsSample extends StatefulWidget {
+  const ToggleButtonsSample({super.key, required this.title});
 
-  double? myWidth;
-  double? myHeight;
-
-  TaxiHistoryBox(double? width, double? height):super(0,0){
-    this.myWidth = width;
-    this.myHeight = height;
-  }
+  final String title;
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Container(
-        width: myWidth,
-        height: myHeight,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.greenAccent,
-        ),
-        child: new Text("I'm HistoryBox!"),
-      ),
-    );
-  }
-
+  State<ToggleButtonsSample> createState() => _ToggleButtonsSampleState();
 }
 
+class _ToggleButtonsSampleState extends State<ToggleButtonsSample> {
+  final List<bool> _selectedFruits = <bool>[true, false, false];
+  final List<bool> _selectedVegetables = <bool>[false, true, false];
+  final List<bool> _selectedWeather = <bool>[false, false, true];
+  bool vertical = false;
 
-class Functions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          color: colorBackground,
-          height: double.infinity,
-          width: double.infinity,
+    final ThemeData theme = Theme.of(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title)),
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
-            children: [
-              SizedBox(height: 100,),
-              MakeContainer(120, 50),
-              SizedBox(height: 50,),
-              MyContainer(120, 50),
-              SizedBox(height: 50,),
-              TaxiHistoryBox(120, 50),
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // ToggleButtons with a single selection.
+              Text('Single-select', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 5),
+              ToggleButtons(
+                direction: vertical ? Axis.vertical : Axis.horizontal,
+                onPressed: (int index) {
+                  setState(() {
+                    // The button that is tapped is set to true, and the others to false.
+                    for (int i = 0; i < _selectedFruits.length; i++) {
+                      _selectedFruits[i] = i == index;
+                    }
+                  });
+                },
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                selectedBorderColor: Colors.red[700],
+                selectedColor: Colors.white,
+                fillColor: Colors.red[200],
+                color: Colors.red[400],
+                constraints: const BoxConstraints(
+                  minHeight: 40.0,
+                  minWidth: 80.0,
+                ),
+                isSelected: _selectedFruits,
+                children: fruits,
+              ),
+              const SizedBox(height: 20),
+              // ToggleButtons with a multiple selection.
+              Text('Multi-select', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 5),
+              ToggleButtons(
+                direction: vertical ? Axis.vertical : Axis.horizontal,
+                onPressed: (int index) {
+                  // All buttons are selectable.
+                  setState(() {
+                    _selectedVegetables[index] = !_selectedVegetables[index];
+                  });
+                },
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                selectedBorderColor: Colors.green[700],
+                selectedColor: Colors.white,
+                fillColor: Colors.green[200],
+                color: Colors.green[400],
+                constraints: const BoxConstraints(
+                  minHeight: 40.0,
+                  minWidth: 80.0,
+                ),
+                isSelected: _selectedVegetables,
+                children: vegetables,
+              ),
+              const SizedBox(height: 20),
+              // ToggleButtons with icons only.
+              Text('Icon-only', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 5),
+              ToggleButtons(
+                direction: vertical ? Axis.vertical : Axis.horizontal,
+                onPressed: (int index) {
+                  setState(() {
+                    // The button that is tapped is set to true, and the others to false.
+                    for (int i = 0; i < _selectedWeather.length; i++) {
+                      _selectedWeather[i] = i == index;
+                    }
+                  });
+                },
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                selectedBorderColor: Colors.blue[700],
+                selectedColor: Colors.white,
+                fillColor: Colors.blue[200],
+                color: Colors.blue[400],
+                isSelected: _selectedWeather,
+                children: icons,
+              ),
             ],
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            // When the button is pressed, ToggleButtons direction is changed.
+            vertical = !vertical;
+          });
+        },
+        icon: const Icon(Icons.screen_rotation_outlined),
+        label: Text(vertical ? 'Horizontal' : 'Vertical'),
+      ),
     );
   }
 }
-<<<<<<< Updated upstream
-=======
-
 final notifications = FlutterLocalNotificationsPlugin();
 
 //1. 앱로드시 실행할 기본설정
 initNotification() async {
+
   //안드로이드용 아이콘파일 이름
-  var androidSetting = AndroidInitializationSettings('@mipmap/ic_launcher');
+  var androidSetting = AndroidInitializationSettings('@drawable/app_icon');
 
   //ios에서 앱 로드시 유저에게 권한요청하려면
   var iosSetting = IOSInitializationSettings(
@@ -183,8 +216,10 @@ initNotification() async {
     requestSoundPermission: true,
   );
 
-  var initializationSettings =
-      InitializationSettings(android: androidSetting, iOS: iosSetting);
+  var initializationSettings = InitializationSettings(
+      android: androidSetting,
+      iOS: iosSetting
+  );
   await notifications.initialize(
     initializationSettings,
     //알림 누를때 함수실행하고 싶으면
@@ -192,11 +227,11 @@ initNotification() async {
   );
 
   print("Init Notification!");
-  showNotification();
 }
 
-//2. 이 함수 원하는 곳에서 실행하면 알림 뜸
+//Show Notification
 showNotification() async {
+
   var androidDetails = AndroidNotificationDetails(
     '유니크한 알림 채널 ID',
     '알림종류 설명',
@@ -212,8 +247,11 @@ showNotification() async {
   );
 
   // 알림 id, 제목, 내용 맘대로 채우기
-  notifications.show(1, 'test', 'hihi',
-      NotificationDetails(android: androidDetails, iOS: iosDetails));
-  print("Show NOtification!");
+  notifications.show(
+      1,
+      'test',
+      'hihi',
+      NotificationDetails(android: androidDetails, iOS: iosDetails)
+  );
+  print("Show Notification!");
 }
->>>>>>> Stashed changes

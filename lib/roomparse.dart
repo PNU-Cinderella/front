@@ -6,7 +6,9 @@ class roomMember {
   final String host;
   final String start;
   final List dest;
-  final int time;
+  // final String dest;
+  final String time;
+
   final int num_of_people;
 
   roomMember(

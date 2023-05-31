@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
-<<<<<<< Updated upstream
-=======
-import 'package:project_cinderella_test3/msp/Classes.dart';
-// import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
->>>>>>> Stashed changes
 
 class LoginButton extends StatelessWidget {
   BuildContext? myContext;
@@ -34,19 +30,11 @@ class LoginButton extends StatelessWidget {
       width: myWidth,
       height: myHeight,
       child: OutlinedButton.icon(
-<<<<<<< Updated upstream
         onPressed: ()
         {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-          print("object");
-=======
-        onPressed: () {
           showNotification();
           MakeToast(msg: "Login Button Pressed.");
-          // launchUrl(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => WebViewScreen()));
->>>>>>> Stashed changes
+          Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewScreen()));
         },
         style: myButtonStyle,
         icon: myIcon,
@@ -56,8 +44,8 @@ class LoginButton extends StatelessWidget {
   }
 }
 
-<<<<<<< Updated upstream
-=======
+
+
 class WebViewScreen extends StatefulWidget {
   const WebViewScreen({
     Key? key,
@@ -84,37 +72,34 @@ class _WebViewScreenState extends State<WebViewScreen> {
         onPageFinished: (String url) {},
         onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
-          print(request);
-          if (request.url.contains('connect-success')) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SignUp()));
-          } else if (request.url.contains('connect-failed')) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
-          }
+          print("url is " + request.url);
+          if(request.url.contains('check'))
+            {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}
+          else if(request.url.contains('login'))
+            {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
           return NavigationDecision.navigate;
         },
       ),
     )
-    ..loadRequest(
-        Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
+    ..loadRequest(Uri.parse('http://10.0.2.2.nip.io:8080/oauth2/authorization/google'));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         child: Container(
-          child: WebViewWidget(
-            controller: webViewController,
+            child: WebViewWidget(
+              controller: webViewController,
+            ),
           ),
-        ),
       ),
     );
   }
 }
->>>>>>> Stashed changes
+
 
 class LoginPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
