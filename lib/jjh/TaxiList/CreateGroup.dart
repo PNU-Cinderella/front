@@ -32,7 +32,7 @@ class _CreateGroupState extends State<CreateGroup> {
   int CurrentMinute = 0;
 
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
-  User user = User(0, "", "bank");
+  User user = User(0, "", "");
   final url = Uri.parse("http://10.0.2.2:8080/chatroom");
 
   Future save() async {
