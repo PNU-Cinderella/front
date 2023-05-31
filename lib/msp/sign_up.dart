@@ -9,43 +9,27 @@ import 'package:http/http.dart' as http;
 const SignUpURL = "http://10.0.2.2:8080/signup";
 const ChatRoomURL = "http://10.0.2.2:8080/chatroom";
 
-Future<SignupData> createData(String nickName, String gender) async {
-  final response = await http.post(
+Future createData(String nickName, String gender, BuildContext context) async {
+  Map data = {'name': nickName, 'gender': gender};
+  final response = await http.put(
     Uri.parse(SignUpURL),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
+    headers: {
+      'Content-Type': 'application/json',
     },
-    body: jsonEncode(<String, String>{
-      'name': nickName,
-      'gender' : gender
-    }),
+    body: json.encode(data),
   );
+  print(response.statusCode);
   if (response.statusCode == 201) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     showNotification();
     MakeToast(msg: "SetData Success!");
-    return SignupData.fromJson(jsonDecode(response.body));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    MakeToast(msg: "SetData Failed!");
+    MakeToast(msg: nickName + " " + gender + " Failed!");
     throw Exception('Failed to create Data.');
-
-  }
-}
-
-class SignupData {
-  final String nickName;
-  final String gender;
-
-  const SignupData({required this.nickName, required this.gender});
-
-  factory SignupData.fromJson(Map<String, dynamic> json) {
-    return SignupData(
-      nickName: json['name'],
-      gender: json['gender'],
-    );
   }
 }
 
@@ -60,7 +44,6 @@ class GenderButton extends StatefulWidget
   void Function() buttonFunction = (){};
   String buttonText = "기본";
   TextStyle textStyle = SimpleTextStyle(size: 14, weight: FontWeight.w400);
-
 
   GenderButton({required double width, required double height, ButtonStyle? style, void Function()? function, required String buttonText, TextStyle? textStyle})
   {
@@ -95,10 +78,12 @@ class _GenderButtonState extends State<GenderButton> {
       width: GetRealWidth(pixel: widget.width, context: context),
       height: GetRealHeight(pixel: widget.height, context: context),
       child: ElevatedButton(
-        onPressed: (){
-          isSelected = !isSelected;
-          widget.buttonFunction;
-          },
+        onPressed: () {
+          setState(() {
+            isSelected = !isSelected;
+            widget.buttonFunction;
+          });
+        },
         style: isSelected ? ElevatedButton.styleFrom(
           backgroundColor: Color(0xff484848),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
@@ -121,7 +106,6 @@ class _SignUpState extends State<SignUp> {
 
   String userName = "Default";
   String gender = "MALE";
-  Future<SignupData>? _futureData;
 
   @override
   Widget build(BuildContext context) {
@@ -197,8 +181,7 @@ class _SignUpState extends State<SignUp> {
                 height: 53,
                 child: OutlinedButton(
                   onPressed: () {
-                    createData(userName,gender);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
+                    createData(userName,gender,context);
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,
