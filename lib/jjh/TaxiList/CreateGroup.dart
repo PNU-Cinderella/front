@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:project_cinderella_test3/msp/functions.dart';
+
 import '../../msp/taxi_main.dart';
 import 'package:http/http.dart' as http;
 import 'am_pm.dart';
@@ -232,18 +234,19 @@ class _CreateGroupState extends State<CreateGroup> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (BuildContext context,
-                                  Animation<double> animation1,
-                                  Animation<double> animation2) {
-                                return TaxiMain(); //변경 필요
-                              },
-                              transitionDuration: Duration.zero,
-                              reverseTransitionDuration: Duration.zero,
-                            ),
-                          );
+                          Navigator.pop(context);
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     pageBuilder: (BuildContext context,
+                          //         Animation<double> animation1,
+                          //         Animation<double> animation2) {
+                          //       return TaxiMain(); //변경 필요
+                          //     },
+                          //     transitionDuration: Duration.zero,
+                          //     reverseTransitionDuration: Duration.zero,
+                          //   ),
+                          // );
                         },
                         child: Image(
                           width: 12.5 * PX,
@@ -275,7 +278,7 @@ class _CreateGroupState extends State<CreateGroup> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 16 * PX,
+                  height: GetRealHeight(pixel: 16, context: context),
                 ),
                 Container(
                   width: double.infinity,
@@ -289,9 +292,9 @@ class _CreateGroupState extends State<CreateGroup> {
                           style: TextStyle(
                               fontFamily: "Pretendard",
                               fontWeight: FontWeight.w600,
-                              fontSize: 20 * PX),
+                              fontSize: 20),
                         ),
-                        Text("출발시간 1235전에 알림감 여기 폰트나중에 디자인수정")
+                        Text("출발시간 30,20,10분전에 알림이 갑니다.")
                       ],
                     ),
                   ),
@@ -720,6 +723,7 @@ class _CreateGroupState extends State<CreateGroup> {
                           : user.time = user.time;
                       print(user.time);
                       save();
+                      Navigator.pop(context);
                     },
                     child: Container(
                       height: 60 * PX,
