@@ -17,7 +17,6 @@ Future createData(String nickName, String gender, BuildContext context) async {
     // then parse the JSON.
     showNotification();
     MakeToast(msg: "SetData Success!");
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
@@ -175,6 +174,7 @@ class _SignUpState extends State<SignUp> {
                 child: OutlinedButton(
                   onPressed: () {
                     createData(userName,gender,context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,

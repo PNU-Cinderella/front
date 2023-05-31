@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
+import 'package:project_cinderella_test3/msp/taxi_mypage.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/taxi_history.dart';
 
@@ -19,7 +20,7 @@ class _TaxiMainState extends State<TaxiMain>
   final List<Widget> _widgetOptions = <Widget>[
     TaxiHistory(),
     TaxiList(),
-    CreateGroup()
+    TaxiMypage()
   ];
 
   void _onItemTapped(int index) {

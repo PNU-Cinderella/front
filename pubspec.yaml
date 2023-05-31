@@ -79,6 +79,7 @@ flutter:
     - assets/images/CreateGroup/
     - assets/images/ListView/
     - assets/images/JoinModal/
+    - assets/images/Mypage/
     - assets/jsonTest.json
     - assets/images/TaxiList/Plus.png
 

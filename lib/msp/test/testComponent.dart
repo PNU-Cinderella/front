@@ -100,3 +100,31 @@ class _SimpleCheckboxState extends State<SimpleCheckbox> {
     );
   }
 }
+
+// Future<User?> login(String nim, String password) async {
+//   String url = Constant.baseURL;
+//   try {
+//     var body = {
+//       'username': nim,
+//       'password': password,
+//     };
+//     var response = await http.post(
+//       Uri.parse(
+//         '$url/login_mhs',
+//       ),
+//       body: body,
+//     );
+//     if (response.statusCode == 200) {
+//       final token = jsonDecode(response.body)['data']['access_token'];
+//       await UtilSharedPreferences.setToken(token);
+//       print(token);
+//       print(await UtilSharedPreferences.getToken());
+//       return User.fromJson(jsonDecode(response.body));
+//     } else {
+//       return null;
+//     }
+//   } catch (e) {
+//     print(e);
+//     throw Exception();
+//   }
+// }
