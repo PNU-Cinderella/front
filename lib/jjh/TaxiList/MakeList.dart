@@ -4,7 +4,7 @@ import 'package:project_cinderella_test3/roomparse.dart';
 // import 'roomparse.dart';
 
 Container listView_group(
-        String start, String Arival, double RealHeight, double RealWidth) =>
+        String start, List Arival, double RealHeight, double RealWidth) =>
     Container(
         width: 353 * RealWidth,
         height: 90 * RealHeight,
@@ -44,39 +44,39 @@ Container listView_group(
                 ),
               ],
             ),
-            // for (var i = 0; i < Arival.length; i++) ...{
-            //   Padding(
-            //     padding: EdgeInsets.only(left: 25),
-            //     child: Column(
-            //       children: [
-            //         Container(
-            //           height: 45,
-            //           width: 45,
-            //           decoration: BoxDecoration(
-            //             shape: BoxShape.circle,
-            //             color: Colors.black,
-            //           ),
-            //           child: Center(
-            //             child: Text(
-            //               "${i + 1}",
-            //               style: SimpleTextStyle(
-            //                   size: 18,
-            //                   weight: FontWeight.w700,
-            //                   color: Colors.white),
-            //             ),
-            //           ),
-            //         ),
-            //         Center(
-            //           child: Text(
-            //             "${Arival[i]}..",
-            //             style: SimpleTextStyle(size: 14),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // }
-            Text("${Arival}"),
+            for (var i = 0; i < Arival.length; i++) ...{
+              Padding(
+                padding: EdgeInsets.only(left: 25),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "${i + 1}",
+                          style: SimpleTextStyle(
+                              size: 18,
+                              weight: FontWeight.w700,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        "${Arival[i]}..",
+                        style: SimpleTextStyle(size: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            }
+            // Text("${Arival}"),
           ],
         ));
 

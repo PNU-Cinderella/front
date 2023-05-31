@@ -66,7 +66,7 @@ class _TaxiListState extends State<TaxiList> {
   var button_bank = Colors.white;
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
-  String url = "http://10.0.2.2:8080/chatlist/school";
+  String url = "http://10.0.2.2:8080/chatlist/bank";
 
   @override
   dynamic jsonList;
