@@ -30,7 +30,7 @@ class _CreateGroupState extends State<CreateGroup> {
   int CurrentMinute = 0;
 
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
-  User user = User(0, "", "부산은행");
+  User user = User(0, "", "bank");
   final url = Uri.parse("http://10.0.2.2:8080/chatroom");
 
   Future save() async {
@@ -150,7 +150,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_bank = button_selected;
       button_station = button_not_selected;
       button_front = button_not_selected;
-      user.start = "부산은행";
+      user.start = "bank";
       textFocus.unfocus();
       // jsonList = fetchInfo(url);
     });
@@ -163,7 +163,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_station = button_selected;
       button_front = button_not_selected;
       // jsonList = fetchInfo(url);
-      user.start = "부산대역";
+      user.start = "subway";
       textFocus.unfocus();
     });
   }
@@ -175,7 +175,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_station = button_not_selected;
       button_front = button_selected;
       // jsonList = fetchInfo(url);
-      user.start = "부산대정문";
+      user.start = "school";
       textFocus.unfocus();
     });
   }
