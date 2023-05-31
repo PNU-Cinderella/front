@@ -186,7 +186,9 @@ class _TaxiListState extends State<TaxiList> {
                                 transitionDuration: Duration.zero,
                                 reverseTransitionDuration: Duration.zero,
                               ),
-                            );
+                            ).then((value) {
+                              _bankurl();
+                            });
                           },
                           child: Image(
                             image:
@@ -316,6 +318,13 @@ class _TaxiListState extends State<TaxiList> {
               // Text("${GetRealHeight(pixel: 13, context: context)}"),
               // Text("${runtimeType(snapshot)}"),
               // Text("${jsonList?[1].dest}"),
+              // Container(
+              //     child: (snapshot.data == null)
+              //         ? Text(
+              //             "아직 방이 없어요 ㅠㅠ",
+              //             style: SimpleTextStyle(size: 30, color: Colors.grey),
+              //           )
+              //         : Container()),
               for (roomMember inlsts in snapshot.data) ...[
                 GestureDetector(
                   onTap: () {
