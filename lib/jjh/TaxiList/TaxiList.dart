@@ -1,8 +1,10 @@
 import 'dart:convert';
+
 // import 'package:project_cinderella_test3/roomparse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+
 // import 'MakeList.dart';
 import '../../msp/taxi_history.dart';
 import 'CreateGroup.dart';
@@ -316,8 +318,12 @@ class _TaxiListState extends State<TaxiList> {
               // Text("${jsonList?[1].dest}"),
               for (roomMember inlsts in snapshot.data) ...[
                 GestureDetector(
-                  onTap: (){print("클릭방");},
-                  child: Makelist(inlsts, GetRealHeight(pixel: 1, context: context),
+                  onTap: () {
+                    print("클릭방");
+                  },
+                  child: Makelist(
+                      inlsts,
+                      GetRealHeight(pixel: 1, context: context),
                       GetRealWidth(pixel: 1, context: context)),
                 ),
               ],

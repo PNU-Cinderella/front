@@ -13,6 +13,7 @@ class User {
   int time;
   String dest;
   String start;
+
   User(this.time, this.start, this.dest);
 }
 
@@ -28,18 +29,22 @@ class _CreateGroupState extends State<CreateGroup> {
   int CurrentHour = 0;
   int CurrentMinute = 0;
 
-
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
   User user = User(0, "", "부산은행");
-  final url = Uri.parse("http://localhost:8080/chatroom");
+  final url = Uri.parse("http://10.0.2.2:8080/chatroom");
 
   Future save() async {
-    Map data = {'host': user.host ,'time': user.time, 'start': user.start, 'dest': user.dest};
+    Map data = {
+      'host': user.host,
+      'time': user.time,
+      'start': user.start,
+      'dest': user.dest
+    };
     var body = json.encode(data);
     http.Response res = await http.post(
       // 나중에 여기 주석처리 해제해서 사용.
       url,
-      headers: {'Context-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: body,
     );
     print(body);
@@ -64,6 +69,7 @@ class _CreateGroupState extends State<CreateGroup> {
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
   FocusNode textFocus = FocusNode();
+
   void _notselected() {
     setState(() {
       // user.dest = "웅비관";
@@ -706,10 +712,12 @@ class _CreateGroupState extends State<CreateGroup> {
                       if (formKeyState.validate()) {
                         formKeyState.save();
                       }
-    user.time = (AM_PM * 12 * 60) +
-    (CurrentHour * 60) +
-    CurrentMinute;
-                      user.time >= 1440 ? user.time = user.time%1440 : user.time = user.time;
+                      user.time = (AM_PM * 12 * 60) +
+                          (CurrentHour * 60) +
+                          CurrentMinute;
+                      user.time >= 1440
+                          ? user.time = user.time % 1440
+                          : user.time = user.time;
                       print(user.time);
                       save();
                     },
