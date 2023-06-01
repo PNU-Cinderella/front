@@ -13,8 +13,8 @@ class TaxiHistory extends StatefulWidget {
 
 class TaxiStatusBox extends StatelessWidget
 {
-  double? myWidth;
-  double? myHeight;
+  double myWidth = 350;
+  double myHeight = 190;
   Text? textStatus;
   Text? textStatusSub;
 
@@ -30,8 +30,9 @@ class TaxiStatusBox extends StatelessWidget
   Widget build(BuildContext context)
   {
     return Container(
-      width: myWidth,
-      height: myHeight,
+      margin: RealLTRB(left: 24.55, top: 11, right: 0, bottom: 0, context: context),
+      width: GetRealWidth(pixel: myWidth, context: context),
+      height: GetRealHeight(pixel: myHeight, context: context),
       decoration: BoxDecoration(
           color: colorWhite,
           borderRadius: BorderRadius.circular(10)
@@ -40,25 +41,39 @@ class TaxiStatusBox extends StatelessWidget
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.only(left: 52, top: 24),
-            width: 118,
-            height: 48,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  textStatus!,
-                  SizedBox(height: 4,),
-                  textStatusSub!,
-                ]
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: GetRealWidth(pixel: 14, context: context),
+                height: GetRealHeight(pixel: 14, context: context),
+                margin: RealLTRB(left: 23, top: 27, right: 0, bottom: 0, context: context),
+                child: Image.asset("assets/images/TaxiHistory/icon_blue_circle.png"),
+              ),
+              Container(
+                margin: RealLTRB(left: 15, top: 24, right: 0, bottom: 0, context: context),
+                width: GetRealWidth(pixel: 118, context: context),
+                height: GetRealHeight(pixel: 48, context: context),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      textStatus!,
+                      SizedBox(height: 4,),
+                      textStatusSub!,
+                    ]
+                ),
+              ),
+              BasicButton(width: 112, height: 22,
+                mLeft: 55, mTop: 24, func: (){}, buttonStyle: ElevatedButton.styleFrom(backgroundColor: Color(0xffE3EBF7), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)) ),
+                text: "오픈채팅 바로가기", textStyle: SimpleTextStyle(size: 12, weight: FontWeight.w400, color: Color(0xff0152B1)),)
+            ],
           ),
           SizedBox(height: 25,),
           Container(
               margin: EdgeInsets.only(left: 24),
               child: Wrap(
                 direction: Axis.horizontal,
-                spacing: 10,
+                spacing: GetRealWidth(pixel: 14, context: context),
                 children: [
                   IconTaxiCurrent(order: 0,
                       text: "부산은행"),
@@ -87,11 +102,11 @@ class IconTaxiCurrent extends StatelessWidget{
   Widget? imageIcon;
   Widget? textIcon;
   List<Widget> imageList = [
-    Image.asset("assets/images/ListView/icon_taxi_start.png"),
-    Image.asset("assets/images/ListView/icon_dest_1.png"),
-    Image.asset("assets/images/ListView/icon_dest_2.png"),
-    Image.asset("assets/images/ListView/icon_dest_3.png"),
-    Image.asset("assets/images/ListView/icon_dest_4.png"),
+    Image.asset("assets/images/TaxiHistory/icon_taxi_start.png"),
+    Image.asset("assets/images/TaxiHistory/icon_dest_1.png"),
+    Image.asset("assets/images/TaxiHistory/icon_dest_2.png"),
+    Image.asset("assets/images/TaxiHistory/icon_dest_3.png"),
+    Image.asset("assets/images/TaxiHistory/icon_dest_4.png"),
   ];
   
   IconTaxiCurrent({double width = 50, double height = 70, required int order, required String text})
@@ -109,6 +124,7 @@ class IconTaxiCurrent extends StatelessWidget{
       width: GetRealWidth(pixel: myWidth, context: context),
       height: GetRealHeight(pixel: myHeight, context: context),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           imageList[order],
           SizedBox(height: 4,),
@@ -131,6 +147,7 @@ class TaxiHistorySearchBar extends StatelessWidget{
     return Container(
       width: myWidth,
       height: myHeight,
+      margin: RealLTRB(left: 21, top: 77, right: 0, bottom: 0, context: context),
       child: Row(
         children: [
           SizedBox(width: 15,),
@@ -229,26 +246,37 @@ class TaxiHistoryList extends StatelessWidget
   double? myWidth = 356;
   double? myHeight = 340;
 
+  //for Test - Dummy Data
+  List<String> dateList = ['2023.03.31','2023.02.11','2023.01.27','2023.01.03','2022.12.15',];
+  List<String> routeTitleList = ['부산은행-명륜역','부산대정문-온천역','부산대역-부곡동','부산은행-서동고개','부산대정문-광안리',];
+  List<String> peopleCountList = ['4','2','3','3','4',];
+  List<String> historyStateList = ['정산완료','정산완료','정산완료','정산완료','정산완료',];
+  List<String> timeList = ['02:30','17:40','11:50','08:20','12:30',];
+  List<String> routeList = ['부산은행-명륜역-교대역-서면역-송정역','부산대정문-온천역-롯데백화점','부산대역-부곡동-해운대-광안리','부산은행-서동고개-센텀시티-벡스코','부산대정문-광안리-대구-서울-개성',];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: myWidth,
-      height: myHeight,
-      child: ListView.builder(
-          padding: EdgeInsets.zero,
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index){
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-              child: TaxiHistoryBox(
-                date: '2023.03.01',
-                routeTitle: '부산은행-명륜역',
-                peopleCount: '4',
-                historyState: '정산완료',
-                time: '02:30',
-                route: '부산은행-명륜역-교대역-서면역-송정역',),
-            );
-          }
+    return Expanded(
+      child: Container(
+        width: myWidth,
+        height: myHeight,
+        margin: RealLTRB(left: 21, top: 0, right: 0, bottom: 0, context: context),
+        child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: dateList.length,
+            itemBuilder: (BuildContext context, int index){
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                child: TaxiHistoryBox(
+                  date: dateList[index],
+                  routeTitle: routeTitleList[index],
+                  peopleCount: peopleCountList[index],
+                  historyState: historyStateList[index],
+                  time: timeList[index],
+                  route: routeList[index]),
+              );
+            }
+        ),
       ),
     );
   }
@@ -266,16 +294,21 @@ class _TaxiHistoryState extends State<TaxiHistory> {
           height: double.infinity,
           width: double.infinity,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: MediaQuery.of(context).padding.top,),
-              BasicTitle(width: 393, height: 50, title: "확인",
-              left: 20, top: 14, bottom: 14,textStyle: textstylePageHeader,),
-              SizedBox(height: 35,),
+              SizedBox( height: MediaQuery.of(context).padding.top,),
+              Container(
+                margin: RealLTRB(left: 25, top: 35, right: 0, bottom: 0, context: context),
+                child: Text("확인", style: SimpleTextStyle(size: 25, weight: FontWeight.w700),),
+              ),
+              Container(
+                margin: RealLTRB(left: 25, top: 25, right: 0, bottom: 0, context: context),
+                child: Text("탑승 현황", style: SimpleTextStyle(size: 18, weight: FontWeight.w600),),
+              ),
               TaxiStatusBox(
                 status: "참여중이에요",
                 subStatus: "부산은행에서 2:30 출발예정",
               ),
-              SizedBox(height: 90,),
               TaxiHistorySearchBar(),
               SizedBox(height: 11,),
               TaxiHistoryList(),

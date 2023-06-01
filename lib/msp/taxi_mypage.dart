@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
+import 'package:project_cinderella_test3/msp/blocklist.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
+import 'package:project_cinderella_test3/msp/taxi_main.dart';
 
 class MypageMyInfo extends StatelessWidget
 {
@@ -31,6 +33,7 @@ class MypageMyInfo extends StatelessWidget
             width: GetRealWidth(pixel: 120, context: context),
             height: GetRealHeight(pixel: 55, context: context),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(myName, style: SimpleTextStyle(size: 22, weight: FontWeight.w500),),
                 RealSizedBox(width: 0, height: 7),
@@ -40,8 +43,8 @@ class MypageMyInfo extends StatelessWidget
           ),
           Container(
             margin: RealLTRB(left: 57, top: 47, right: 0, bottom: 0, context: context),
-            width: 70,
-            height: 33,
+            width: GetRealWidth(pixel: 70, context: context),
+            height: GetRealHeight(pixel: 33, context: context),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -62,14 +65,29 @@ class MypageOptionBox extends StatelessWidget
 {
   double myWidth = 393;
   double myHeight = 60;
-  String? optionText = "기본";
-  void Function() function = (){};
+  String optionText = "기본";
+  void Function() onTapFunction = (){};
+
+  MypageOptionBox({text,function})
+  {
+    optionText = text;
+    onTapFunction = function ?? (){};
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: GetRealWidth(pixel: myWidth, context: context),
-      height: GetRealHeight(pixel: myHeight, context: context),
+    return GestureDetector(
+      onTap: onTapFunction,
+      child: Container(
+        color: Colors.white,
+        width: GetRealWidth(pixel: myWidth, context: context),
+        height: GetRealHeight(pixel: myHeight, context: context),
+        child: Container(
+          margin: RealLTRB(left: 39, top: 20, right: 0, bottom: 0, context: context),
+            child: Text(optionText, style: SimpleTextStyle(size: 19),)
+        ),
+      ),
     );
   }
 
@@ -90,13 +108,26 @@ class _TaxiMypageState extends State<TaxiMypage> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
-          color: colorBackground,
+          color: Colors.white,
           height: double.infinity,
           width: double.infinity,
           child: Column(
             children: [
               RealSizedBox(width: 0, height: GetStatusBarHeight(context: context)),
+              Container(
+                alignment: Alignment.topLeft,
+                height: GetRealHeight(pixel: 70, context: context),
+                child: Container(
+                    margin: RealLTRB(left: 20, top: 33, right: 0, bottom: 0, context: context),
+                    child: Text("마이페이지", style: SimpleTextStyle(size: 22, weight: FontWeight.w700))
+                ),
+              ),
               MypageMyInfo(),
+              MypageOptionBox(text: "차단목록",function: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BlockList()));
+                },),
+              MypageOptionBox(text: "로그아웃",),
+              MypageOptionBox(text: "회원탈퇴",),
             ],
           ),
         ),
