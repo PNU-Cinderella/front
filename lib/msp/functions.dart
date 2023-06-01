@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
+import '';
 import 'package:webview_flutter/webview_flutter.dart';
 const SIZE_FIGMA_WIDTH = 393;
 const SIZE_FIGMA_HEIGHT = 852;
@@ -32,6 +34,11 @@ double GetRealHeight({required double pixel, required BuildContext context, })
 double GetStatusBarHeight({required BuildContext context})
 {
   return MediaQuery.of(context).viewPadding.top;
+}
+
+EdgeInsetsGeometry RealLTRB({required double left, required double top, required double right, required double bottom, required BuildContext context})
+{
+  return EdgeInsets.fromLTRB(GetRealWidth(pixel: left, context: context),GetRealHeight(pixel: top, context: context),GetRealWidth(pixel: right, context: context),GetRealHeight(pixel: bottom, context: context));
 }
 
 TextStyle SimpleTextStyle({required double size, Color color = colorBlack, String family = 'Pretendard', FontWeight weight = FontWeight.w400})
@@ -73,7 +80,10 @@ const List<Widget> icons = <Widget>[
   Icon(Icons.ac_unit),
 ];
 
-void main() => runApp(const ToggleButtonsExampleApp());
+void main() async {
+  runApp(const ToggleButtonsExampleApp());
+}
+
 
 class ToggleButtonsExampleApp extends StatelessWidget {
   const ToggleButtonsExampleApp({super.key});
@@ -226,6 +236,7 @@ initNotification() async {
     //onSelectNotification: 함수명추가
   );
 
+
   print("Init Notification!");
 }
 
@@ -237,7 +248,7 @@ showNotification() async {
     '알림종류 설명',
     priority: Priority.high,
     importance: Importance.max,
-    color: Color.fromARGB(255, 255, 0, 0),
+    color: Colors.black,
   );
 
   var iosDetails = IOSNotificationDetails(
@@ -249,9 +260,9 @@ showNotification() async {
   // 알림 id, 제목, 내용 맘대로 채우기
   notifications.show(
       1,
-      'test',
-      'hihi',
+      '신데렐라',
+      '(대충 알림이 간다는 내용)',
       NotificationDetails(android: androidDetails, iOS: iosDetails)
   );
-  print("Show Notification!");
+  print(notifications);
 }

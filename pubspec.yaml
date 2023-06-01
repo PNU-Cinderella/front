@@ -36,6 +36,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   flutter_local_notifications: 9.1.5
   webview_flutter: ^4.2.1
+  permission_handler: ^10.0.0
   get:
 
 
@@ -78,8 +79,10 @@ flutter:
     # - images/a_dot_burr.jpeg
     - assets/images/
     - assets/images/CreateGroup/
-    - assets/images/ListView/
+    - assets/images/TaxiHistory/
     - assets/images/JoinModal/
+    - assets/images/Mypage/
+    - assets/images/BottomNavigationBar/
     - assets/jsonTest.json
     - assets/images/TaxiList/Plus.png
 

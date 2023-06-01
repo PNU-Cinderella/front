@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
@@ -242,8 +243,17 @@ class SignupData {
   }
 }
 
-void main() {
+void main() async {
   runApp(const MyData());
+  if (await Permission.notification.request().isGranted) {
+  // Either the permission was already granted before or the user just granted it.
+    print("Permission granted!");
+  }
+  else
+    {
+      Permission.notification.request();
+    }
+
 }
 
 class MyData extends StatefulWidget {
@@ -257,13 +267,14 @@ class MyData extends StatefulWidget {
 class _MyDataState extends State<MyData> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
-  Future<SignupData>? _futureAlbum;
+  Future<SignupData>? _futureData;
 
   @override
   void initState()
   {
     super.initState();
     initNotification();
+
   }
 
   @override
@@ -280,7 +291,7 @@ class _MyDataState extends State<MyData> {
         body: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8.0),
-          child: (_futureAlbum == null) ? buildColumn() : buildFutureBuilder(),
+          child: (_futureData == null) ? buildColumn() : buildFutureBuilder(),
         ),
       ),
     );
@@ -300,8 +311,9 @@ class _MyDataState extends State<MyData> {
         ),
         ElevatedButton(
           onPressed: () {
+            showNotification();
             setState(() {
-              _futureAlbum = createData(_controller.text,_controller2.text);
+              _futureData = createData(_controller.text,_controller2.text);
             });
           },
           child: const Text('Create Data'),
@@ -312,7 +324,7 @@ class _MyDataState extends State<MyData> {
 
   FutureBuilder<SignupData> buildFutureBuilder() {
     return FutureBuilder<SignupData>(
-      future: _futureAlbum,
+      future: _futureData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Text(snapshot.data!.nickName + snapshot.data!.gender );

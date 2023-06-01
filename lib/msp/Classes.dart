@@ -7,40 +7,95 @@ import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:get/get.dart';
 
+
 class BasicButton extends StatelessWidget
 {
-  BuildContext? myContext;
-  double? myWidth;
-  double? myHeight;
+  double myWidth = 100;
+  double myHeight = 100;
+  double myLeft = 0;
+  double myTop = 0;
+  double myRight = 0;
+  double myBottom = 0;
   void Function()? funcOnPressed;
-  ButtonStyle? myButtonStyle = OutlinedButton.styleFrom(
+  ButtonStyle myButtonStyle = OutlinedButton.styleFrom(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
       side: BorderSide(color: Colors.black, width: 1.4)
   );
-  Widget? myIcon;
-  Widget? myText;
+  TextStyle textStyle = SimpleTextStyle(size: 20);
+  String myText = "Default";
 
-  BasicButton({BuildContext? context, double? width, double? height, void Function()? func, ButtonStyle? style, Widget? icon, Widget? text}){
-    myContext = context;
+  BasicButton({required double width, required double height, double mLeft = 0, double mTop = 0, double mRight = 0, double mBottom = 0,
+    void Function()? func, ButtonStyle? buttonStyle, String text="Default", TextStyle? textStyle}){
     myWidth = width;
     myHeight = height;
-    funcOnPressed = func;
-    myButtonStyle = style;
-    myIcon = icon;
+    myLeft = mLeft;
+    myTop = mTop;
+    myRight = mRight;
+    myBottom = mBottom;
+    funcOnPressed = func ?? (){};
+    myButtonStyle = buttonStyle ?? myButtonStyle;
     myText = text;
+    this.textStyle = textStyle ?? this.textStyle;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: myWidth,
-      height: myHeight,
-      child: OutlinedButton.icon(
-        onPressed: funcOnPressed,
+      margin: RealLTRB(left: myLeft, top: myTop, right: myRight, bottom: myBottom, context: context),
+      width: GetRealWidth(pixel: myWidth, context: context),
+      height: GetRealHeight(pixel: myHeight, context: context),
+      child: ElevatedButton(
         style: myButtonStyle,
-        icon: myIcon!,
-        label: myText!,
-      ),
+        onPressed: funcOnPressed,
+        child: Text(myText, style: textStyle,),
+      )
+    );
+  }
+}
+class BasicButtonWithIcon extends StatelessWidget
+{
+  double myWidth = 100;
+  double myHeight = 100;
+  double myLeft = 0;
+  double myTop = 0;
+  double myRight = 0;
+  double myBottom = 0;
+  void Function()? funcOnPressed;
+  late Widget myIcon;
+  ButtonStyle myButtonStyle = OutlinedButton.styleFrom(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+      side: BorderSide(color: Colors.black, width: 1.4)
+  );
+  TextStyle textStyle = SimpleTextStyle(size: 20);
+  String myText = "Default";
+
+  BasicButtonWithIcon({required double width, required double height, double mLeft = 0, double mTop = 0, double mRight = 0, double mBottom = 0,
+    void Function()? func, ButtonStyle? buttonStyle, String text="Default", TextStyle? textStyle, required Widget icon}){
+    myWidth = width;
+    myHeight = height;
+    myLeft = mLeft;
+    myTop = mTop;
+    myRight = mRight;
+    myBottom = mBottom;
+    funcOnPressed = func ?? (){};
+    myButtonStyle = buttonStyle ?? myButtonStyle;
+    myText = text;
+    this.textStyle = textStyle ?? this.textStyle;
+    myIcon = icon;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: RealLTRB(left: myLeft, top: myTop, right: myRight, bottom: myBottom, context: context),
+      width: GetRealWidth(pixel: myWidth, context: context),
+      height: GetRealHeight(pixel: myHeight, context: context),
+      child: ElevatedButton.icon(
+        style: myButtonStyle,
+        onPressed: funcOnPressed,
+        icon: myIcon,
+        label: Text(myText, style: textStyle,),
+      )
     );
   }
 }
@@ -60,8 +115,8 @@ class BasicTitle extends StatelessWidget
   double? left=0,double? top=0,double? right=0,double? bottom=0,
   required TextStyle? textStyle, required String? title})
   {
-    width = myWidth;
-    height = myHeight;
+    myWidth = width;
+    myHeight = height;
     paddingLeft = left;
     paddingTop = top;
     paddingRight = right;
@@ -74,11 +129,10 @@ class BasicTitle extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-      paddingLeft!, paddingTop!, paddingRight!, paddingBottom!),
+      padding: RealLTRB(left:paddingLeft!, top:paddingTop!, right:paddingRight!, bottom:paddingBottom!,context: context),
       child: Container(
-        width: myWidth,
-        height: myHeight,
+        width: GetRealWidth(pixel: myWidth!, context: context),
+        height: GetRealHeight(pixel: myHeight!, context: context),
         child :
         Row(
           children: [
@@ -120,12 +174,12 @@ class BasicCircle extends CustomPainter
 
 //Taxi_History Page Classes
 
-class SimpleSizedBox extends StatelessWidget
+class RealSizedBox extends StatelessWidget
 {
   double? myWidth;
   double? myHeight;
 
-  SimpleSizedBox({required double width, required double height})
+  RealSizedBox({required double width, required double height})
   {
     myWidth = width;
     myHeight = height;
@@ -163,11 +217,11 @@ class _SimpleCheckboxState extends State<SimpleCheckbox> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.white;
     }
 
     return Checkbox(
-      checkColor: Colors.white,
+      checkColor: Colors.black,
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
