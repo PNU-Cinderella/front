@@ -75,8 +75,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
           print("url is " + request.url);
           if(request.url.contains('check'))
             {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}
-          else if(request.url.contains('login'))
-            {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
+          // else if(request.url.contains('login'))
+          //   {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
           return NavigationDecision.navigate;
         },
       ),
