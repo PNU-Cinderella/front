@@ -4,20 +4,19 @@ import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class LoginButton extends StatelessWidget
-{
+class LoginButton extends StatelessWidget {
   BuildContext? myContext;
   double? myWidth;
   double? myHeight;
   Function? funcOnPressed;
   ButtonStyle? myButtonStyle = OutlinedButton.styleFrom(
-  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
-  side: BorderSide(color: colorDarkGray, width: 1.4)
-  );
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+      side: BorderSide(color: colorDarkGray, width: 1.4));
   late Widget myIcon;
   late Widget myText;
 
-  LoginButton(BuildContext? context, double? width, double? height, Widget icon, Widget text){
+  LoginButton(BuildContext? context, double? width, double? height, Widget icon,
+      Widget text) {
     myContext = context;
     myWidth = width;
     myHeight = height;
@@ -43,8 +42,9 @@ class LoginButton extends StatelessWidget
       ),
     );
   }
-
 }
+
+
 
 class WebViewScreen extends StatefulWidget {
   const WebViewScreen({
@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -119,16 +119,24 @@ class LoginPage extends StatelessWidget {
               // rowLoginLogoSub,
               textLogoShadow,
               textLogoMain,
-              SizedBox(height: 150.58,),
-              LoginButton(context, 249, 53,
-                  Image.asset("assets/images/icon_google_black.png"),
-                  Text("구글로 로그인", style: textstyleLoginButton)
+              SizedBox(
+                height: 150.58,
               ),
-              SizedBox(height: 31,),
-              LoginButton(context, 249, 53,
+              LoginButton(
+                  context,
+                  249,
+                  53,
+                  Image.asset("assets/images/icon_google_black.png"),
+                  Text("구글로 로그인", style: textstyleLoginButton)),
+              SizedBox(
+                height: 31,
+              ),
+              LoginButton(
+                  context,
+                  249,
+                  53,
                   Image.asset("assets/images/icon_apple_black.png"),
-                  Text("애플로 로그인", style: textstyleLoginButton)
-                  )
+                  Text("애플로 로그인", style: textstyleLoginButton))
             ],
           ),
         ),

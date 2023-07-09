@@ -5,8 +5,10 @@ import 'dart:convert';
 class roomMember {
   final String host;
   final String start;
-  final String dest;
-  final int time;
+  final List dest;
+  // final String dest;
+  final String time;
+
   final int num_of_people;
 
   roomMember(

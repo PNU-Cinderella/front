@@ -1,4 +1,8 @@
 import 'dart:convert';
+import 'package:project_cinderella_test3/msp/functions.dart';
+
+import '../../msp/taxi_main.dart';
+import 'package:http/http.dart' as http;
 import 'am_pm.dart';
 import 'hours.dart';
 import 'minutes.dart';
@@ -7,9 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class User {
+  String host = "host";
   int time;
   String dest;
   String start;
+
   User(this.time, this.start, this.dest);
 }
 
@@ -26,18 +32,23 @@ class _CreateGroupState extends State<CreateGroup> {
   int CurrentMinute = 0;
 
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
-  User user = User(0, "", "부산은행");
-  final url = Uri.parse("http://localhost:8080/login");
+  User user = User(0, "", "");
+  final url = Uri.parse("http://10.0.2.2:8080/chatroom");
 
   Future save() async {
-    Map data = {'time': user.time, 'start': user.start, 'dest': user.dest};
+    Map data = {
+      'host': user.host,
+      'time': user.time,
+      'start': user.start,
+      'dest': user.dest
+    };
     var body = json.encode(data);
-    // var res = await http.post(
-    //   // 나중에 여기 주석처리 해제해서 사용.
-    //   url,
-    //   headers: {'Context-Type': 'application/json'},
-    //   body: body,
-    // );
+    http.Response res = await http.post(
+      // 나중에 여기 주석처리 해제해서 사용.
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    );
     print(body);
   }
 
@@ -60,6 +71,7 @@ class _CreateGroupState extends State<CreateGroup> {
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
   FocusNode textFocus = FocusNode();
+
   void _notselected() {
     setState(() {
       // user.dest = "웅비관";
@@ -140,7 +152,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_bank = button_selected;
       button_station = button_not_selected;
       button_front = button_not_selected;
-      user.start = "부산은행";
+      user.start = "bank";
       textFocus.unfocus();
       // jsonList = fetchInfo(url);
     });
@@ -153,7 +165,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_station = button_selected;
       button_front = button_not_selected;
       // jsonList = fetchInfo(url);
-      user.start = "부산대역";
+      user.start = "subway";
       textFocus.unfocus();
     });
   }
@@ -165,7 +177,7 @@ class _CreateGroupState extends State<CreateGroup> {
       button_station = button_not_selected;
       button_front = button_selected;
       // jsonList = fetchInfo(url);
-      user.start = "부산대정문";
+      user.start = "school";
       textFocus.unfocus();
     });
   }
@@ -221,7 +233,21 @@ class _CreateGroupState extends State<CreateGroup> {
                         width: 223.75 * PX,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     pageBuilder: (BuildContext context,
+                          //         Animation<double> animation1,
+                          //         Animation<double> animation2) {
+                          //       return TaxiMain(); //변경 필요
+                          //     },
+                          //     transitionDuration: Duration.zero,
+                          //     reverseTransitionDuration: Duration.zero,
+                          //   ),
+                          // );
+                        },
                         child: Image(
                           width: 12.5 * PX,
                           height: 12.5 * PX,
@@ -252,7 +278,7 @@ class _CreateGroupState extends State<CreateGroup> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 16 * PX,
+                  height: GetRealHeight(pixel: 16, context: context),
                 ),
                 Container(
                   width: double.infinity,
@@ -266,9 +292,9 @@ class _CreateGroupState extends State<CreateGroup> {
                           style: TextStyle(
                               fontFamily: "Pretendard",
                               fontWeight: FontWeight.w600,
-                              fontSize: 20 * PX),
+                              fontSize: 20),
                         ),
-                        Text("출발시간 1235전에 알림감 여기 폰트나중에 디자인수정")
+                        Text("출발시간 30,20,10분전에 알림이 갑니다.")
                       ],
                     ),
                   ),
@@ -674,8 +700,10 @@ class _CreateGroupState extends State<CreateGroup> {
                     ),
                   ),
                 ),
-                Text(
-                    "${CurrentMinute}${CurrentHour}${AM_PM}${user.dest}${user.start}"),
+                // Text(
+                //     "${CurrentMinute}${CurrentHour}${AM_PM}${user.dest}${user.start}${(AM_PM * 12 * 60) +
+                //         (CurrentHour * 60) +
+                //         CurrentMinute}"),
                 SizedBox(
                   height: 150 * PX,
                 ),
@@ -687,12 +715,15 @@ class _CreateGroupState extends State<CreateGroup> {
                       if (formKeyState.validate()) {
                         formKeyState.save();
                       }
-                      print(user.dest);
-                      print(user.start);
                       user.time = (AM_PM * 12 * 60) +
                           (CurrentHour * 60) +
                           CurrentMinute;
+                      user.time >= 1440
+                          ? user.time = user.time % 1440
+                          : user.time = user.time;
                       print(user.time);
+                      save();
+                      Navigator.pop(context);
                     },
                     child: Container(
                       height: 60 * PX,

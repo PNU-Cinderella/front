@@ -1,23 +1,24 @@
 [
-    {
-      "host": "김철수",
-      "start": "한글되나",
-      "dest": "accusamus beatae ad facilis cum similique qui sunt",
-      "time": 100,
-      "num_of_people": 2
-    },
-    {
-      "host": "조정현",
-      "start": "can english",
-      "dest": "reprehenderit est deserunt velit ipsam",
-      "time": 200,
-      "num_of_people": 3
-    },
-    {
-      "host": "감자밭",
-      "start": "용으로 잠깐 한글씀",
-      "dest": "officia porro iure quia iusto qui ipsa ut modi",
-      "time": 300,
-      "num_of_people": 4
-    }
-  ]
+  {
+    "host": "김철수",
+    "start": "세글자",
+    "dest": ["명륜역","선경1차","장전역"],
+    "time": "am 3:50",
+    "num_of_people": 2
+  },
+  {
+    "host": "조정현",
+    "start": "한글되나",
+    "dest": ["명륜역","선경1차","장전역"],
+    "time": "am 2:30",
+    "num_of_people": 3
+  },
+  {
+    "host": "감자밭",
+    "start": "다서엇글자",
+    "dest": ["명륜역","선경1차","장전역"],
+    "time": "pm 362313",
+    "num_of_people": 4
+  }
+
+]

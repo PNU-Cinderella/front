@@ -8,9 +8,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 const SIZE_FIGMA_WIDTH = 393;
 const SIZE_FIGMA_HEIGHT = 852;
 
-//For PlaceHolding
-Container MakeContainer(double? myWidth, double? myHeight)
-{
+Container MakeContainer(double? myWidth, double? myHeight) {
   return Container(
     width: myWidth,
     height: myHeight,
@@ -213,7 +211,6 @@ class _ToggleButtonsSampleState extends State<ToggleButtonsSample> {
     );
   }
 }
-
 final notifications = FlutterLocalNotificationsPlugin();
 
 //1. 앱로드시 실행할 기본설정
