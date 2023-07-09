@@ -11,7 +11,7 @@ void main() async {
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Cinderella_front",
-        home: TaxiMain()),
+        home: WebViewScreen()),
   );
   initNotification();
   if (await Permission.notification.request().isGranted) {

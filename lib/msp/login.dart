@@ -73,9 +73,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
         onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
           print("url is " + request.url);
-          if(request.url.contains('check'))
+          if(request.url == "http://10.0.2.2.nip.io:8080/check")
             {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}
-          else if(request.url.contains('login'))
+          else if(request.url == "http://10.0.2.2.nip.io:8080/login")
             {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
           return NavigationDecision.navigate;
         },
