@@ -4,6 +4,7 @@ import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
+import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:http/http.dart' as http;
 
 const SignUpURL = "http://10.0.2.2:8080/signup";
@@ -15,11 +16,12 @@ Future createData(String nickName, String gender, BuildContext context) async {
     Uri.parse(SignUpURL),
     headers: {
       'Content-Type': 'application/json',
+      'Cookie' : cookieRecieved,
     },
     body: json.encode(data),
   );
   print(response.statusCode);
-  if (response.statusCode == 201) {
+  if (response.statusCode == 201 || response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     showNotification();
