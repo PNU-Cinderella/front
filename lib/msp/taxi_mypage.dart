@@ -126,7 +126,9 @@ class _TaxiMypageState extends State<TaxiMypage> {
               MypageOptionBox(text: "차단목록",function: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => BlockList()));
                 },),
-              MypageOptionBox(text: "로그아웃",),
+              MypageOptionBox(text: "로그아웃", function: (){
+
+              }; ),
               MypageOptionBox(text: "회원탈퇴",),
             ],
           ),
