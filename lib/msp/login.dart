@@ -3,6 +3,10 @@ import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
+
+String cookieRecieved = '';
+String currentSessionID = '';
 
 class LoginButton extends StatelessWidget {
   BuildContext? myContext;
@@ -61,6 +65,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
     super.initState();
   }
 
+
   late WebViewController webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -68,14 +73,33 @@ class _WebViewScreenState extends State<WebViewScreen> {
     ..setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {},
-        onPageStarted: (String url) {},
-        onPageFinished: (String url) {},
+        onPageStarted: (String url) {
+        },
+        onPageFinished: (String url) {
+        },
         onWebResourceError: (WebResourceError error) {},
-        onNavigationRequest: (NavigationRequest request) {
+        onNavigationRequest: (NavigationRequest request) async{
+          // {
+          //   final cookie = await webViewController.runJavaScriptReturningResult('document.cookie');
+          //   print(cookie);
+          // }
+          final cookieManager = WebviewCookieManager();
+
+
           print("url is " + request.url);
-          if(request.url.contains('check'))
-            {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}
-          else if(request.url.contains('login'))
+
+          if(request.url == "http://10.0.2.2.nip.io:8080/check")
+          {
+            final gotCookies = await cookieManager.getCookies(request.url);
+            for (var item in gotCookies) {
+              print(item);
+              cookieRecieved = item.toString();
+              print(item.value);
+              currentSessionID = item.value;
+            }
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+            }
+            else if(request.url == "http://10.0.2.2.nip.io:8080/login")
             {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
           return NavigationDecision.navigate;
         },
