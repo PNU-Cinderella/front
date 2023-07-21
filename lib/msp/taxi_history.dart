@@ -135,12 +135,16 @@ class IconTaxiCurrent extends StatelessWidget{
   }
 }
 
-class TaxiHistorySearchBar extends StatelessWidget{
+class TaxiHistorySearchBar extends StatefulWidget{
 
+  @override
+  State<TaxiHistorySearchBar> createState() => _TaxiHistorySearchBarState();
+}
+
+class _TaxiHistorySearchBarState extends State<TaxiHistorySearchBar> {
   double? myWidth = 356;
+
   double? myHeight = 53;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -241,18 +245,35 @@ class TaxiHistoryBox extends StatelessWidget {
 
 }
 
-class TaxiHistoryList extends StatelessWidget
+class TaxiHistoryList extends StatefulWidget
 {
+  @override
+  State<TaxiHistoryList> createState() => _TaxiHistoryListState();
+}
+
+class _TaxiHistoryListState extends State<TaxiHistoryList> {
   double? myWidth = 356;
+
   double? myHeight = 340;
 
-  //for Test - Dummy Data
-  List<String> dateList = ['2023.03.31','2023.02.11','2023.01.27','2023.01.03','2022.12.15',];
-  List<String> routeTitleList = ['부산은행-명륜역','부산대정문-온천역','부산대역-부곡동','부산은행-서동고개','부산대정문-광안리',];
-  List<String> peopleCountList = ['4','2','3','3','4',];
-  List<String> historyStateList = ['정산완료','정산완료','정산완료','정산완료','정산완료',];
-  List<String> timeList = ['02:30','17:40','11:50','08:20','12:30',];
-  List<String> routeList = ['부산은행-명륜역-교대역-서면역-송정역','부산대정문-온천역-롯데백화점','부산대역-부곡동-해운대-광안리','부산은행-서동고개-센텀시티-벡스코','부산대정문-광안리-대구-서울-개성',];
+  bool sortAsending = true;
+
+  final List<Map<String, dynamic>> taxiHistory = [
+    {'date': '2023.03.31', 'routeTitle': '부산은행-명륜역', 'peopleCount': 4,'historyState': '정산완료','time' : '02:30', 'route' : '부산은행-명륜역-교대역-서면역-송정역'},
+    {'date': '2023.02.11', 'routeTitle': '부산대정문-온천역', 'peopleCount': 2,'historyState': '정산완료','time' : '17:40', 'route' : '부산대정문-온천역-롯데백화점'},
+    {'date': '2023.01.27', 'routeTitle': '부산대역-부곡동', 'peopleCount': 3,'historyState': '정산완료','time' : '11:50', 'route' : '부산대역-부곡동-해운대-광안리'},
+    {'date': '2023.01.03', 'routeTitle': '부산은행-서동고개', 'peopleCount': 3,'historyState': '정산완료','time' : '08:20', 'route' : '부산은행-서동고개-센텀시티-벡스코'},
+    {'date': '2022.12.15', 'routeTitle': '부산대정문-광안리', 'peopleCount': 4,'historyState': '정산완료','time' : '12:30', 'route' : '부산대정문-광안리-대구-서울-개성'},
+  ];
+
+  void SortTaxiHistory(bool ascending) {
+    setState(() {
+      sortAsending = ascending;
+      taxiHistory.sort((a, b) => ascending
+          ? a['date'].compareTo(b['date'])
+          : b['date'].compareTo(a['date']));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -263,17 +284,18 @@ class TaxiHistoryList extends StatelessWidget
         margin: RealLTRB(left: 21, top: 0, right: 0, bottom: 0, context: context),
         child: ListView.builder(
             padding: EdgeInsets.zero,
-            itemCount: dateList.length,
+            itemCount: taxiHistory.length,
             itemBuilder: (BuildContext context, int index){
               return Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                 child: TaxiHistoryBox(
-                  date: dateList[index],
-                  routeTitle: routeTitleList[index],
-                  peopleCount: peopleCountList[index],
-                  historyState: historyStateList[index],
-                  time: timeList[index],
-                  route: routeList[index]),
+                  date: taxiHistory[index]['date'],
+                  routeTitle: taxiHistory[index]['routeTitle'],
+                  peopleCount: taxiHistory[index]['peopleCount'],
+                  historyState: taxiHistory[index]['historyState'],
+                  time: taxiHistory[index]['time'],
+                  route: taxiHistory[index]['route']
+                ),
               );
             }
         ),
@@ -310,7 +332,7 @@ class _TaxiHistoryState extends State<TaxiHistory> {
                 subStatus: "부산은행에서 2:30 출발예정",
               ),
               TaxiHistorySearchBar(),
-              SizedBox(height: 11,),
+              RealSizedBox(width: 0, height: 11,),
               TaxiHistoryList(),
             ],
           ),

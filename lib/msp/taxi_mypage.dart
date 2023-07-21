@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
 import 'package:project_cinderella_test3/msp/blocklist.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:http/http.dart' as http;
 
-const logoutURL = "http://10.0.2.2:8080/logout";
+const logoutURL = "http://10.0.2.2:8080/memberLogout";
 
 class MypageMyInfo extends StatelessWidget
 {
@@ -131,11 +132,13 @@ class _TaxiMypageState extends State<TaxiMypage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => BlockList()));
                 },),
               MypageOptionBox(text: "로그아웃", function: () async {
-                final response =  await http.post(Uri.parse(logoutURL));
+                final response =  await http.post(Uri.parse(logoutURL),
+                headers: {'Cookie' : cookieRecieved,});
                 print(response.statusCode);
-                if(response.statusCode.isEqual(200))
+                if(response.statusCode.isEqual(302))
                   {
                     print("Success!");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   }
                 print('LogOutPressed');
               }),
