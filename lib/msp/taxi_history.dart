@@ -154,9 +154,9 @@ class _TaxiHistorySearchBarState extends State<TaxiHistorySearchBar> {
       margin: RealLTRB(left: 21, top: 77, right: 0, bottom: 0, context: context),
       child: Row(
         children: [
-          SizedBox(width: 15,),
+          RealSizedBox(width: 15, height:0),
           Image.asset("assets/images/icon_search.png"),
-          SizedBox(width: 240,),
+          RealSizedBox(width: 240, height:0),
           Text("최신순", style: textstyleBoxDescr,),
           Image.asset("assets/images/icon_down_arrow.png"),
         ],
@@ -291,7 +291,7 @@ class _TaxiHistoryListState extends State<TaxiHistoryList> {
                 child: TaxiHistoryBox(
                   date: taxiHistory[index]['date'],
                   routeTitle: taxiHistory[index]['routeTitle'],
-                  peopleCount: taxiHistory[index]['peopleCount'],
+                  peopleCount: taxiHistory[index]['peopleCount'].toString(),
                   historyState: taxiHistory[index]['historyState'],
                   time: taxiHistory[index]['time'],
                   route: taxiHistory[index]['route']

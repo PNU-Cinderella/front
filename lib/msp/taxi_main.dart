@@ -4,6 +4,7 @@ import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
 import 'package:project_cinderella_test3/msp/blockList.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/serviceQuit.dart';
 import 'package:project_cinderella_test3/msp/taxi_mypage.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/taxi_history.dart';
@@ -13,23 +14,42 @@ import 'package:project_cinderella_test3/msp/taxi_history.dart';
 class TaxiMain extends StatefulWidget {
 
   @override
-  State<TaxiMain> createState() => _TaxiMainState();
+  State<TaxiMain> createState() => TaxiMainState();
 }
 
-class _TaxiMainState extends State<TaxiMain>
+class TaxiMainState extends State<TaxiMain>
 {
   int _selectedIndex = 1;
-
+  int _navbarIndex = 1;
   final List<Widget> _widgetOptions = <Widget>[
     TaxiHistory(),
     TaxiList(),
     TaxiMypage(),
-    BlockList()
+    BlockListPage(),
+    ServiceQuitPage(),
   ];
+
+
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      _navbarIndex = index;
+    });
+  }
+
+  void SetIndex(int index)
+  {
+    setState(() {
+      _selectedIndex = index;
+      if(index > 2)
+        {
+          _navbarIndex = 2;
+        }
+      else
+        {
+          _navbarIndex = index;
+        }
     });
   }
 
@@ -40,6 +60,7 @@ class _TaxiMainState extends State<TaxiMain>
       home: Scaffold(
         body:
         _widgetOptions.elementAt(_selectedIndex),
+
         // Navigator(
         //   onGenerateRoute: (settings){
         //     Widget page = TaxiList();
@@ -52,7 +73,7 @@ class _TaxiMainState extends State<TaxiMain>
          Container(
            height: GetRealHeight(pixel: 84, context: context),
            child: BottomNavigationBar(
-            currentIndex: _selectedIndex,
+            currentIndex: _navbarIndex,
             selectedItemColor: colorBlack,
             unselectedFontSize: 14,
             items: <BottomNavigationBarItem>[
