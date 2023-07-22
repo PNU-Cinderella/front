@@ -4,15 +4,24 @@ import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
+import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:http/http.dart' as http;
 
 const SignUpURL = "http://10.0.2.2:8080/signup";
 const ChatRoomURL = "http://10.0.2.2:8080/chatroom";
 
 Future createData(String nickName, String gender, BuildContext context) async {
-  final response1 = await http.get(Uri.parse(SignUpURL+"?name="+nickName+"&gender="+gender));;
-  print(response1.statusCode);
-  if (response1.statusCode == 201) {
+  Map data = {'name': nickName, 'gender': gender};
+  final response = await http.put(
+    Uri.parse(SignUpURL),
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie' : cookieRecieved,
+    },
+    body: json.encode(data),
+  );
+  print(response.statusCode);
+  if (response.statusCode == 201 || response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     showNotification();
@@ -89,6 +98,7 @@ class _GenderButtonState extends State<GenderButton> {
 }
 
 class SignUp extends StatefulWidget {
+
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -178,8 +188,7 @@ class _SignUpState extends State<SignUp> {
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,
                     side: BorderSide(color: colorDarkGray, width: 1.4),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   ),
                   child: Text("완료", style: textstyleLoginButtonInvert),
                 ),
