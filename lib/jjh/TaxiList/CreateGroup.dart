@@ -31,8 +31,10 @@ class _CreateGroupState extends State<CreateGroup> {
   int CurrentHour = 0;
   int CurrentMinute = 0;
   var _data = '오픈채팅방 링크 붙여주세요';
+  var _roomname = '';
 
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
+  final _roomformKey = GlobalKey<FormState>();
   User user = User(0, "", "");
   final url = Uri.parse("http://10.0.2.2:8080/chatroom");
 
@@ -185,7 +187,6 @@ class _CreateGroupState extends State<CreateGroup> {
 
   void pasteFromClipboard() async {
     ClipboardData? cdata = await Clipboard.getData(Clipboard.kTextPlain);
-
     setState(() {
       _data = cdata?.text ?? 'got null...';
     });
@@ -208,6 +209,7 @@ class _CreateGroupState extends State<CreateGroup> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return GestureDetector(
       onTap: () {
+        FocusScope.of(context).unfocus();
         textFocus.unfocus();
       },
       child: Scaffold(
@@ -419,7 +421,7 @@ class _CreateGroupState extends State<CreateGroup> {
                   //       borderRadius: BorderRadius.circular(8 * PX)),
                   // ),
                   SizedBox(
-                    height: GetRealHeight(pixel: 10, context: context),
+                    height: GetRealHeight(pixel: 25, context: context),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -618,7 +620,7 @@ class _CreateGroupState extends State<CreateGroup> {
                     ),
                   ),
                   SizedBox(
-                    height: GetRealHeight(pixel: 60, context: context),
+                    height: GetRealHeight(pixel: 40, context: context),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 31 * PX),
@@ -715,7 +717,7 @@ class _CreateGroupState extends State<CreateGroup> {
                   //         (CurrentHour * 60) +
                   //         CurrentMinute}"),
                   SizedBox(
-                    height: GetRealHeight(pixel: 45, context: context),
+                    height: GetRealHeight(pixel: 35, context: context),
                   ),
                   Row(
                     children: [
@@ -748,12 +750,13 @@ class _CreateGroupState extends State<CreateGroup> {
                     decoration: BoxDecoration(
                         color: Color.fromRGBO(244, 247, 253, 1),
                         borderRadius: BorderRadius.circular(15)),
-                    child: Center(child: Text(_data)
-                        // TextField(controller: TextEditingController(text:_data),textAlign: TextAlign.center, decoration: InputDecoration(contentPadding: EdgeInsets.zero,hintText: "오픈채팅방 링크 붙여넣어",hintStyle: TextStyle(fontSize: 20,color: Color.fromRGBO(132, 127, 127, 1),fontWeight: FontWeight.w500,),border: InputBorder.none, focusedBorder: InputBorder.none, ),keyboardType: TextInputType.emailAddress,)
+                    child: Center(child:
+                    //  Text(_data)
+                        TextField(controller: TextEditingController(text:_data),textAlign: TextAlign.center, decoration: InputDecoration(contentPadding: EdgeInsets.zero,hintText: "오픈채팅방 링크 붙여넣어",hintStyle: TextStyle(fontSize: 20,color: Color.fromRGBO(132, 127, 127, 1),fontWeight: FontWeight.w500,),border: InputBorder.none, focusedBorder: InputBorder.none, ),keyboardType: TextInputType.emailAddress,)
                         ),
                   ),
                   SizedBox(
-                    height: GetRealHeight(pixel: 30, context: context),
+                    height: GetRealHeight(pixel: 15, context: context),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -768,29 +771,36 @@ class _CreateGroupState extends State<CreateGroup> {
                         SizedBox(
                           width: GetRealWidth(pixel: 10, context: context),
                         ),
-                        Container(
-                            width: GetRealWidth(pixel: 220, context: context),
-                            height: GetRealHeight(pixel: 22, context: context),
-                            child: TextField(
-                              controller: TextEditingController(),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.only(right:GetRealWidth(pixel: 31, context: context),top: GetRealHeight(pixel: 12, context: context)),
+                            child: TextFormField(
+                              key : _roomformKey,
+                              controller: TextEditingController(text: _roomname),
+                              onChanged: (value) {
+                                _roomname = value;
+                              },
                               textAlign: TextAlign.left,
-                              
+                              style: SimpleTextStyle(size: 19, weight: FontWeight.w500),
+                              maxLength: 8,
+                              // maxLengthEnforcement: MaxLengthEnforcement.enforced,
                               decoration: InputDecoration(
                                 hintText: "입력하세요",
                                 hintStyle: SimpleTextStyle(size: 19,color: Color.fromRGBO(138, 138, 142, 1)),
-                                // contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(top:8,left: 8),
+                                border: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromRGBO(223, 223, 223, 1))),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color:
                                             Color.fromRGBO(223, 223, 223, 1))),
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                            ))
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  SizedBox(height: GetRealHeight(pixel: 30, context: context)),
+                  // SizedBox(height: GetRealHeight(pixel: 30, context: context)),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20 * PX),
                     child: GestureDetector(

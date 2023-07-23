@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/joinModal.dart';
 
 // import 'MakeList.dart';
 import '../../msp/taxi_history.dart';
@@ -326,7 +327,9 @@ class _TaxiListState extends State<TaxiList> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
-                        onTap: (){print(index);},
+                        onTap: (){
+                          JoinModalFirst();
+                          print(index);},
                         child: Makelist(
                             snapshot.data[index],
                             GetRealHeight(pixel: 1, context: context),
