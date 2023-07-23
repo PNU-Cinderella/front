@@ -30,7 +30,7 @@ Container listView_group(
                     ),
                     child: Center(
                       child: Image(
-                        image: AssetImage("assets/images/ListView/Union.png"),
+                        image: AssetImage("assets/images/TaxiList/ListView_Taxi.png"),
                       ),
                     ),
                   ),
@@ -141,9 +141,9 @@ class Makelist extends StatelessWidget {
                         fontSize: 18,
                         color: Color.fromRGBO(64, 113, 205, 1)),
                   ),
-                  Icon(
-                    Icons.more_vert,
-                  ),
+                  // Icon(
+                  //   Icons.more_vert,
+                  // ),
                 ],
               ),
 
