@@ -4,14 +4,65 @@ import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
-class ServiceQuitPage extends StatefulWidget
+class BoxRequiredAttribute extends StatelessWidget
+{
+  double myWidth = 393;
+  double myHeight = 290;
+  Widget userImage = Image.asset("assets/images/Mypage/image_default_myimage.png");
+  String userName = "기본";
+
+  BoxRequiredAttribute({image, name}){
+    userName = name ?? "기본값";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.topLeft,
+      width: GetRealWidth(pixel: myWidth, context: context),
+      height: GetRealHeight(pixel: myHeight, context: context),
+      child: Column(
+        children: [
+          Container(
+            width: GetRealWidth(pixel: 48, context: context),
+            height: GetRealHeight(pixel: 48, context: context),
+            margin: RealLTRB(left: 33, top: 13, right: 0, bottom: 0, context: context),
+            child: userImage,
+          ),
+          Container(
+            margin: RealLTRB(left: 28, top: 26, right: 0, bottom: 0, context: context),
+            width: GetRealWidth(pixel: 120, context: context),
+            height: GetRealHeight(pixel: 22, context: context),
+            child: Text(userName, style: SimpleTextStyle(size: 22, weight: FontWeight.w500),)
+          ),
+          Container(
+            margin: RealLTRB(left: 37, top: 25, right: 0, bottom: 0, context: context),
+            width: GetRealWidth(pixel: 95, context: context),
+            height: GetRealHeight(pixel: 33, context: context),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13)),
+                backgroundColor: Color(0xff113B6D),
+              ),
+              onPressed: (){},
+              child: Text("중복확인", style: SimpleTextStyle(size: 19, weight: FontWeight.w500, color: Color(0xffF6F5F5)),),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class PageProfileEdit extends StatefulWidget
 {
 
   @override
-  State<ServiceQuitPage> createState() => _ServiceQuitPageState();
+  State<PageProfileEdit> createState() => _PageProfileEditState();
 }
 
-class _ServiceQuitPageState extends State<ServiceQuitPage> {
+class _PageProfileEditState extends State<PageProfileEdit> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +81,7 @@ class _ServiceQuitPageState extends State<ServiceQuitPage> {
                 height: GetRealHeight(pixel: 70, context: context),
                 child: Container(
                     margin: RealLTRB(left: 20, top: 33, right: 0, bottom: 0, context: context),
-                    child: Text("회원탈퇴", style: SimpleTextStyle(size: 22, weight: FontWeight.w700))
+                    child: Text("프로필 수정", style: SimpleTextStyle(size: 22, weight: FontWeight.w700))
                 ),
               ),
               Container(
@@ -53,7 +104,6 @@ class _ServiceQuitPageState extends State<ServiceQuitPage> {
                 alignment: Alignment.bottomCenter,
                 height: GetRealHeight(pixel: 70, context: context),
                 child: Container(
-
                     child: Text("그동안 신데렐라를 이용해 주셔서 감사합니다.", style: SimpleTextStyle(size: 19, weight: FontWeight.w400))
                 ),
               ),
