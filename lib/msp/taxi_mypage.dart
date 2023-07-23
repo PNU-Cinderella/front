@@ -57,7 +57,10 @@ class MypageMyInfo extends StatelessWidget
                   borderRadius: BorderRadius.circular(13)),
                 backgroundColor: Color(0xff222222),
               ),
-              onPressed: (){},
+              onPressed: (){
+                final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
+                state.SetIndex(6);
+                },
               child: Text("수정", style: SimpleTextStyle(size: 20, weight: FontWeight.w500, color: Color(0xffF6F5F5)),),
             ),
           )
@@ -149,6 +152,11 @@ class _TaxiMypageState extends State<TaxiMypage> {
                 final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
                 state.SetIndex(4);
               },),
+              MypageOptionBox(text: "고객문의", function: ()  {
+                final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
+                state.SetIndex(5);
+              }
+              ),
             ],
           ),
         ),

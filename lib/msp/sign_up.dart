@@ -11,27 +11,34 @@ const SignUpURL = "http://10.0.2.2:8080/signup";
 const ChatRoomURL = "http://10.0.2.2:8080/chatroom";
 
 Future createData(String nickName, String gender, BuildContext context) async {
-  Map data = {'name': nickName, 'gender': gender};
-  final response = await http.put(
-    Uri.parse(SignUpURL),
-    headers: {
-      'Content-Type': 'application/json',
-      'Cookie' : cookieRecieved,
-    },
-    body: json.encode(data),
-  );
-  print(response.statusCode);
-  if (response.statusCode == 201 || response.statusCode == 200) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    showNotification();
-    MakeToast(msg: "SetData Success!");
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    MakeToast(msg: nickName + " " + gender + " Failed!");
-    throw Exception('Failed to create Data.');
-  }
+  if(nickName == '')
+    {
+      MakeToast(msg: "닉네임을 입력해주세요!");
+    }
+  if(gender == '')
+    {
+      MakeToast(msg: "성별을 선택해주세요!");
+    }
+  else
+    {
+      Map data = {'name': nickName, 'gender': gender};
+      final response = await http.put(
+        Uri.parse(SignUpURL),
+        headers: {
+          'Content-Type': 'application/json',
+          'Cookie' : cookieRecieved,
+        },
+        body: json.encode(data),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        showNotification();
+        MakeToast(msg: "SetData Success!");
+      } else {
+        MakeToast(msg: nickName + " " + gender + " Failed!");
+        throw Exception('Failed to create Data.');
+      }
+    }
 }
 
 class GenderButton extends StatefulWidget
@@ -105,8 +112,8 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  String userName = "Default";
-  String gender = "MALE";
+  String userName = "";
+  String gender = "";
 
   @override
   Widget build(BuildContext context) {

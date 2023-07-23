@@ -158,7 +158,14 @@ class _TaxiHistorySearchBarState extends State<TaxiHistorySearchBar> {
           Image.asset("assets/images/icon_search.png"),
           RealSizedBox(width: 240, height:0),
           Text("최신순", style: textstyleBoxDescr,),
-          Image.asset("assets/images/icon_down_arrow.png"),
+        BasicButtonWithIcon(width: 30, height: 30,
+            icon: Image.asset("assets/images/icon_down_arrow.png"),
+          func: (){
+            TaxiHistoryListState state = context.findAncestorStateOfType<TaxiHistoryListState>()!;
+            state.SortTaxiHistory(state.sortAsending);
+          },
+        ),
+          // Image.asset("assets/images/icon_down_arrow.png"),
         ],
       ),
       decoration: BoxDecoration(
@@ -248,10 +255,10 @@ class TaxiHistoryBox extends StatelessWidget {
 class TaxiHistoryList extends StatefulWidget
 {
   @override
-  State<TaxiHistoryList> createState() => _TaxiHistoryListState();
+  State<TaxiHistoryList> createState() => TaxiHistoryListState();
 }
 
-class _TaxiHistoryListState extends State<TaxiHistoryList> {
+class TaxiHistoryListState extends State<TaxiHistoryList> {
   double? myWidth = 356;
 
   double? myHeight = 340;
