@@ -324,3 +324,55 @@ class _SimpleSwitchState extends State<SimpleSwitch> {
 //   });
 // }
 
+class SortableListView extends StatefulWidget
+{
+  @override
+  State<SortableListView> createState() => _SortableListViewState();
+}
+
+class _SortableListViewState extends State<SortableListView> {
+  double? myWidth = 356;
+
+  double? myHeight = 340;
+
+  bool sortAsending = true;
+
+  final List<Map<String, dynamic>> componentList = [];
+
+  void SortComponent(bool ascending) {
+    setState(() {
+      sortAsending = ascending;
+      componentList.sort((a, b) => ascending
+          ? a['date'].compareTo(b['date'])
+          : b['date'].compareTo(a['date']));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        width: myWidth,
+        height: myHeight,
+        margin: RealLTRB(left: 21, top: 0, right: 0, bottom: 0, context: context),
+        child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: componentList.length,
+            itemBuilder: (BuildContext context, int index){
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                // child: TaxiHistoryBox(
+                //     date: componentList[index]['date'],
+                //     routeTitle: componentList[index]['routeTitle'],
+                //     peopleCount: componentList[index]['peopleCount'].toString(),
+                //     historyState: componentList[index]['historyState'],
+                //     time: componentList[index]['time'],
+                //     route: componentList[index]['route']
+                // ),
+              );
+            }
+        ),
+      ),
+    );
+  }
+}

@@ -4,11 +4,12 @@ import 'package:project_cinderella_test3/msp/Classes.dart';
 import 'package:project_cinderella_test3/msp/blocklist.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
+import 'package:project_cinderella_test3/msp/serviceQuit.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:http/http.dart' as http;
 
-const logoutURL = "http://10.0.2.2:8080/memberLogout";
+const logoutURL = "http://10.0.2.2:8080/memberlogout";
 
 class MypageMyInfo extends StatelessWidget
 {
@@ -128,21 +129,26 @@ class _TaxiMypageState extends State<TaxiMypage> {
                 ),
               ),
               MypageMyInfo(),
-              MypageOptionBox(text: "차단목록",function: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => BlockList()));
+              MypageOptionBox(text: "차단목록",function: () {
+                final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
+                state.SetIndex(3);
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => BlockList()));
                 },),
               MypageOptionBox(text: "로그아웃", function: () async {
                 final response =  await http.post(Uri.parse(logoutURL),
                 headers: {'Cookie' : cookieRecieved,});
                 print(response.statusCode);
-                if(response.statusCode.isEqual(302))
+                if(response.statusCode.isEqual(200) || response.statusCode.isEqual(302))
                   {
                     print("Success!");
                     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   }
                 print('LogOutPressed');
               }),
-              MypageOptionBox(text: "회원탈퇴",),
+              MypageOptionBox(text: "회원탈퇴", function: (){
+                final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
+                state.SetIndex(4);
+              },),
             ],
           ),
         ),
