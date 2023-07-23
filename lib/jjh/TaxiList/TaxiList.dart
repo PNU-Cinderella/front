@@ -15,27 +15,27 @@ import '../../roomparse.dart';
 
 Future<List> fetchInfo(url) async {
   /// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
-  final jsonString = await http.get(Uri.parse(url));
-  if (jsonString.statusCode == 200) {
-    //만약 서버가 ok응답을 반환하면, json을 파싱합니다
-    // print('백엔드쪽에서 응답 완료.');
-    var jsonstring = utf8.decode(jsonString.bodyBytes);
-    // print(json.decode(jsonString.body));
-    List<dynamic> jsonMaps = jsonDecode(jsonstring);
-    List<roomMember> jsonLists =
-        jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-    return jsonLists;
-    // return Info.fromJson(json.decode(response.body));
-  } else {
-    //만약 응답이 ok가 아니면 에러를 던집니다.
-    throw Exception('몬가 몬가 에러임');
-  }
+  // final jsonString = await http.get(Uri.parse(url));
+  // if (jsonString.statusCode == 200) {
+  //   //만약 서버가 ok응답을 반환하면, json을 파싱합니다
+  //   // print('백엔드쪽에서 응답 완료.');
+  //   var jsonstring = utf8.decode(jsonString.bodyBytes);
+  //   // print(json.decode(jsonString.body));
+  //   List<dynamic> jsonMaps = jsonDecode(jsonstring);
+  //   List<roomMember> jsonLists =
+  //       jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+  //   return jsonLists;
+  //   // return Info.fromJson(json.decode(response.body));
+  // } else {
+  //   //만약 응답이 ok가 아니면 에러를 던집니다.
+  //   throw Exception('몬가 몬가 에러임');
+  // }
   //// 혼자 테스트한곳 //////
-  // String jsonString = await rootBundle.loadString('assets/jsonTest.json');
-  // List<dynamic> jsonMaps = jsonDecode(jsonString);
-  // List<roomMember> jsonLists =
-  //     jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  // return jsonLists;
+  String jsonString = await rootBundle.loadString('assets/jsonTest.json');
+  List<dynamic> jsonMaps = jsonDecode(jsonString);
+  List<roomMember> jsonLists =
+      jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+  return jsonLists;
   //// 여기까지 남겨두기 //////
 }
 
@@ -312,8 +312,28 @@ class _TaxiListState extends State<TaxiList> {
                 ),
               ),
               SizedBox(
-                height: GetRealHeight(pixel: 21, context: context),
+                height: GetRealHeight(pixel: 10, context: context),
               ),
+              (snapshot.data.length == 0)
+                  ? Center(
+                      child: Text(
+                      "아직 방이 없어요ㅜ",
+                      style: SimpleTextStyle(size: 30, color: Colors.grey),
+                    ))
+                  : Expanded(
+                    child: ListView.builder(
+                    padding: EdgeInsets.only(top: 0),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: (){print(index);},
+                        child: Makelist(
+                            snapshot.data[index],
+                            GetRealHeight(pixel: 1, context: context),
+                            GetRealWidth(pixel: 1, context: context)),
+                      );
+                    }),
+                  ),
               // Text("${snapshot.data}"),
               // Text("${GetRealHeight(pixel: 13, context: context)}"),
               // Text("${runtimeType(snapshot)}"),
@@ -325,17 +345,18 @@ class _TaxiListState extends State<TaxiList> {
               //             style: SimpleTextStyle(size: 30, color: Colors.grey),
               //           )
               //         : Container()),
-              for (roomMember inlsts in snapshot.data) ...[
-                GestureDetector(
-                  onTap: () {
-                    print("클릭방");
-                  },
-                  child: Makelist(
-                      inlsts,
-                      GetRealHeight(pixel: 1, context: context),
-                      GetRealWidth(pixel: 1, context: context)),
-                ),
-              ],
+              
+              // for (roomMember inlsts in snapshot.data) ...[
+              //   GestureDetector(
+              //     onTap: () {
+              //       print("클릭방");
+              //     },
+              //     child: Makelist(
+              //         inlsts,
+              //         GetRealHeight(pixel: 1, context: context),
+              //         GetRealWidth(pixel: 1, context: context)),
+              //   ),
+              // ],
             ],
           ),
         ),

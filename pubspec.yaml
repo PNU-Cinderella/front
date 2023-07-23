@@ -81,6 +81,7 @@ flutter:
     - assets/images/
     - assets/images/CreateGroup/
     - assets/images/TaxiHistory/
+    - assets/images/TaxiList/
     - assets/images/JoinModal/
     - assets/images/Mypage/
     - assets/images/BottomNavigationBar/
