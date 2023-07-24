@@ -13,30 +13,31 @@ import 'MakeList.dart';
 import 'package:http/http.dart' as http;
 import '../../roomparse.dart';
 // import 'roomparse.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Future<List> fetchInfo(url) async {
   /// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
-  // final jsonString = await http.get(Uri.parse(url));
-  // if (jsonString.statusCode == 200) {
-  //   //만약 서버가 ok응답을 반환하면, json을 파싱합니다
-  //   // print('백엔드쪽에서 응답 완료.');
-  //   var jsonstring = utf8.decode(jsonString.bodyBytes);
-  //   // print(json.decode(jsonString.body));
-  //   List<dynamic> jsonMaps = jsonDecode(jsonstring);
-  //   List<roomMember> jsonLists =
-  //       jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  //   return jsonLists;
-  //   // return Info.fromJson(json.decode(response.body));
-  // } else {
-  //   //만약 응답이 ok가 아니면 에러를 던집니다.
-  //   throw Exception('몬가 몬가 에러임');
-  // }
+  final jsonString = await http.get(Uri.parse(url));
+  if (jsonString.statusCode == 200) {
+    //만약 서버가 ok응답을 반환하면, json을 파싱합니다
+    // print('백엔드쪽에서 응답 완료.');
+    var jsonstring = utf8.decode(jsonString.bodyBytes);
+    // print(json.decode(jsonString.body));
+    List<dynamic> jsonMaps = jsonDecode(jsonstring);
+    List<roomMember> jsonLists =
+        jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+    return jsonLists;
+    // return Info.fromJson(json.decode(response.body));
+  } else {
+    //만약 응답이 ok가 아니면 에러를 던집니다.
+    throw Exception('몬가 몬가 에러임');
+  }
   //// 혼자 테스트한곳 //////
-  String jsonString = await rootBundle.loadString('assets/jsonTest.json');
-  List<dynamic> jsonMaps = jsonDecode(jsonString);
-  List<roomMember> jsonLists =
-      jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
-  return jsonLists;
+  // String jsonString = await rootBundle.loadString('assets/jsonTest.json');
+  // List<dynamic> jsonMaps = jsonDecode(jsonString);
+  // List<roomMember> jsonLists =
+  //     jsonMaps.map((dynamic item) => roomMember.fromJson(item)).toList();
+  // return jsonLists;
   //// 여기까지 남겨두기 //////
 }
 
@@ -70,6 +71,7 @@ class _TaxiListState extends State<TaxiList> {
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
   String url = "http://10.0.2.2:8080/chatlist/bank";
+  late FToast fToast;
 
   @override
   dynamic jsonList;
@@ -79,6 +81,8 @@ class _TaxiListState extends State<TaxiList> {
   void initState() {
     super.initState();
     jsonList = fetchInfo(url);
+    fToast = FToast();
+    fToast.init(context);
   }
 
   void _bankurl() {
@@ -109,6 +113,85 @@ class _TaxiListState extends State<TaxiList> {
       button_front = button_selected;
       jsonList = fetchInfo(url);
     });
+  }
+
+  void ShowToast() {
+    fToast.showToast(
+      positionedToastBuilder: (context, child) {
+        return Positioned(
+          child: child,
+          top: GetRealHeight(pixel: 212, context: context),
+          left: GetRealWidth(pixel: 20, context: context),
+          // left: 16.0,
+        );
+      },
+      toastDuration: Duration(milliseconds: 3000),
+      child: (Container(
+        width: GetRealWidth(pixel: 354, context: context),
+        height: GetRealHeight(pixel: 47, context: context),
+        // padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 40.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Color.fromRGBO(13, 154, 255, 0.8),
+        ),
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: GetRealWidth(pixel: 14, context: context),
+            ),
+            Container(
+              width: 22,
+              height: 22,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(22), color: Colors.white),
+              child: Center(
+                child:
+                    Image(image: AssetImage("assets/images/TaxiList/Tick.png")),
+              ),
+            ),
+            SizedBox(width: GetRealWidth(pixel: 10, context: context)),
+            Text(
+              "택시팟을 생성했어요",
+              style: SimpleTextStyle(
+                  size: 16,
+                  color: Color.fromRGBO(245, 245, 245, 1),
+                  weight: FontWeight.w500),
+            ),
+            SizedBox(
+              width: GetRealWidth(pixel: 108, context: context),
+            ),
+            TextButton(
+              onPressed: () {
+                fToast.removeCustomToast();
+                // print("눌림");
+              },
+              child: Text(
+                "확인",
+                style: SimpleTextStyle(
+                    size: 16, color: Colors.white, weight: FontWeight.w600),
+              ),
+            )
+          ],
+        ),
+      )),
+      //   Material(
+      //     color: Colors.white,
+      //     child: Row(
+      //       mainAxisSize: MainAxisSize.min,
+      //       children: [
+      //         Icon(Icons.face),
+      //         Text(
+      //           "Press and hold to send Alert!",
+      //           style: TextStyle(color: Colors.black87, fontSize: 16.0),
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      //   gravity: ToastGravity.CENTER,
+      // );
+    );
   }
 
   Widget build(BuildContext context) {
@@ -188,6 +271,7 @@ class _TaxiListState extends State<TaxiList> {
                                 reverseTransitionDuration: Duration.zero,
                               ),
                             ).then((value) {
+                              ShowToast();
                               _bankurl();
                             });
                           },
@@ -322,21 +406,22 @@ class _TaxiListState extends State<TaxiList> {
                       style: SimpleTextStyle(size: 30, color: Colors.grey),
                     ))
                   : Expanded(
-                    child: ListView.builder(
-                    padding: EdgeInsets.only(top: 0),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: (){
-                          JoinModalFirst();
-                          print(index);},
-                        child: Makelist(
-                            snapshot.data[index],
-                            GetRealHeight(pixel: 1, context: context),
-                            GetRealWidth(pixel: 1, context: context)),
-                      );
-                    }),
-                  ),
+                      child: ListView.builder(
+                          padding: EdgeInsets.only(top: 0),
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () {
+                                JoinModalFirst();
+                                print(index);
+                              },
+                              child: Makelist(
+                                  snapshot.data[index],
+                                  GetRealHeight(pixel: 1, context: context),
+                                  GetRealWidth(pixel: 1, context: context)),
+                            );
+                          }),
+                    ),
               // Text("${snapshot.data}"),
               // Text("${GetRealHeight(pixel: 13, context: context)}"),
               // Text("${runtimeType(snapshot)}"),
@@ -348,7 +433,7 @@ class _TaxiListState extends State<TaxiList> {
               //             style: SimpleTextStyle(size: 30, color: Colors.grey),
               //           )
               //         : Container()),
-              
+
               // for (roomMember inlsts in snapshot.data) ...[
               //   GestureDetector(
               //     onTap: () {
