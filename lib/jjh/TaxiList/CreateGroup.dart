@@ -44,8 +44,8 @@ class _CreateGroupState extends State<CreateGroup> {
       'time': user.time,
       'start': user.start,
       'dest': user.dest,
-      'openChatLink' : _data,
-      'chatName' : _roomname,
+      'openChatLink': _data,
+      'chatName': _roomname,
     };
     var body = json.encode(data);
     http.Response res = await http.post(
@@ -752,10 +752,28 @@ class _CreateGroupState extends State<CreateGroup> {
                     decoration: BoxDecoration(
                         color: Color.fromRGBO(244, 247, 253, 1),
                         borderRadius: BorderRadius.circular(15)),
-                    child: Center(child:
-                    //  Text(_data)
-                        TextField(controller: TextEditingController(text:_data),textAlign: TextAlign.center, decoration: InputDecoration(contentPadding: EdgeInsets.zero,hintText: "오픈채팅방 링크 붙여넣어주세요",hintStyle: TextStyle(fontSize: 15,color: Color.fromRGBO(132, 127, 127, 1),fontWeight: FontWeight.w500,),border: InputBorder.none, focusedBorder: InputBorder.none, ),keyboardType: TextInputType.emailAddress,)
+                    child: Center(
+                        child:
+                            //  Text(_data)
+                            TextField(
+                      controller: TextEditingController(text: _data),
+                      onChanged: (value) {
+                                _data = value;
+                              },
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        hintText: "오픈채팅방 링크 붙여넣어주세요",
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromRGBO(132, 127, 127, 1),
+                          fontWeight: FontWeight.w500,
                         ),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                    )),
                   ),
                   SizedBox(
                     height: GetRealHeight(pixel: 15, context: context),
@@ -775,22 +793,34 @@ class _CreateGroupState extends State<CreateGroup> {
                         ),
                         Flexible(
                           child: Padding(
-                            padding: EdgeInsets.only(right:GetRealWidth(pixel: 31, context: context),top: GetRealHeight(pixel: 12, context: context)),
+                            padding: EdgeInsets.only(
+                                right:
+                                    GetRealWidth(pixel: 31, context: context),
+                                top:
+                                    GetRealHeight(pixel: 12, context: context)),
                             child: TextFormField(
-                              key : _roomformKey,
-                              controller: TextEditingController(text: _roomname),
+                              key: _roomformKey,
+                              controller:
+                                  TextEditingController(text: _roomname),
                               onChanged: (value) {
                                 _roomname = value;
                               },
                               textAlign: TextAlign.left,
-                              style: SimpleTextStyle(size: 19, weight: FontWeight.w500),
+                              style: SimpleTextStyle(
+                                  size: 19, weight: FontWeight.w500),
                               maxLength: 8,
                               // maxLengthEnforcement: MaxLengthEnforcement.enforced,
                               decoration: InputDecoration(
                                 hintText: "입력하세요",
-                                hintStyle: SimpleTextStyle(size: 19,color: Color.fromRGBO(138, 138, 142, 1)),
-                                contentPadding: EdgeInsets.only(top:8,left: 8),
-                                border: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromRGBO(223, 223, 223, 1))),
+                                hintStyle: SimpleTextStyle(
+                                    size: 19,
+                                    color: Color.fromRGBO(138, 138, 142, 1)),
+                                contentPadding:
+                                    EdgeInsets.only(top: 8, left: 8),
+                                border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromRGBO(223, 223, 223, 1))),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color:
