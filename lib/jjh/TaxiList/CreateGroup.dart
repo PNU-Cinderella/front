@@ -30,7 +30,7 @@ class _CreateGroupState extends State<CreateGroup> {
   int AM_PM = 0;
   int CurrentHour = 0;
   int CurrentMinute = 0;
-  var _data = '오픈채팅방 링크 붙여주세요';
+  var _data = '';
   var _roomname = '';
 
   final _formKey = GlobalKey<FormState>(); //여기쪽을 위에 함수에 올려서 사용하기
@@ -43,7 +43,9 @@ class _CreateGroupState extends State<CreateGroup> {
       'host': user.host,
       'time': user.time,
       'start': user.start,
-      'dest': user.dest
+      'dest': user.dest,
+      'openChatLink' : _data,
+      'chatName' : _roomname,
     };
     var body = json.encode(data);
     http.Response res = await http.post(
@@ -752,7 +754,7 @@ class _CreateGroupState extends State<CreateGroup> {
                         borderRadius: BorderRadius.circular(15)),
                     child: Center(child:
                     //  Text(_data)
-                        TextField(controller: TextEditingController(text:_data),textAlign: TextAlign.center, decoration: InputDecoration(contentPadding: EdgeInsets.zero,hintText: "오픈채팅방 링크 붙여넣어",hintStyle: TextStyle(fontSize: 20,color: Color.fromRGBO(132, 127, 127, 1),fontWeight: FontWeight.w500,),border: InputBorder.none, focusedBorder: InputBorder.none, ),keyboardType: TextInputType.emailAddress,)
+                        TextField(controller: TextEditingController(text:_data),textAlign: TextAlign.center, decoration: InputDecoration(contentPadding: EdgeInsets.zero,hintText: "오픈채팅방 링크 붙여넣어주세요",hintStyle: TextStyle(fontSize: 15,color: Color.fromRGBO(132, 127, 127, 1),fontWeight: FontWeight.w500,),border: InputBorder.none, focusedBorder: InputBorder.none, ),keyboardType: TextInputType.emailAddress,)
                         ),
                   ),
                   SizedBox(
@@ -815,7 +817,8 @@ class _CreateGroupState extends State<CreateGroup> {
                         user.time >= 1440
                             ? user.time = user.time % 1440
                             : user.time = user.time;
-                        print(user.time);
+                        // print(user.time);
+                        // print(_roomname);
                         save();
                         Navigator.pop(context);
                       },
