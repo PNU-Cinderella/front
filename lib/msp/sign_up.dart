@@ -11,14 +11,21 @@ const SignUpURL = "http://10.0.2.2:8080/signup";
 const ChatRoomURL = "http://10.0.2.2:8080/chatroom";
 
 Future createData(String nickName, String gender, BuildContext context) async {
-  if(nickName == '')
-    {
-      MakeToast(msg: "닉네임을 입력해주세요!");
-    }
-  if(gender == '')
+  if (nickName == '' && gender == '')
+  {
+    MakeToast(msg: "닉네임과 성별을 선택해주세요!");
+    throw Exception('닉네임과 성별 오류');
+  }
+  else if(gender == '')
     {
       MakeToast(msg: "성별을 선택해주세요!");
+      throw Exception('성별 오류');
     }
+  else if (nickName == '')
+  {
+    MakeToast(msg: "닉네임을 입력해주세요!");
+    throw Exception('닉네임 오류');
+  }
   else
     {
       Map data = {'name': nickName, 'gender': gender};
@@ -33,8 +40,10 @@ Future createData(String nickName, String gender, BuildContext context) async {
       print(response.statusCode);
       if (response.statusCode == 201 || response.statusCode == 200) {
         showNotification();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
         MakeToast(msg: "SetData Success!");
-      } else {
+      } else
+      {
         MakeToast(msg: nickName + " " + gender + " Failed!");
         throw Exception('Failed to create Data.');
       }
@@ -60,15 +69,15 @@ class GenderButton extends StatefulWidget
     this.buttonText = buttonText;
     if(style != null)
       {
-        buttonStyle = style!;
+        buttonStyle = style;
       }
     if(function != null)
       {
-        buttonFunction = function!;
+        buttonFunction = function;
       }
     if(textStyle != null)
       {
-        this.textStyle = textStyle!;
+        this.textStyle = textStyle;
       }
   }
 
@@ -87,6 +96,7 @@ class _GenderButtonState extends State<GenderButton> {
       height: GetRealHeight(pixel: widget.height, context: context),
       child: ElevatedButton(
         onPressed: () {
+          widget.buttonFunction;
           setState(() {
             isSelected = !isSelected;
             widget.buttonFunction;
@@ -113,7 +123,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
 
   String userName = "";
-  String gender = "";
+  String gender = "MALE";
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +200,6 @@ class _SignUpState extends State<SignUp> {
                 child: OutlinedButton(
                   onPressed: () {
                     createData(userName,gender,context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorDarkGray,

@@ -12,7 +12,7 @@ void main() async {
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Cinderella_front",
-        home: ModalTest()),
+        home: LoginPage()),
   );
   initNotification();
   if (await Permission.notification.request().isGranted) {
