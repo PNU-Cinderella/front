@@ -5,13 +5,14 @@ import 'package:project_cinderella_test3/msp/taxi_history.dart';
 import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/test/testfunction.dart';
 
 void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Cinderella_front",
-        home: LoginPage()),
+        home: ModalTest()),
   );
   initNotification();
   if (await Permission.notification.request().isGranted) {

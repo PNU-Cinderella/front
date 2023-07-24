@@ -49,6 +49,7 @@ dependencies:
   fluttertoast: ^8.2.2
   google_maps_flutter: ^2.2.8
   webview_cookie_manager: ^2.0.6
+  modal_bottom_sheet: ^2.1.2
 
 
 dev_dependencies:

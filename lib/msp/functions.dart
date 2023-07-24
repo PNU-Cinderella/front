@@ -257,7 +257,6 @@ showNotification() async {
     presentSound: true,
   );
 
-  // 알림 id, 제목, 내용 맘대로 채우기
   notifications.show(
       1,
       '신데렐라',
@@ -265,4 +264,20 @@ showNotification() async {
       NotificationDetails(android: androidDetails, iOS: iosDetails)
   );
   print(notifications);
+}
+
+void CallSnackBar(BuildContext context, {String text = '택시팟에 참가했어요!'})
+{
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.only(bottom: 700),
+        content: Text(text),
+        duration: Duration(seconds: 5),
+        action: SnackBarAction(
+          label: '확인',
+          onPressed: (){},
+        ),
+      )
+  );
 }

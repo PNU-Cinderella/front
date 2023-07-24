@@ -5,6 +5,8 @@ import 'package:project_cinderella_test3/msp/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/Classes.dart';
 
+GlobalKey<TaxiHistoryListState> Key_TaxiHistoryListSate = GlobalKey();
+
 class TaxiHistory extends StatefulWidget {
 
   @override
@@ -137,6 +139,7 @@ class IconTaxiCurrent extends StatelessWidget{
 
 class TaxiHistorySearchBar extends StatefulWidget{
 
+  TaxiHistorySearchBar({required Key key}) : super(key: key);
   @override
   State<TaxiHistorySearchBar> createState() => _TaxiHistorySearchBarState();
 }
@@ -158,14 +161,14 @@ class _TaxiHistorySearchBarState extends State<TaxiHistorySearchBar> {
           Image.asset("assets/images/icon_search.png"),
           RealSizedBox(width: 240, height:0),
           Text("최신순", style: textstyleBoxDescr,),
-        BasicButtonWithIcon(width: 30, height: 30,
-            icon: Image.asset("assets/images/icon_down_arrow.png"),
-          func: (){
-            TaxiHistoryListState state = context.findAncestorStateOfType<TaxiHistoryListState>()!;
-            state.SortTaxiHistory(state.sortAsending);
-          },
-        ),
-          // Image.asset("assets/images/icon_down_arrow.png"),
+          GestureDetector(
+            onTap: (){
+              // print(Key_TaxiHistoryListSate.currentState);
+              // Key_TaxiHistoryListSate.currentState!.sortAsending;
+              // TaxiHistoryListState.of(context).sortAsending;
+            },
+            child: Image.asset("assets/images/icon_down_arrow.png"),
+          ),
         ],
       ),
       decoration: BoxDecoration(
@@ -265,6 +268,9 @@ class TaxiHistoryListState extends State<TaxiHistoryList> {
 
   bool sortAsending = true;
 
+  static TaxiHistoryListState of(BuildContext context) =>
+      context.findAncestorStateOfType<TaxiHistoryListState>()!;
+
   final List<Map<String, dynamic>> taxiHistory = [
     {'date': '2023.03.31', 'routeTitle': '부산은행-명륜역', 'peopleCount': 4,'historyState': '정산완료','time' : '02:30', 'route' : '부산은행-명륜역-교대역-서면역-송정역'},
     {'date': '2023.02.11', 'routeTitle': '부산대정문-온천역', 'peopleCount': 2,'historyState': '정산완료','time' : '17:40', 'route' : '부산대정문-온천역-롯데백화점'},
@@ -338,7 +344,7 @@ class _TaxiHistoryState extends State<TaxiHistory> {
                 status: "참여중이에요",
                 subStatus: "부산은행에서 2:30 출발예정",
               ),
-              TaxiHistorySearchBar(),
+              TaxiHistorySearchBar(key : Key_TaxiHistoryListSate),
               RealSizedBox(width: 0, height: 11,),
               TaxiHistoryList(),
             ],
