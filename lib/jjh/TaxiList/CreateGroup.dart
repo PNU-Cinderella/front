@@ -740,7 +740,7 @@ class _CreateGroupState extends State<CreateGroup> {
                       IconButton(
                           onPressed: () {
                             setState(() {
-                              _data = "오픈채팅방 링크 붙여넣어주세요";
+                              _data = "";
                             });
                           },
                           icon: const Icon(Icons.close))
