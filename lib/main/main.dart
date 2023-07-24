@@ -7,21 +7,21 @@ import 'package:project_cinderella_test3/msp/taxi_main.dart';
 import 'package:flutter/material.dart';
 import 'package:project_cinderella_test3/msp/functions.dart';
 
-// void main() {
-//   runApp(
-//     MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         title: "Cinderella_front",
-//         home: LoginPage()),
-//   );
-//   initNotification();
-// }
 void main() {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Cinderella_front",
-        home: TaxiList()),
+        home: LoginPage()),
   );
-  // initNotification();
+  initNotification();
 }
+// void main() {
+//   runApp(
+//     MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         title: "Cinderella_front",
+//         home: CreateGroup()),
+//   );
+//   // initNotification();
+// }
