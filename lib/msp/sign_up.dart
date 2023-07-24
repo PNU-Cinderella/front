@@ -62,11 +62,8 @@ class GenderButton extends StatefulWidget
   String buttonText = "기본";
   TextStyle textStyle = SimpleTextStyle(size: 14, weight: FontWeight.w400);
 
-  GenderButton({required double width, required double height, ButtonStyle? style, void Function()? function, required String buttonText, TextStyle? textStyle})
+  GenderButton({required double this.width, required double this.height, ButtonStyle? style, void Function()? function, required String this.buttonText, TextStyle? textStyle})
   {
-    this.width = width;
-    this.height = height;
-    this.buttonText = buttonText;
     if(style != null)
       {
         buttonStyle = style;
@@ -96,7 +93,6 @@ class _GenderButtonState extends State<GenderButton> {
       height: GetRealHeight(pixel: widget.height, context: context),
       child: ElevatedButton(
         onPressed: () {
-          widget.buttonFunction;
           setState(() {
             isSelected = !isSelected;
             widget.buttonFunction;
