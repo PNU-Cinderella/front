@@ -15,6 +15,8 @@ import '../../roomparse.dart';
 // import 'roomparse.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+
+
 Future<List> fetchInfo(url) async {
   /// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
   final jsonString = await http.get(Uri.parse(url));
@@ -64,6 +66,8 @@ class _TaxiListState extends State<TaxiList> {
   //   });
   // }
   /// 네비게이션 바 끝  //////
+  /// 
+  
 
   var button_not_selected = Color.fromRGBO(118, 118, 128, 0.12);
   var button_selected = Colors.white;
@@ -71,7 +75,7 @@ class _TaxiListState extends State<TaxiList> {
   var button_station = Color.fromRGBO(118, 118, 128, 0.12);
   var button_front = Color.fromRGBO(118, 118, 128, 0.12);
   String url = "http://10.0.2.2:8080/chatlist/bank";
-  late FToast fToast;
+  late FToast fToast; //// 플러터 토스트 ////
 
   @override
   dynamic jsonList;
@@ -81,8 +85,8 @@ class _TaxiListState extends State<TaxiList> {
   void initState() {
     super.initState();
     jsonList = fetchInfo(url);
-    fToast = FToast();
-    fToast.init(context);
+    fToast = FToast(); //// 플러터 토스트 ////
+    fToast.init(context); //// 플러터 토스트 ////
   }
 
   void _bankurl() {
@@ -126,7 +130,9 @@ class _TaxiListState extends State<TaxiList> {
         );
       },
       toastDuration: Duration(milliseconds: 3000),
-      child: (Container(
+      child: (
+        //// 만들어졌을때 컨테이너 ////
+        Container(
         width: GetRealWidth(pixel: 354, context: context),
         height: GetRealHeight(pixel: 47, context: context),
         // padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 40.0),
@@ -153,7 +159,7 @@ class _TaxiListState extends State<TaxiList> {
             ),
             SizedBox(width: GetRealWidth(pixel: 10, context: context)),
             Text(
-              "택시팟을 생성했어요",
+              "택시팟을 생성했어요.",
               style: SimpleTextStyle(
                   size: 16,
                   color: Color.fromRGBO(245, 245, 245, 1),
@@ -175,24 +181,63 @@ class _TaxiListState extends State<TaxiList> {
             )
           ],
         ),
-      )),
-      //   Material(
-      //     color: Colors.white,
-      //     child: Row(
-      //       mainAxisSize: MainAxisSize.min,
-      //       children: [
-      //         Icon(Icons.face),
-      //         Text(
-      //           "Press and hold to send Alert!",
-      //           style: TextStyle(color: Colors.black87, fontSize: 16.0),
-      //         )
-      //       ],
-      //     ),
+      )
+      //// 이거 다른거임 ////
+      // Container(
+      //   width: GetRealWidth(pixel: 354, context: context),
+      //   height: GetRealHeight(pixel: 47, context: context),
+      //   decoration: BoxDecoration(
+      //     borderRadius: BorderRadius.circular(10.0),
+      //     color: Color.fromRGBO(207, 4, 4, 0.8),
       //   ),
-      //   gravity: ToastGravity.CENTER,
-      // );
+      //   child: Row(
+      //     // mainAxisAlignment: MainAxisAlignment.center,
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: [
+      //       SizedBox(
+      //         width: GetRealWidth(pixel: 14, context: context),
+      //       ),
+      //       Image(image: AssetImage("assets/images/TaxiList/xmark_Taxi.png")),
+      //       // Container(
+      //       //   width: 22,
+      //       //   height: 22,
+      //       //   decoration: BoxDecoration(
+      //       //       borderRadius: BorderRadius.circular(22), color: Colors.white),
+      //       //   child: Center(
+      //       //     child:
+      //       //         Image(image: AssetImage("assets/images/TaxiList/xmark_Taxi.png")),
+      //       //   ),
+      //       // ),
+      //       SizedBox(width: GetRealWidth(pixel: 10, context: context)),
+      //       Text(
+      //         "이미 참여 중인 택시팟이 있어요.",
+      //         style: SimpleTextStyle(
+      //             size: 16,
+      //             color: Color.fromRGBO(245, 245, 245, 1),
+      //             weight: FontWeight.w500),
+      //       ),
+      //       SizedBox(
+      //         width: GetRealWidth(pixel: 48, context: context),
+      //       ),
+      //       TextButton(
+      //         onPressed: () {
+      //           fToast.removeCustomToast();
+      //           // print("눌림");
+      //         },
+      //         child: Text(
+      //           "확인",
+      //           style: SimpleTextStyle(
+      //               size: 16, color: Colors.white, weight: FontWeight.w600),
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      // )
+      ///// 여까지 ////
+      ),
     );
   }
+  
 
   Widget build(BuildContext context) {
     return Scaffold(
