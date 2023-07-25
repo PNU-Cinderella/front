@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:project_cinderella_test3/msp/Classes.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/Classes.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
 void main() async{
@@ -30,8 +30,14 @@ class BottomSheetApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('Bottom Sheet Sample')),
-        body: const JoinModalFirst(),
+        body: BasicButton(width: 100, height: 50, func: (){
+          showModalBottomSheet<void>(
+              context: context,
+              builder: (BuildContext context) => JoinModal()
+        );
+        }
       ),
+    ),
     );
   }
 }
@@ -41,7 +47,7 @@ class JoinButton extends StatelessWidget
   BuildContext? myContext;
   double? myWidth;
   double? myHeight;
-  Widget? myWidget;
+  int myIndex = 0;
   ButtonStyle? myButtonStyle = OutlinedButton.styleFrom(
       backgroundColor: Color(0xff222222),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -50,13 +56,13 @@ class JoinButton extends StatelessWidget
   TextStyle myTextStyle = SimpleTextStyle(size: 17, color: Colors.white, weight: FontWeight.w500);
   late String myText;
 
-  JoinButton({required BuildContext context, required double width,  required double height, required String text, required Widget widget, ButtonStyle? buttonStyle, TextStyle? textStyle}){
+  JoinButton({required BuildContext context, required double width,  required double height, required String text, required int index, ButtonStyle? buttonStyle, TextStyle? textStyle}){
     myContext = context;
     myWidth = width;
     myHeight = height;
     myText = text;
-    myWidget = widget;
-
+    myIndex = index;
+    print(myIndex);
     if(buttonStyle != null)
       {
         myButtonStyle = buttonStyle;
@@ -76,9 +82,8 @@ class JoinButton extends StatelessWidget
       child: OutlinedButton(
         onPressed: ()
         {
-          showNotification();
-          MakeToast(msg: "Button Pressed.");
-          Navigator.push(context, ModalBottomSheetRoute(builder: (context) => myWidget!, isScrollControlled: false));
+          final JoinModalState state = context.findAncestorStateOfType<JoinModalState>()!;
+          state.SetIndex(myIndex);
         },
         style: myButtonStyle,
         child: Text(myText, style: myTextStyle,),
@@ -88,110 +93,161 @@ class JoinButton extends StatelessWidget
 
 }
 
+class JoinModal extends StatefulWidget
+{
+  @override
+  State<JoinModal> createState() => JoinModalState();
+}
+
+class JoinModalState extends State<JoinModal>
+{
+  int _index = 0;
+  final List<Widget> _widgetOptions = <Widget>[
+    JoinModalFirst(),
+    JoinModalSecond(),
+    JoinModalThird(),
+    JoinModalFourth(),
+  ];
+
+  void SetIndex(int index)
+  {
+    setState(() {
+      _index = index;
+        _index = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body:
+        _widgetOptions.elementAt(_index),
+      )
+    );
+  }
+}
+
+// showModalBottomSheet<void>(
+// context: context,
+// builder: (BuildContext context) {
+// return Container(
 
 class JoinModalFirst extends StatelessWidget {
   const JoinModalFirst({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: const Text('showModalBottomSheet'),
-        onPressed: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                // height: GetRealHeight(pixel: 1575, context: context),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  color: colorWhite,
-                ),
-                child: Container(
-                  height: GetRealHeight(pixel: 1575, context: context),
-                  child: Column(
+    return Container(
+      // height: GetRealHeight(pixel: 1575, context: context),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: colorWhite,
+      ),
+      child: Container(
+        height: GetRealHeight(pixel: 1575, context: context),
+        child: Column(
+          children: [
+            Container(
+              child: Column(
+                children: <Widget>[
+                  Column(
                     children: [
                       Container(
-                        child: Column(
-                          children: <Widget>[
-                            Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 16, context: context), GetRealHeight(pixel: 22, context: context), 0, 0),
-                                  child:
-                                  Row(
-                                      children: [
-                                        Image.asset("assets/images/JoinModal/icon_left.png"),
-                                        SizedBox(width: GetRealWidth(pixel: 130, context: context),),
-                                        Text("참여하기", style: textstyleBoxHeader,),
-                                        SizedBox(width: GetRealWidth(pixel: 122, context: context),),
-                                        Image.asset("assets/images/JoinModal/icon_x.png"),
-                                      ]
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 39, context: context), GetRealHeight(pixel: 50, context: context), 0, 0),
-                                  child:
-                                  Row(
-                                      children: [
-                                        Text("부산은행 앞", style: SimpleTextStyle(size: 19, weight: FontWeight.w600, color: colorDarkBlue),),
-                                        SizedBox(width: GetRealWidth(pixel: 113, context: context),),
-                                        Text("am 02시 30분", style: SimpleTextStyle(size: 19, weight: FontWeight.w600),),
-                                      ]
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 38, context: context), GetRealHeight(pixel: 37, context: context), 0, 0),
-                                  child:
-                                  Row(
-                                      children: [
-                                        Text("동승자의 경유지를 확인해주세요", style: SimpleTextStyle(size: 17, weight: FontWeight.w600),),
-                                      ]
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(GetRealWidth(pixel: 37, context: context), GetRealHeight(pixel: 30, context: context), 0, 0),
-                                  child:
-                                  Column(
-                                    children: [
-                                      Row(
-                                          children: [
-                                            Text("1   명륜역", style: SimpleTextStyle(size: 17),),
-                                          ]
-                                      ),
-                                      RealSizedBox(width: 0, height: 25),
-                                      Row(
-                                          children: [
-                                            Text("2   명륜동 황금손한방병원", style: SimpleTextStyle(size: 17),),
-                                          ]
-                                      ),
-                                      RealSizedBox(width: 0, height: 25),
-                                      Row(
-                                          children: [
-                                            Text("3   부곡동 거제한양아파트", style: SimpleTextStyle(size: 17),),
-                                          ]
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                        margin: EdgeInsets.fromLTRB(
+                            GetRealWidth(pixel: 16, context: context),
+                            GetRealHeight(pixel: 22, context: context), 0, 0),
+                        child:
+                        Row(
+                            children: [
+                              GestureDetector(
+                                child: Image.asset(
+                                    "assets/images/JoinModal/icon_left.png"),
+                              ),
+                              SizedBox(width: GetRealWidth(
+                                  pixel: 130, context: context),),
+                              Text("참여하기", style: textstyleBoxHeader,),
+                              SizedBox(width: GetRealWidth(
+                                  pixel: 122, context: context),),
+                              GestureDetector(
+                                child: Image.asset(
+                                    "assets/images/JoinModal/icon_x.png"),
+                              ),
+
+                            ]
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(
+                            GetRealWidth(pixel: 39, context: context),
+                            GetRealHeight(pixel: 50, context: context), 0, 0),
+                        child:
+                        Row(
+                            children: [
+                              Text("부산은행 앞", style: SimpleTextStyle(size: 19,
+                                  weight: FontWeight.w600,
+                                  color: colorDarkBlue),),
+                              SizedBox(width: GetRealWidth(
+                                  pixel: 113, context: context),),
+                              Text("am 02시 30분", style: SimpleTextStyle(
+                                  size: 19, weight: FontWeight.w600),),
+                            ]
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(
+                            GetRealWidth(pixel: 38, context: context),
+                            GetRealHeight(pixel: 37, context: context), 0, 0),
+                        child:
+                        Row(
+                            children: [
+                              Text("동승자의 경유지를 확인해주세요", style: SimpleTextStyle(
+                                  size: 17, weight: FontWeight.w600),),
+                            ]
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(
+                            GetRealWidth(pixel: 37, context: context),
+                            GetRealHeight(pixel: 30, context: context), 0, 0),
+                        child:
+                        Column(
+                          children: [
+                            Row(
+                                children: [
+                                  Text("1   명륜역",
+                                    style: SimpleTextStyle(size: 17),),
+                                ]
+                            ),
+                            RealSizedBox(width: 0, height: 25),
+                            Row(
+                                children: [
+                                  Text("2   명륜동 황금손한방병원",
+                                    style: SimpleTextStyle(size: 17),),
+                                ]
+                            ),
+                            RealSizedBox(width: 0, height: 25),
+                            Row(
+                                children: [
+                                  Text("3   부곡동 거제한양아파트",
+                                    style: SimpleTextStyle(size: 17),),
+                                ]
                             ),
                           ],
                         ),
                       ),
-                      RealSizedBox(width: 0, height: 30),
-                      JoinButton(context: context,
-                          width: GetRealWidth(pixel: 310, context: context),
-                          height: GetRealHeight(pixel: 47, context: context),
-                          text: "참여하기",
-                          widget: JoinModalSecond())
                     ],
                   ),
-                ),
-              );
-            },
-          );
-        },
+                ],
+              ),
+            ),
+            RealSizedBox(width: 0, height: 30),
+
+
+          ],
+        ),
       ),
     );
   }
@@ -261,7 +317,7 @@ class JoinModalSecond extends StatelessWidget {
                   child:
                   Row(
                       children: [
-                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "이전", widget: JoinModalFirst(),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "이전", index: 1,
                           buttonStyle: OutlinedButton.styleFrom(
                               backgroundColor: Color(0xffF5F5F5),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -270,7 +326,7 @@ class JoinModalSecond extends StatelessWidget {
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
                         RealSizedBox(width: 103, height: 0),
-                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalThird())
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", index: 2,)
                       ]
                   ),
                 ),
@@ -385,7 +441,7 @@ class JoinModalThird extends StatelessWidget {
                   child:
                   Row(
                       children: [
-                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "이전", widget: JoinModalFirst(),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "이전", index: 0,
                           buttonStyle: OutlinedButton.styleFrom(
                               backgroundColor: Color(0xffF5F5F5),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -394,7 +450,7 @@ class JoinModalThird extends StatelessWidget {
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
                         RealSizedBox(width: 103, height: 0),
-                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", widget: JoinModalFourth())
+                        JoinButton(context: context, width: GetRealWidth(pixel: 126, context: context), height: GetRealHeight(pixel: 47, context: context), text: "다음", index: 3)
                       ]
                   ),
                 ),
@@ -460,7 +516,7 @@ class JoinModalFourth extends StatelessWidget {
                   child:
                   Column(
                       children: [
-                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "카카오 오픈채팅방 가기", widget: JoinModalFirst(),
+                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "카카오 오픈채팅방 가기", index: 0,
                           buttonStyle: OutlinedButton.styleFrom(
                               backgroundColor: Color(0xffF5F5F5),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -469,7 +525,7 @@ class JoinModalFourth extends StatelessWidget {
                           textStyle: SimpleTextStyle(size: 17, color: Colors.black, weight: FontWeight.w500),
                         ),
                         RealSizedBox(width: 0, height: 13),
-                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "완료", widget: JoinModalThird())
+                        JoinButton(context: context, width: GetRealWidth(pixel: 310, context: context), height: GetRealHeight(pixel: 47, context: context), text: "완료", index: 2)
                       ]
                   ),
                 ),

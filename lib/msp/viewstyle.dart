@@ -1,4 +1,4 @@
-import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;

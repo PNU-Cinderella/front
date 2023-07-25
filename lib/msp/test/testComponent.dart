@@ -128,9 +128,11 @@ class _SimpleCheckboxState extends State<SimpleCheckbox> {
 //     throw Exception();
 //   }
 // }
+
+
 /// Flutter code sample for [DropdownButton].
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+const List<String> list = <String>['자취', '통학', '기숙사', '기타'];
 
 class DropdownButtonApp extends StatelessWidget {
   const DropdownButtonApp({super.key});

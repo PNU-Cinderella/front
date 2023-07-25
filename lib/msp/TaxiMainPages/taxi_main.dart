@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
-import 'package:project_cinderella_test3/msp/PageProfileEdit.dart';
-import 'package:project_cinderella_test3/msp/blockList.dart';
-import 'package:project_cinderella_test3/msp/customerFAQ.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
-import 'package:project_cinderella_test3/msp/serviceQuit.dart';
-import 'package:project_cinderella_test3/msp/taxi_mypage.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/PageProfileEdit.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/blockList.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/customerFAQ.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/serviceQuit.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_mypage.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
-import 'package:project_cinderella_test3/msp/taxi_history.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_history.dart';
 
 
 

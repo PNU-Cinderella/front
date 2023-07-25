@@ -3,11 +3,11 @@ import 'dart:convert';
 // import 'package:project_cinderella_test3/roomparse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
-import 'package:project_cinderella_test3/msp/joinModal.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/joinModal.dart';
 
 // import 'MakeList.dart';
-import '../../msp/taxi_history.dart';
+import '../../msp/TaxiMainPages/taxi_history.dart';
 import 'CreateGroup.dart';
 import 'MakeList.dart';
 import 'package:http/http.dart' as http;

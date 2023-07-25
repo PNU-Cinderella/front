@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -101,6 +102,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
             }
             else if(request.url == "http://10.0.2.2.nip.io:8080/login")
             {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}
+            else if(request.url == "http://10.0.2.2.nip.io:8080/success")
+            {Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()));}
           return NavigationDecision.navigate;
         },
       ),

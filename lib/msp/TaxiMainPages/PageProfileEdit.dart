@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_cinderella_test3/msp/Classes.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/Classes.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/test/testComponent.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
@@ -38,6 +39,19 @@ class BoxRequiredAttribute extends StatelessWidget
                 height: GetRealHeight(pixel: 22, context: context),
                 child: Text('닉네임', style: SimpleTextStyle(size: 22, weight: FontWeight.w500),)
               ),
+              Container(
+                margin: RealLTRB(left: 16, top: 21, right: 0, bottom: 0, context: context),
+                width: GetRealWidth(pixel: 120, context: context),
+                child: TextField(
+                  onSubmitted: (text){
+                  },
+                  style: SimpleTextStyle(size: 20, weight: FontWeight.w600),
+                  decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder()
+                  ),
+                ),
+              ),
+              BasicButton(width: 100, height: 50, text: '중복확인', func: (){print('중복확인 함수');},)
             ],
           ),
           Row(
@@ -48,6 +62,8 @@ class BoxRequiredAttribute extends StatelessWidget
                   height: GetRealHeight(pixel: 22, context: context),
                   child: Text('성별', style: SimpleTextStyle(size: 22, weight: FontWeight.w500),)
               ),
+              BasicButton(width: 60, height: 30, text: '남성', textStyle: SimpleTextStyle(size: 17.5, weight: FontWeight.w400),),
+              BasicButton(width: 60, height: 30, text: '여성', textStyle: SimpleTextStyle(size: 17.5, weight: FontWeight.w400),),
             ],
           ),
         ],
@@ -60,6 +76,9 @@ class BoxRequiredAttribute extends StatelessWidget
   double myHeight = 290;
 
 
+   List<String> ageList = <String>['2004', '2003', '2002', '2001','2000','1999','1998','1997' ];
+   List<String> residenceList = <String>['자취', '통학', '기숙사', '기타'];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,17 +89,13 @@ class BoxRequiredAttribute extends StatelessWidget
         children: [
           Row(
             children: [
-              Row(
-                children: [
-                  Container(
-                    margin: RealLTRB(left: 28, top: 26, right: 0, bottom: 0, context: context),
-                    width: GetRealWidth(pixel: 120, context: context),
-                    height: GetRealHeight(pixel: 22, context: context),
-                    child: Text('연령', style: SimpleTextStyle(size: 22, weight: FontWeight.w500),)
-                  ),
-                  DropdownButtonExample()
-                ],
+              Container(
+                margin: RealLTRB(left: 28, top: 26, right: 0, bottom: 0, context: context),
+                width: GetRealWidth(pixel: 120, context: context),
+                height: GetRealHeight(pixel: 22, context: context),
+                child: Text('연령', style: SimpleTextStyle(size: 22, weight: FontWeight.w500),)
               ),
+              DropdownButtonExample(),
             ],
           ),
           Row(
@@ -91,6 +106,7 @@ class BoxRequiredAttribute extends StatelessWidget
                   height: GetRealHeight(pixel: 22, context: context),
                   child: Text('거주', style: SimpleTextStyle(size: 22, weight: FontWeight.w500),)
               ),
+              DropdownButtonExample(),
             ],
           ),
         ],
@@ -120,13 +136,45 @@ class _PageProfileEditState extends State<PageProfileEdit> {
           child: Column(
             children: [
               RealSizedBox(width: 0, height: GetStatusBarHeight(context: context)),
-              Container(
-                alignment: Alignment.topCenter,
-                height: GetRealHeight(pixel: 70, context: context),
-                child: Container(
+              Row(
+                children: [
+                  Container(
+                  alignment: Alignment.topRight,
+                  height: GetRealHeight(pixel: 70, context: context),
+                  child: Container(
                     margin: RealLTRB(left: 0, top: 33, right: 0, bottom: 0, context: context),
-                    child: Text("프로필 수정", style: SimpleTextStyle(size: 22, weight: FontWeight.w700))
+                    child: GestureDetector
+                      (
+                      child: Icon(Icons.keyboard_arrow_left),
+                      onTap: (){
+                        print('뒤로가기 실행');
+                        final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
+                        state.SetIndex(2);
+                        },
+                    ),
+                  ),
                 ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: GetRealHeight(pixel: 70, context: context),
+                    child: Container(
+                        margin: RealLTRB(left: 0, top: 33, right: 0, bottom: 0, context: context),
+                        child: Text("프로필 수정", style: SimpleTextStyle(size: 22, weight: FontWeight.w700))
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.topRight,
+                    height: GetRealHeight(pixel: 70, context: context),
+                    child: Container(
+                      margin: RealLTRB(left: 0, top: 33, right: 0, bottom: 0, context: context),
+                      child: GestureDetector
+                        (
+                        child: Text("저장", style: SimpleTextStyle(size: 20, weight: FontWeight.w600)),
+                        onTap: (){print('저장하는 함수 실행');},
+                      ),
+                    ),
+                  ),
+                ],
               ),
               BoxRequiredAttribute(),
               BoxOptionalAttribute(),

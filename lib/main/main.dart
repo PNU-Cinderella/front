@@ -2,10 +2,10 @@ import 'package:project_cinderella_test3/jjh/TaxiList/CreateGroup.dart';
 import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/sign_up.dart';
-import 'package:project_cinderella_test3/msp/taxi_history.dart';
-import 'package:project_cinderella_test3/msp/taxi_main.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_history.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_main.dart';
 import 'package:flutter/material.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
 
 void main() {
   runApp(

@@ -24,3 +24,17 @@ async {
   print(response.statusCode);
   func;
 }
+RequestHttpDelete({required BuildContext context, required Map dataSet, required String URL, required void Function() func})
+async {
+  Map data = dataSet;
+  final response = await http.delete(
+    Uri.parse(URL),
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie' : cookieRecieved,
+    },
+    body: json.encode(data),
+  );
+  print(response.statusCode);
+  func;
+}
