@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_cinderella_test3/msp/Classes.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/Classes.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
@@ -65,6 +65,7 @@ class _ServiceQuitPageState extends State<ServiceQuitPage> {
               ),
                 textStyle: SimpleTextStyle(size: 20, weight: FontWeight.w500, color: Color(0xFFF6F5F5)),
                 func: (){
+                print('탈퇴하는 함수');
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()) );
                 },
               )

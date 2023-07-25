@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_cinderella_test3/msp/Classes.dart';
-import 'package:project_cinderella_test3/msp/functions.dart';
-import 'package:project_cinderella_test3/msp/HttpHelper.dart';
+import 'package:project_cinderella_test3/msp/Components/Classes.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/Http/HttpHelper.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
 class BlockBlockUserNameSearch extends StatefulWidget
@@ -151,7 +151,7 @@ class _BlockListPageState extends State<BlockListPage> {
               ),
               BasicButton(width: 100, height: 50,text: '차단해제', func: (){
                 print(userEmail);
-                RequestHttpPut(context: context,
+                RequestHttpDelete(context: context,
                     dataSet : {'blockEmail' : userEmail },
                     URL: URL_USER_UNBLOCK,
                     func: (){
