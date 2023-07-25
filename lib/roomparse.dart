@@ -20,7 +20,7 @@ class roomMember {
 
   factory roomMember.fromJson(Map<String, dynamic> json) {
     return roomMember(
-      host: json['host'],
+      host: json['chatName'], // 주의요
       start: json['start'],
       dest: json['dest'],
       time: json['time'],
