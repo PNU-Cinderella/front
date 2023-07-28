@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:project_cinderella_test3/msp/functions.dart';
 
+import '../../msp/login.dart';
 import '../../msp/taxi_main.dart';
 import 'package:http/http.dart' as http;
 import 'am_pm.dart';
@@ -51,7 +52,7 @@ class _CreateGroupState extends State<CreateGroup> {
     http.Response res = await http.post(
       // 나중에 여기 주석처리 해제해서 사용.
       url,
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json','Cookie' : cookieRecieved},
       body: body,
     );
     print(body);
