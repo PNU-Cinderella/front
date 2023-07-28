@@ -7,7 +7,8 @@ import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:project_cinderella_test3/msp/TaxiMainPages/joinModal.dart';
 
 // import 'MakeList.dart';
-import '../../msp/TaxiMainPages/taxi_history.dart';
+import '../../msp/login.dart';
+import '../../msp/taxi_history.dart';
 import 'CreateGroup.dart';
 import 'MakeList.dart';
 import 'package:http/http.dart' as http;
@@ -18,8 +19,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 
 Future<List> fetchInfo(url) async {
+  
   /// 이곳은 네트워크 통신을 하여 json을 가져오는 곳입니다 ///////
-  final jsonString = await http.get(Uri.parse(url));
+  final jsonString = await http.get(Uri.parse(url),headers: {'Content-Type': 'application/json',
+      'Cookie' : cookieRecieved},);
   if (jsonString.statusCode == 200) {
     //만약 서버가 ok응답을 반환하면, json을 파싱합니다
     // print('백엔드쪽에서 응답 완료.');
