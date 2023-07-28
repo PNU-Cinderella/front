@@ -123,7 +123,7 @@ class Makelist extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(
-                  "${userlists.host} (${userlists.num_of_people}/4)",
+                  "${userlists.chatName} (${userlists.num_of_people}/4)",
                   style: TextStyle(
                       fontSize: 18,
                       fontFamily: "Pretendard",
