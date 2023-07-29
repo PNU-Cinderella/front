@@ -142,7 +142,7 @@ class _BlockListPageState extends State<BlockListPage> {
           ),
               BasicButton(width: 100, height: 50,text: '차단', func: (){
                 print(userEmail);
-                RequestHttpPut(context: context,
+                RequestHttpPut(
                     dataSet : {'blockEmail' : userEmail },
                     URL: URL_USER_BLOCK,
                     func: (){
@@ -151,7 +151,7 @@ class _BlockListPageState extends State<BlockListPage> {
               ),
               BasicButton(width: 100, height: 50,text: '차단해제', func: (){
                 print(userEmail);
-                RequestHttpDelete(context: context,
+                RequestHttpDelete(
                     dataSet : {'blockEmail' : userEmail },
                     URL: URL_USER_UNBLOCK,
                     func: (){
