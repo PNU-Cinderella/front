@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 const String URL_USER_BLOCK = 'http://10.0.2.2:8080/addblocklist';
 const String URL_USER_UNBLOCK = 'http://10.0.2.2:8080/removeblocklist';
+const String URL_CHECK_PARTICIPATE = 'http://10.0.2.2:8080/isparticipate';
 
 //url은 "/addblocklist"
 //리퀘스트는 put방식
@@ -47,4 +48,18 @@ async {
   );
   print(response.statusCode);
   func;
+}
+Future<bool> CheckUserParticipate({required String URL})
+async {
+  final response = await http.get(
+    Uri.parse(URL),
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie' : cookieRecieved,
+    },
+  );
+  print(response.statusCode);
+
+  if (response.statusCode == 200) return true;
+  return false;
 }
