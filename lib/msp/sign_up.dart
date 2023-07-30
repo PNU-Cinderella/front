@@ -70,7 +70,7 @@ class GenderButton extends StatefulWidget
       }
     if(function != null)
       {
-        buttonFunction = function;
+        this.buttonFunction = function;
       }
     if(textStyle != null)
       {

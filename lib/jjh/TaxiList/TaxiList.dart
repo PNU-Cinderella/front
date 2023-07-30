@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/Http/HttpHelper.dart';
 import 'package:project_cinderella_test3/msp/TaxiMainPages/joinModal.dart';
 
 // import 'MakeList.dart';
@@ -307,6 +308,7 @@ class _TaxiListState extends State<TaxiList> {
                         child: GestureDetector(
                           // 이게 답이였구나 이걸로 만들면 정렬하기 편할듯
                           onTap: () {
+                            CheckUserParticipate(URL: URL_CHECK_PARTICIPATE);
                             Navigator.push(
                               context,
                               PageRouteBuilder(
