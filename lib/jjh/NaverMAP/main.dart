@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 Future<Position> getCurrentLocation() async {
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high);
-
   return position;
 }
 
@@ -97,7 +96,7 @@ class _NaverMAPTestState extends State<NaverMAPTest> {
                 onMapReady: (controller) {
                   _controller = controller;
                   controller.addOverlay(marker);
-                  controller.addOverlay(NMarker(id: "test", position: NLatLng(35.232525, 129.08307844472995),icon: NOverlayImage.fromAssetImage("assets/images/TaxiList/taxi_2.png")));
+                  controller.addOverlay(NMarker(id: "test", position: NLatLng(35.232525, 129.08307844472995),));
                   controller.addOverlay(NMarker(id: "응애", position: NLatLng(35.23560335286283, 129.08639730711354)));
                   controller.addOverlay(NMarker(id: "응애2", position: NLatLng(35.23274589527866, 129.08644492419526)));
                   // controller.updateCamera(cameraUpdate);

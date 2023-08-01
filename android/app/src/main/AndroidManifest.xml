@@ -8,8 +8,8 @@
         android:name="${applicationName}"
         android:icon="@drawable/app_icon"
        android:usesCleartextTraffic="true">
-       <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyD-IHoh9kUx9qrnJEdY6aIh0GDHxODc9ZQ"/>
+       <!-- <meta-data android:name="com.google.android.geo.API_KEY" -->
+           <!-- android:value="AIzaSyD-IHoh9kUx9qrnJEdY6aIh0GDHxODc9ZQ"/> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
