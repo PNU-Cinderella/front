@@ -582,6 +582,8 @@ class _TaxiListState extends State<TaxiList> {
                               onTap: () {
                                 JoinModalFirst();
                                 print(index);
+                                // snapshot.data[index];
+                                //// 여기에 넣으면 됨 ////
                               },
                               child: Makelist(
                                   snapshot.data[index],

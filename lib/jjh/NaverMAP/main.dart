@@ -1,58 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:geolocator/geolocator.dart';
-
-Future<Position> getCurrentLocation() async {
-  Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high);
-  return position;
-}
-
-Future<Position> _determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
-
-  // Test if location services are enabled.
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    // Location services are not enabled don't continue
-    // accessing the position and request users of the
-    // App to enable the location services.
-    return Future.error('Location services are disabled.');
-  }
-
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      // Permissions are denied, next time you could try
-      // requesting permissions again (this is also where
-      // Android's shouldShowRequestPermissionRationale
-      // returned true. According to Android guidelines
-      // your App should show an explanatory UI now.
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    // Permissions are denied forever, handle appropriately.
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  }
-
-  // When we reach here, permissions are granted and we can
-  // continue accessing the position of the device.
-  return await Geolocator.getCurrentPosition();
-}
+// import 'package:geolocator/geolocator.dart';
+import 'package:project_cinderella_test3/jjh/NaverMAP/Geolocator.dart';
+import 'package:project_cinderella_test3/jjh/taxi_history copy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NaverMapSdk.instance.initialize(clientId: 'qqlw5g439b');
-  runApp(NaverMAPTest());
+  runApp(TaxiHistory());
 }
 
 class NaverMAPTest extends StatefulWidget {
-  const NaverMAPTest({super.key});
+  NaverMAPTest({
+    super.key,
+  });
+  // late double lat = 35.232525;
 
   @override
   State<NaverMAPTest> createState() => _NaverMAPTestState();
@@ -60,21 +22,22 @@ class NaverMAPTest extends StatefulWidget {
 
 class _NaverMAPTestState extends State<NaverMAPTest> {
   @override
+
   late double lat = 35.232525;
   late double long = 129.08307844472995;
   late NCameraUpdate ascancled;
   late NaverMapController _controller;
   String locationMessage = "지금 유저의 위치";
   final cameraUpdate = NCameraUpdate.withParams(
-  target: NLatLng(37.5666102, 126.9783881),
-  bearing: 180,
-);
+    target: NLatLng(37.5666102, 126.9783881),
+    bearing: 180,
+  );
   final cameraUpdate1 = NCameraUpdate.withParams(
-  target: NLatLng(35.232525, 129.08307844472995),
-  bearing: 180,
-);
-  final marker = NMarker(id: "test", position: NLatLng(37.5666102, 126.9783881));
-  
+    target: NLatLng(35.232525, 129.08307844472995),
+    bearing: 180,
+  );
+  final marker =
+      NMarker(id: "test", position: NLatLng(37.5666102, 126.9783881));
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +59,18 @@ class _NaverMAPTestState extends State<NaverMAPTest> {
                 onMapReady: (controller) {
                   _controller = controller;
                   controller.addOverlay(marker);
-                  controller.addOverlay(NMarker(id: "test", position: NLatLng(35.232525, 129.08307844472995),));
-                  controller.addOverlay(NMarker(id: "응애", position: NLatLng(35.23560335286283, 129.08639730711354)));
-                  controller.addOverlay(NMarker(id: "응애2", position: NLatLng(35.23274589527866, 129.08644492419526)));
+                  controller.addOverlay(NMarker(
+                    id: "test",
+                    position: NLatLng(35.232525, 129.08307844472995),
+                  ));
+                  controller.addOverlay(NMarker(
+                      id: "응애",
+                      position:
+                          NLatLng(35.23560335286283, 129.08639730711354)));
+                  controller.addOverlay(NMarker(
+                      id: "응애2",
+                      position:
+                          NLatLng(35.23274589527866, 129.08644492419526)));
                   // controller.updateCamera(cameraUpdate);
                   // controller.updateCamera(ascancled);
                   // print(ascancled);
@@ -108,7 +80,7 @@ class _NaverMAPTestState extends State<NaverMAPTest> {
             ),
             OutlinedButton(
                 onPressed: () {
-                  _determinePosition();
+                  determinePosition();
                 },
                 child: Text("권한 받기")),
             OutlinedButton(
