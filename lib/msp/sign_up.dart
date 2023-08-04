@@ -39,7 +39,6 @@ Future createData(String nickName, String gender, BuildContext context) async {
       );
       print(response.statusCode);
       if (response.statusCode == 201 || response.statusCode == 200) {
-        showNotification();
         Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
         MakeToast(msg: "SetData Success!");
       } else

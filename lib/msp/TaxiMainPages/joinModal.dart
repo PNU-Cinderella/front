@@ -4,6 +4,7 @@ import 'package:project_cinderella_test3/msp/Components/Classes.dart';
 import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 
+
 void main() async{
   runApp(const BottomSheetApp());
   if (await Permission.contacts.request().isGranted) {
@@ -102,7 +103,8 @@ class JoinModal extends StatefulWidget
 class JoinModalState extends State<JoinModal>
 {
   int _index = 0;
-  final List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions =
+  <Widget>[
     JoinModalFirst(),
     JoinModalSecond(),
     JoinModalThird(),
@@ -124,6 +126,7 @@ class JoinModalState extends State<JoinModal>
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body:
+          // showMaterialModalBottomSheet(context: context, builder: builder);
         _widgetOptions.elementAt(_index),
       )
     );

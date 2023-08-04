@@ -37,8 +37,6 @@ class LoginButton extends StatelessWidget {
       child: OutlinedButton.icon(
         onPressed: ()
         {
-          showNotification();
-          MakeToast(msg: "Login Button Pressed.");
           Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewScreen()));
         },
         style: myButtonStyle,

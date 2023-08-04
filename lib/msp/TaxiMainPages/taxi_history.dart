@@ -4,6 +4,7 @@ import 'package:project_cinderella_test3/jjh/TaxiList/TaxiList.dart';
 import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/Components/Classes.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 GlobalKey<TaxiHistoryListState> Key_TaxiHistoryListSate = GlobalKey();
 
@@ -32,7 +33,6 @@ class TaxiStatusBox extends StatelessWidget
   Widget build(BuildContext context)
   {
     return Container(
-      margin: RealLTRB(left: 24.55, top: 11, right: 0, bottom: 0, context: context),
       width: GetRealWidth(pixel: myWidth, context: context),
       height: GetRealHeight(pixel: myHeight, context: context),
       decoration: BoxDecoration(
@@ -96,6 +96,60 @@ class TaxiStatusBox extends StatelessWidget
   }
 
 }
+
+class NaverMAPP extends StatefulWidget {
+  const NaverMAPP({super.key});
+
+  @override
+  State<NaverMAPP> createState() => _NaverMAPPState();
+}
+
+class _NaverMAPPState extends State<NaverMAPP> {
+  //// 변수 추가 ////
+  late double lat = 35.232525;
+  late double long = 129.08307844472995;
+  late NCameraUpdate ascancled;
+  late NaverMapController _controller;
+  String locationMessage = "지금 유저의 위치";
+  final cameraUpdate = NCameraUpdate.withParams(
+    target: NLatLng(37.5666102, 126.9783881),
+    bearing: 180,
+  );
+  final cameraUpdate1 = NCameraUpdate.withParams(
+    target: NLatLng(35.232525, 129.08307844472995),
+    bearing: 180,
+  );
+  final marker =
+  NMarker(id: "test", position: NLatLng(37.5666102, 126.9783881));
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: GetRealWidth(pixel: 350, context: context),
+      height: GetRealHeight(pixel: 190, context: context),
+      padding: RealLTRB(left: 10, top: 0, right: 0, bottom: 0, context: context),
+      child: NaverMap(
+        options: NaverMapViewOptions(
+          initialCameraPosition: NCameraPosition(
+              target: NLatLng(lat, long), zoom: 13, bearing: 0, tilt: 0),
+        ),
+        onMapReady: (controller) {
+          _controller = controller;
+          controller.addOverlay(marker);
+          controller.addOverlay(NMarker(
+            id: "test",
+            position: NLatLng(35.232525, 129.08307844472995),
+          ));
+          controller.addOverlay(NMarker(
+              id: "도착지2", position: NLatLng(35.23274589527866, 129.08644492419526)));
+          print("네이버 맵 로딩됨!");
+        },
+      ),
+    );
+  }
+}
+
 
 class IconTaxiCurrent extends StatelessWidget{
   double myWidth = 0;
@@ -340,9 +394,19 @@ class _TaxiHistoryState extends State<TaxiHistory> {
                 margin: RealLTRB(left: 25, top: 25, right: 0, bottom: 0, context: context),
                 child: Text("탑승 현황", style: SimpleTextStyle(size: 18, weight: FontWeight.w600),),
               ),
-              TaxiStatusBox(
-                status: "참여중이에요",
-                subStatus: "부산은행에서 2:30 출발예정",
+              Container(
+                height: GetRealHeight(pixel: 190, context: context),
+                margin: RealLTRB(left: 24.55, top: 11, right: 0, bottom: 0, context: context),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    TaxiStatusBox(
+                      status: "참여중이에요",
+                      subStatus: "부산은행에서 2:30 출발예정",
+                    ),
+                    NaverMAPP(),
+                  ],
+                ),
               ),
               TaxiHistorySearchBar(key : Key_TaxiHistoryListSate),
               RealSizedBox(width: 0, height: 11,),
