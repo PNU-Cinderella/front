@@ -44,7 +44,7 @@ EdgeInsetsGeometry RealLTRB({required double left, required double top, required
   return EdgeInsets.fromLTRB(GetRealWidth(pixel: left, context: context),GetRealHeight(pixel: top, context: context),GetRealWidth(pixel: right, context: context),GetRealHeight(pixel: bottom, context: context));
 }
 
-TextStyle SimpleTextStyle({required double size, Color color = colorBlack, String family = 'Pretendard', FontWeight weight = FontWeight.w400})
+TextStyle SimpleTextStyle({required double size, Color color = colorBlack, String family = 'Pretendard', FontWeight weight = FontWeight.w400, double lineSpacing = 0})
 {
   return TextStyle(
     color: color,
@@ -52,6 +52,7 @@ TextStyle SimpleTextStyle({required double size, Color color = colorBlack, Strin
     fontFamily: family,
     fontWeight: weight,
     letterSpacing: -0.4,
+    height: lineSpacing,
   );
 }
 

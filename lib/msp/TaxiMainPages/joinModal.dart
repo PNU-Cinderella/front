@@ -34,7 +34,9 @@ class BottomSheetApp extends StatelessWidget {
         body: BasicButton(width: 100, height: 50, func: (){
           showModalBottomSheet<void>(
               context: context,
-              builder: (BuildContext context) => JoinModal()
+              builder: (BuildContext context){
+                return JoinModalFirst();
+              }
         );
         }
       ),
@@ -247,8 +249,6 @@ class JoinModalFirst extends StatelessWidget {
               ),
             ),
             RealSizedBox(width: 0, height: 30),
-
-
           ],
         ),
       ),

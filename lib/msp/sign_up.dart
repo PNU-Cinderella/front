@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 const SignUpURL = "http://10.0.2.2:8080/signup";
 const ChatRoomURL = "http://10.0.2.2:8080/chatroom";
 
+UserActive userActive = new UserActive(userName: "", userGender: "");
+
 Future createData(String nickName, String gender, BuildContext context) async {
   if (nickName == '' && gender == '')
   {
@@ -40,6 +42,8 @@ Future createData(String nickName, String gender, BuildContext context) async {
       print(response.statusCode);
       if (response.statusCode == 201 || response.statusCode == 200) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => TaxiMain()) );
+        userActive.userName = nickName;
+        userActive.userGender = gender;
         MakeToast(msg: "SetData Success!");
       } else
       {

@@ -62,6 +62,7 @@ class TaxiMainState extends State<TaxiMain>
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body:
         _widgetOptions.elementAt(_selectedIndex),
 

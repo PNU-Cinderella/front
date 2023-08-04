@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_main.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -376,3 +377,32 @@ class _SortableListViewState extends State<SortableListView> {
     );
   }
 }
+
+class UserActive
+{
+  String userName;
+  String userGender;
+
+  UserActive({required this.userName, required this.userGender})
+  {}
+}
+
+class Button_Back extends StatelessWidget
+{
+
+  double iconSize = 40;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector
+      (
+      child: Icon(Icons.keyboard_arrow_left, size: iconSize,),
+      onTap: (){
+        final TaxiMainState state = context.findAncestorStateOfType<TaxiMainState>()!;
+        state.SetIndex(2);
+      },
+    );
+  }
+
+}
+

@@ -3,6 +3,7 @@ import 'package:project_cinderella_test3/msp/Components/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
+import 'package:project_cinderella_test3/msp/sign_up.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_main.dart';
 import 'package:http/http.dart' as http;
@@ -38,9 +39,9 @@ class MypageMyInfo extends StatelessWidget
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(myName, style: SimpleTextStyle(size: 22, weight: FontWeight.w500),),
+                Text(userActive.userName, style: SimpleTextStyle(size: 22, weight: FontWeight.w500),),
                 RealSizedBox(width: 0, height: 7),
-                Text(myGender, style: SimpleTextStyle(size: 17, color: Color(0xff7F8287)),)
+                Text(userActive.userGender, style: SimpleTextStyle(size: 17, color: Color(0xff7F8287)),)
               ],
             ),
           ),

@@ -66,7 +66,7 @@ class TaxiStatusBox extends StatelessWidget
                 ),
               ),
               BasicButton(width: 112, height: 22,
-                mLeft: 55, mTop: 24, func: (){}, buttonStyle: ElevatedButton.styleFrom(backgroundColor: Color(0xffE3EBF7), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)) ),
+                mLeft: 55, mTop: 24, func: (){print("오픈채팅 소환");}, buttonStyle: ElevatedButton.styleFrom(backgroundColor: Color(0xffE3EBF7), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)) ),
                 text: "오픈채팅 바로가기", textStyle: SimpleTextStyle(size: 12, weight: FontWeight.w400, color: Color(0xff0152B1)),)
             ],
           ),
@@ -78,15 +78,15 @@ class TaxiStatusBox extends StatelessWidget
                 spacing: GetRealWidth(pixel: 14, context: context),
                 children: [
                   IconTaxiCurrent(order: 0,
-                      text: "부산은행"),
+                      text: "부산대정문"),
                   IconTaxiCurrent(order: 1,
-                      text: "명륜역"),
-                  IconTaxiCurrent(order: 2,
-                      text: "교대역"),
-                  IconTaxiCurrent(order: 3,
-                      text: "서면역"),
-                  IconTaxiCurrent(order: 4,
-                      text: "송정역"),
+                      text: "효원재"),
+                  // IconTaxiCurrent(order: 2,
+                  //     text: "교대역"),
+                  // IconTaxiCurrent(order: 3,
+                  //     text: "서면역"),
+                  // IconTaxiCurrent(order: 4,
+                  //     text: "송정역"),
                 ],
               )
           ),
@@ -170,7 +170,7 @@ class IconTaxiCurrent extends StatelessWidget{
     myWidth = width;
     myHeight = height;
     this.order = order;
-    textIcon = Text(text, style: textstyleBoxDescr);
+    textIcon = Text(text, style: textstyleBoxDescr, overflow: TextOverflow.ellipsis,);
   }
 
   @override
@@ -402,7 +402,7 @@ class _TaxiHistoryState extends State<TaxiHistory> {
                   children: [
                     TaxiStatusBox(
                       status: "참여중이에요",
-                      subStatus: "부산은행에서 2:30 출발예정",
+                      subStatus: "부산은행에서 0:00 출발예정",
                     ),
                     NaverMAPP(),
                   ],
