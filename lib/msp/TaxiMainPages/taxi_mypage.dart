@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project_cinderella_test3/msp/Components/Classes.dart';
 import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_cinderella_test3/msp/login.dart';
 import 'package:project_cinderella_test3/msp/viewstyle.dart';
 import 'package:project_cinderella_test3/msp/TaxiMainPages/taxi_main.dart';
 import 'package:http/http.dart' as http;
-
 const logoutURL = "http://10.0.2.2:8080/memberlogout";
 
 class MypageMyInfo extends StatelessWidget
