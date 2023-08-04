@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:project_cinderella_test3/msp/Root/functions.dart';
-import 'package:project_cinderella_test3/msp/Root/Classes.dart';
+import 'package:project_cinderella_test3/msp/Components/functions.dart';
+import 'package:project_cinderella_test3/msp/Components/Classes.dart';
 
 Future<Album> fetchAlbum() async {
   final response = await http
